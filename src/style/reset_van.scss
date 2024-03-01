@@ -1,0 +1,19 @@
+.van-nav-bar__title,
+.van-ellipsis,
+.van-nav-bar__text {
+  font-family: Poppins, Poppins;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  color: #313c5b !important;
+}
+.van-nav-bar__arrow {
+  margin-right: 17px !important;
+}
+.van-icon-arrow-left:before {
+  position: relative;
+  top: 2px;
+  content: '' !important;
+  width: 10px;
+  height: 16px;
+  background: url('@/assets/images/backIcon.png') 100% no-repeat !important;
+}
