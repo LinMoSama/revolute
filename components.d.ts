@@ -13,6 +13,9 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     TotalRevenue: typeof import('./src/components/totalRevenue.vue')['default']
     VanButton: typeof import('vant/es')['Button']
+    VanCollapse: typeof import('vant/es')['Collapse']
+    VanCollapseItem: typeof import('vant/es')['CollapseItem']
     VanNavBar: typeof import('vant/es')['NavBar']
+    VanTextEllipsis: typeof import('vant/es')['TextEllipsis']
   }
 }

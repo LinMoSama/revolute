@@ -9,18 +9,40 @@
     </div>
     <Detail title="Compound 收益" :money="45.00"></Detail>
     <Detail title="团队收益" :money="45.00"></Detail>
+    <Detail title="认购收益" :money="45.00" :flag="true" :propsData="propsData"></Detail>
+    <Detail title="推荐收益" :money="45.00" :flag="true"></Detail>
   </div>
 </template>
 
 <script setup lang="ts" name="totalEarningsYesterday">
 // import { onMounted } from 'vue'
 import Detail from '@/components/Detail.vue'
+import { reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const { params: { title } } = useRoute()
 function onClickLeft() {
   router.back()
 }
+const propsData = reactive([
+  {
+    product: '产品一 (USDT)',
+    money: 149.50
+  },
+  {
+    product: '产品二 (USDT)',
+    money: 149.50
+  }, {
+    product: '产品三 (USDT)',
+    money: 149.50
+  }, {
+    product: '产品四 (USDT)',
+    money: 149.50
+  }, {
+    product: '产品一 (USDT)',
+    money: 149.50
+  }
+])
 </script>
 
 <style lang="scss" scoped >

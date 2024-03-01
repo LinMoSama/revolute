@@ -1,25 +1,40 @@
 <template>
-  <div class="detail">
+  <div class="detail" @click="rotate" :class="{ 'radius': flag }">
+    <i class="icon" v-if="flag" :class="{ 'rotate': f }"></i>
     <p>{{ title }}</p>
     <p class="p2">{{ money }}USDT</p>
   </div>
+  <transition name="fade" mode="in-out">
+    <div class="content" v-if="flag && f">
+      <div class="item" v-for="(item, index) in propsData" :key="index">
+        <div class="product">{{ item.product }}</div>
+        <div class="money">{{ item.money }}</div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
-defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  money: {
-    type: Number,
-    required: true
-  }
-})
+import { computed, ref } from 'vue'
+import { type propsDataInter } from '@/types/index'
+let f = ref(false)
+const props = defineProps<{
+  flag?: boolean,
+  propsData?: propsDataInter[]
+  title: string,
+  money: number,
+}>()
+
+function rotate() {
+  if (!props.flag) return
+  f.value = !f.value
+}
+
 </script>
 
 <style lang="scss" scoped>
 .detail {
+  position: relative;
   margin-top: 16px;
   padding: 9px 0 0px 16px;
   width: 325px;
@@ -39,5 +54,61 @@ defineProps({
     font-size: 16px;
     color: #0359BD;
   }
+
+  .icon {
+    &::after {
+      position: absolute;
+      top: 28px;
+      right: 14px;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      content: '';
+      background: url('@/assets/images/topArrow.png') no-repeat;
+      transform: rotate(180deg);
+      transition: all 0.3s ease;
+    }
+  }
+
+
+}
+
+.content {
+  padding: 16px 14px 0 16px;
+  width: 325px;
+  min-height: 124px;
+  background: rgba(14, 20, 70, 0.03);
+  border-radius: 0px 0px 10px 10px;
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    font-family: Poppins, Poppins;
+    font-weight: 400;
+    font-size: 12px;
+    color: #313C5B;
+  }
+}
+
+/* fade为过渡名称 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+  /* 设置过渡属性及持续时间 */
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  /* 初始状态与结束状态的不同值 */
+}
+
+.radius {
+  border-radius: 10px 10px 0 0;
+}
+
+.detail .rotate::after {
+  transform: rotate(0deg) !important;
 }
 </style>
