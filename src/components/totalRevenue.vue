@@ -27,10 +27,6 @@ const router = useRouter()
 function goTotalEarningsYesterday() {
   router.push({
     name: 'TotalEarningsYesterday',
-    params: {
-      title: '昨日总收益'
-    }
-
   })
 }
 </script>

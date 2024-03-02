@@ -15,7 +15,8 @@
     "pinia": "^2.1.7",
     "vant": "^4.8.5",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "web3": "^4.5.0"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",

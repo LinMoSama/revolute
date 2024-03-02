@@ -9,7 +9,7 @@ export default [
     component: () => import('@/views/Home/index.vue'),
   },
   {
-    path: '/totalEarningsYesterday/:title',
+    path: '/totalEarningsYesterday',
     name: 'TotalEarningsYesterday',
     component: () => import('@/views/totalEarningsYesterday/index.vue'),
     meta:{title:'昨日总收益'},
