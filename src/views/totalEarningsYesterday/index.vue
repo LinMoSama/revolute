@@ -38,9 +38,6 @@ const propsData = reactive([
   }, {
     product: '产品四 (USDT)',
     money: 149.50
-  }, {
-    product: '产品一 (USDT)',
-    money: 149.50
   }
 ])
 const propsData2 = reactive([
