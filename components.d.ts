@@ -8,14 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Detail: typeof import('./src/components/Detail.vue')['default']
-    NavBar: typeof import('./src/components/navBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TotalRevenue: typeof import('./src/components/totalRevenue.vue')['default']
-    VanButton: typeof import('vant/es')['Button']
-    VanCollapse: typeof import('vant/es')['Collapse']
-    VanCollapseItem: typeof import('vant/es')['CollapseItem']
-    VanNavBar: typeof import('vant/es')['NavBar']
-    VanTextEllipsis: typeof import('vant/es')['TextEllipsis']
+    VanTab: typeof import('vant/es')['Tab']
+    VanTabs: typeof import('vant/es')['Tabs']
   }
 }
