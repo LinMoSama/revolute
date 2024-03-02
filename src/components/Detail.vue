@@ -6,23 +6,34 @@
   </div>
   <transition name="fade" mode="in-out">
     <div class="content" v-if="flag && f">
-      <div class="item" v-for="(item, index) in propsData" :key="index">
-        <div class="product">{{ item.product }}</div>
-        <div class="money">{{ item.money }}</div>
-      </div>
+      <template v-if="type === 1">
+        <div class="item" v-for="(item, index) in propsData" :key="index">
+          <div class="product">{{ item.product }}</div>
+          <div class="money">{{ item.money }}</div>
+        </div>
+      </template>
+      <template v-else-if="type === 2">
+        <div class="item" v-for="(item, index) in propsData2" :key="index">
+          <div class="account">{{ item.acc }}</div>
+          <div class="classify">{{ item.classify }}</div>
+          <div class="money">{{ item.income }}</div>
+        </div>
+      </template>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { type propsDataInter } from '@/types/index'
+import { ref } from 'vue'
+import type { propsDataInter, propsDataInter2 } from '@/types/index'
 let f = ref(false)
 const props = defineProps<{
   flag?: boolean,
-  propsData?: propsDataInter[]
+  propsData?: propsDataInter[],
+  propsData2?: propsDataInter2[],
   title: string,
   money: number,
+  type?: number
 }>()
 
 function rotate() {
@@ -81,6 +92,7 @@ function rotate() {
   border-radius: 0px 0px 10px 10px;
 
   .item {
+    position: relative;
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
@@ -88,6 +100,27 @@ function rotate() {
     font-weight: 400;
     font-size: 12px;
     color: #313C5B;
+
+    .account {
+      line-height: 14px;
+    }
+
+    .classify {
+      position: absolute;
+      left: 80px;
+      top: -2px;
+      width: 42px;
+      height: 16px;
+      background: #0359BD;
+      border-radius: 26px 26px 26px 26px;
+      font-family: Poppins, Poppins;
+      font-weight: 400;
+      font-size: 12px;
+      color: #FFFFFF;
+      line-height: 16px;
+      text-align: center;
+    }
+
   }
 }
 
@@ -107,6 +140,7 @@ function rotate() {
 .radius {
   border-radius: 10px 10px 0 0;
 }
+
 
 .detail .rotate::after {
   transform: rotate(0deg) !important;

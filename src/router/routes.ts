@@ -12,10 +12,6 @@ export default [
     path: '/totalEarningsYesterday/:title',
     name: 'TotalEarningsYesterday',
     component: () => import('@/views/totalEarningsYesterday/index.vue'),
-    props(router: any) {
-      return {
-        title: router.params.title,
-      }
-    },
+    meta:{title:'昨日总收益'},
   },
 ]

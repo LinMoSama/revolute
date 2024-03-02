@@ -9,8 +9,8 @@
     </div>
     <Detail title="Compound 收益" :money="45.00"></Detail>
     <Detail title="团队收益" :money="45.00"></Detail>
-    <Detail title="认购收益" :money="45.00" :flag="true" :propsData="propsData"></Detail>
-    <Detail title="推荐收益" :money="45.00" :flag="true"></Detail>
+    <Detail title="认购收益" :money="45.00" :flag="true" :propsData="propsData" :type="1"></Detail>
+    <Detail title="推荐收益" :money="45.00" :flag="true" :propsData2="propsData2" :type="2"></Detail>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import Detail from '@/components/Detail.vue'
 import { reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
-const { params: { title } } = useRoute()
+const { meta: { title } } = useRoute()
 function onClickLeft() {
   router.back()
 }
@@ -41,6 +41,21 @@ const propsData = reactive([
   }, {
     product: '产品一 (USDT)',
     money: 149.50
+  }
+])
+const propsData2 = reactive([
+  {
+    acc: '0x....sdfsfsd',
+    income: "+149.50",
+    classify: "一代"
+  }, {
+    acc: '0x....sdfsfsd',
+    income: "+149.50",
+    classify: "二代"
+  }, {
+    acc: '0x....sdfsfsd',
+    income: "+149.50",
+    classify: "三代"
   }
 ])
 </script>
