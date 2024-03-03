@@ -35,7 +35,7 @@ export default defineConfig({
       plugins: [
         postCssPxToRem({
           rootValue: 375 / 10, // （设计稿/10）1rem的大小
-          propList: ['*'], // 除 border/font-size 外所有px 转 rem
+          propList: ['*'],
           /* 
           rootValue：根元素字体大小，用于将像素转换为rem的基准值。
           unitPrecision：rem的小数位数。

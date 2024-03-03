@@ -38,7 +38,6 @@ export default function () {
     },
   ]
   function changRoute(value: string) {
-    console.log(1)
     switch (value) {
       case '首页':
         router.push({
