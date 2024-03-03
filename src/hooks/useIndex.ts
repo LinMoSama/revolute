@@ -1,13 +1,8 @@
 import { ref } from 'vue'
-import useWallect from '@/stores/wallect'
-import { storeToRefs } from 'pinia'
-import { formatName } from '@/utils/utils'
 
 export default function () {
-
   let alertShow = ref(false)
-  const { account } = storeToRefs(useWallect())
-  const wallectStore = useWallect()
+
   const controlList = [
     {
       icon: '/src/assets/images/recharge.png',
@@ -25,7 +20,7 @@ export default function () {
       type: 2,
     },
   ]
-  
+
   function closeAlert() {
     alertShow.value = false
   }
@@ -54,18 +49,14 @@ export default function () {
   function transfer() {
     alert('转账')
   }
- 
- 
+
   function updateShow() {
     alertShow.value = false
   }
   return {
-    account,
     controlList,
-    wallectStore,
     alertShow,
     updateShow,
-    formatName,
     controlHandler,
     buyHandle,
     closeAlert,

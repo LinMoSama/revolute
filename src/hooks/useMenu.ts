@@ -62,7 +62,7 @@ export default function () {
         break
       case '我的认购':
         router.push({
-          path: '/home',
+          path: '/myPurchase',
         })
         break
       case '收益明细':

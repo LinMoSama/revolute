@@ -12,12 +12,19 @@ export default [
     path: '/totalEarningsYesterday',
     name: 'TotalEarningsYesterday',
     component: () => import('@/views/totalEarningsYesterday/index.vue'),
-    meta:{title:'昨日总收益'},
+    meta: { title: '昨日总收益' },
+  },
+  {
+    path: '/myPurchase',
+    name: 'MyPurchase',
+    meta: { title: '我的认购' },
+    component: () => import('@/views/MyPurchase/index.vue'),
   },
   // 提现
   {
     path: '/withdraw',
     name: 'Withdraw',
+    meta: { title: '提现' },
     component: () => import('@/views/withdraw/index.vue'),
   },
   // 提现记录

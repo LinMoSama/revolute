@@ -1,18 +1,6 @@
 <template>
   <div class='wrap'>
-    <div class="banner">
-      <div class="log">
-        <img src="@/assets/images/logo.png" alt="">
-      </div>
-      <div class="wallet_menu">
-        <img src="@/assets/images/wallet.png" alt="" @click="wallectStore.ConnectTheWallet" v-if="!account">
-        <div class="wallect" v-if="account">
-          <img src="@/assets/images/wallect_icon.png" alt="">
-          <div class="account">{{ formatName(account) }}</div>
-        </div>
-        <img src="@/assets/images/menu.png" alt="" @click="updateMenu">
-      </div>
-    </div>
+    <Banner :menu="menu" :showWallect="true"></Banner>
     <div class="control">
       <div class="item" v-for="(item, index) in controlList" :key="index" @click="controlHandler(item.type)">
         <img :src="item.icon" alt="">
@@ -36,18 +24,17 @@
 </template>
 
 <script setup lang="ts" name="Home">
+import { ref } from 'vue';
 import useIndex from '@/hooks/useIndex'
 import TotalRevenue from '@/components/TotalRevenue.vue';
 import Buy from '@/components/Buy.vue'
 import Alert from '@/components/Alert.vue'
 import Menu from '@/components/Menu.vue'
-const { controlList, alertShow, wallectStore, account, controlHandler, formatName, buyHandle, updateShow, closeAlert } = useIndex()
-import { onMounted, ref } from 'vue'
+import Banner from '@/components/Banner.vue'
+const { controlList, alertShow, controlHandler, buyHandle, updateShow, closeAlert } = useIndex()
 const menu = ref()
 
-function updateMenu() {
-  menu.value.show = true
-}
+
 </script>
 
 <style scoped lang="scss">
@@ -60,68 +47,6 @@ function updateMenu() {
   overflow: hidden;
   min-height: 100vh;
 
-
-
-  :deep(.van-popup--bottom) {
-    left: auto;
-    bottom: 24px;
-    width: 334px;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  .banner {
-    display: flex;
-    width: 100%;
-    height: 168px;
-    padding: 0 25px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #005ABD;
-
-    .log {
-      img {
-        width: 90px;
-        height: 50px;
-      }
-    }
-
-    .wallet_menu {
-      display: flex;
-      align-items: center;
-
-      img {
-        width: 24px;
-        height: 24px;
-
-        &:first-child {
-          margin-right: 16px;
-        }
-      }
-
-      .wallect {
-        display: flex;
-        align-items: center;
-        margin-right: 18px;
-        width: 111px;
-        height: 32px;
-        background: #FFFFFF;
-        border-radius: 10px 10px 10px 10px;
-
-        img {
-          margin: 0 10px;
-          width: 16px;
-          height: 16px;
-        }
-
-        .account {
-          font-size: 12px;
-          color: #333333
-        }
-      }
-    }
-
-
-  }
 
   .control {
     display: flex;
