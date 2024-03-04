@@ -26,11 +26,12 @@
 <script setup lang="ts" name="Home">
 import { ref } from 'vue';
 import useIndex from '@/hooks/useIndex'
-import TotalRevenue from '@/components/TotalRevenue.vue';
+import TotalRevenue from '@/components/totalRevenue.vue';
 import Buy from '@/components/Buy.vue'
 import Alert from '@/components/Alert.vue'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
+import { title } from 'process';
 const { controlList, alertShow, controlHandler, buyHandle, updateShow, closeAlert } = useIndex()
 const menu = ref()
 

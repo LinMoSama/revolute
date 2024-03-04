@@ -1,7 +1,8 @@
 import { ref } from 'vue'
-
+import { useRouter } from 'vue-router'
 export default function () {
   let alertShow = ref(false)
+  const $router = useRouter()
 
   const controlList = [
     {
@@ -44,10 +45,10 @@ export default function () {
     alert('充值')
   }
   function wallet() {
-    alert('提现')
+    $router.push('/withdraw')
   }
   function transfer() {
-    alert('转账')
+    $router.push('/transfer')
   }
 
   function updateShow() {

@@ -1,14 +1,6 @@
 <template>
   <div class='wrap'>
-    <div class="banner df aic">
-      <div class="log">
-        <img src="@/assets/images/logo.png">
-      </div>
-      <p style="color: #fff;margin-left: -20px;" class="cfff fz16">收益明细</p>
-      <div class="wallet_menu" @click="$router.push('/withdrawdetail')">
-        <img src="@/assets/images/menu.png">
-      </div>
-    </div>
+    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
     <div class="control df aic fdc">
       <p class="c999 mb10">账户余额(USDT)</p>
       <p class="fw7 fz30">9,856.00</p>
@@ -114,12 +106,16 @@
                 </van-tab>
             </van-tabs>
     </div>
+    <Menu ref="menu"></Menu>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
+import Menu from '@/components/Menu.vue'
+import Banner from '@/components/Banner.vue'
+const menu = ref()
 const $router = useRouter()
 const active = ref(0)
 const formData = ref({

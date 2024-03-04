@@ -43,24 +43,28 @@ export default [
   {
     path: '/transfer',
     name: 'Transfer',
+    meta: { title: '转账' },
     component: () => import('@/views/transfer/index.vue'),
   },
   // 收益明细
   {
     path: '/incomeDetail',
     name: 'incomeDetail',
+    meta: { title: '收益明细' },
     component: () => import('@/views/incomeDetail/index.vue'),
   },
   // 邀请好友
   {
     path: '/invite',
     name: 'invite',
+    meta: { title: '邀请好友' },
     component: () => import('@/views/invite/index.vue'),
   },
   // 我的团队
   {
     path: '/myTeam',
     name: 'myTeam',
+    meta: { title: '我的团队' },
     component: () => import('@/views/myTeam/index.vue'),
   },
   // 团队人员

@@ -1,12 +1,12 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
         <p class="fw7">25578</p>
       </div>
-      <img src="../../assets/images/withdrawicon.png" style="width: 40px;">
+      <img src="../../assets/images/withdrawicon.png" style="width: 40px;" >
     </div>
     <div class="content bsbb">
       <p class="fz18 co fw7 mb20">接收方</p>
@@ -37,16 +37,16 @@
 </template>
 
 <script setup lang="ts" name="Withdraw">
-import Banner from '@/components/Banner.vue'
-import Menu from '@/components/Menu.vue'
 import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
+import Menu from '@/components/Menu.vue'
+import Banner from '@/components/Banner.vue'
+const menu = ref()
 const $router = useRouter()
 const formData = ref({
   toaddress: '',
   amount: ''
 })
-const menu = ref()
 const flag = ref(false)
 watch(() => formData.value.toaddress, () => {
   if (formData.value.toaddress) {

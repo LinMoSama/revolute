@@ -5,13 +5,15 @@
     </div>
     <p class="title">{{ title }}</p>
     <div class="wallet_menu">
-      <img src="@/assets/images/wallet.png" alt="" @click="wallectStore.ConnectTheWallet" v-if="!account">
-      <template v-if="showWallect">
-        <div class="wallect" v-if="account">
-          <img src="@/assets/images/wallect_icon.png" alt="">
-          <div class="account">{{ formatName(account) }}</div>
-        </div>
-      </template>
+      <div v-if="!defaults">
+        <img src="@/assets/images/wallet.png" alt="" @click="wallectStore.ConnectTheWallet" v-if="!account">
+        <template v-if="showWallect">
+          <div class="wallect" v-if="account">
+            <img src="@/assets/images/wallect_icon.png" alt="">
+            <div class="account">{{ formatName(account) }}</div>
+          </div>
+        </template>
+      </div>
       <img src="@/assets/images/menu.png" alt="" @click="updateMenu">
     </div>
   </div>
@@ -22,7 +24,7 @@ import { useRoute } from 'vue-router'
 
 import useBanner from '@/hooks/useBanner'
 const { wallectStore, account, formatName } = useBanner()
-const props = defineProps(['menu', 'showWallect'])
+const props = defineProps(['menu', 'showWallect','defaults'])
 let { meta: { title } } = useRoute()
 function updateMenu() {
   props.menu.showMenu()
