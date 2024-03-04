@@ -29,6 +29,18 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    host: '0.0.0.0',
+    open: true,
+    port: 8080,
+    proxy: {
+      '/api': {
+        target: 'http://3.37.36.146:8080',
+        // 192.168.1.16
+        changeOrigin: true,
+      },
+    },
+  }, 
 
   css: {
     postcss: {

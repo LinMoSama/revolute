@@ -6,7 +6,7 @@
         <p class="c999 mb10">账户余额</p>
         <p class="fw7">25578</p>
       </div>
-      <img src="../../assets/images/withdrawicon.png" style="width: 40px;" >
+      <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="$router.push('/withdrawdetail')">
     </div>
     <div class="content bsbb">
       <p class="fz18 co fw7 mb20">接收方</p>
@@ -41,6 +41,7 @@ import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
+import { getWithdraw } from '@/service/api'
 const menu = ref()
 const $router = useRouter()
 const formData = ref({
@@ -53,6 +54,12 @@ watch(() => formData.value.toaddress, () => {
     flag.value = true
   }
 })
+
+const confirmWithdraw = ()=>{
+  getWithdraw({}).then(res=>{
+    console.log(res)
+  })
+}
 </script>
 
 <style scoped lang="scss">

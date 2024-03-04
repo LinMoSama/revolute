@@ -124,14 +124,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter ,useRoute} from 'vue-router'
+import { getWithdrawList } from '@/service/api'
 const $router = useRouter()
 const $route = useRoute()
 const active = ref(0)
-const colorArr = ref({
-    success:'#4CCD78',
-    failed:'#FF0000',
-    default:'#313C5B'
-})
+const formData = ref([])
+
 const listType = ref({
     success:{color:'#4CCD78',text:'已完成',type:0},
     failed:{color:'#FF0000',text:'失败',type:1},
@@ -144,6 +142,14 @@ const goInnerDetail = (status:any,type:any)=>{
         query:{
             status:status,//状态
             type:type,//类型
+        }
+    })
+}
+
+const getFormData = ()=>{
+    getWithdrawList().then((res:any)=>{
+        if(res.code == 200){
+            formData.value = res.result
         }
     })
 }
