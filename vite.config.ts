@@ -35,12 +35,13 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api': {
-        target: 'http://3.37.36.146:8080',
+        target: 'http://192.168.2.177:7786',
         // 192.168.1.16
+        // http://192.168.2.177:7786
         changeOrigin: true,
       },
     },
-  }, 
+  },
 
   css: {
     postcss: {

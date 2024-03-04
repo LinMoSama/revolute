@@ -2,7 +2,12 @@
   <van-overlay :show="alertShow" @click="updateShow" lock-scroll z-index="999">
     <div class="wrapper" @click.stop>
       <div class="block">
-        <p class="title">{{ title }}</p>
+        <img src="../assets/images/succ.png" alt="" class="succ" v-if="transferSucc">
+        <img src="../assets/images/fail.png" alt="" class="succ" v-if="transferFail">
+        <p class="title" :class="{ 'title_succ': transferSucc }">{{ title }}</p>
+        <p class="tip_text" v-if="tipTextShow">基金收益+复利的收益总和大于本金时，
+          不再享受复利收益</p>
+        <p v-if="transferSucc" class="succ_tip">请在收益明细中查看</p>
         <template v-if="flag">
           <div class="input">
             <input type="number" v-model="inputMoney" placeholder="Min 100.00">
@@ -10,18 +15,19 @@
               <div class="danwei">USDT</div>
               <div class="max">MAX</div>
             </div>
+            <span class="balance_not_enough">余额不足</span>
             <span class="keyong">可用: 1,547.00USDT</span>
           </div>
 
         </template>
 
         <template v-else>
-          <div class="input input2">
+          <div class="input input2" v-if="!hiddenInput">
             <input type="text" placeholder="输入推荐钱包地址" v-model="wallectAddres">
           </div>
         </template>
-        <div class="btns">
-          <div class="cancel" @click="cancel">取消</div>
+        <div class="btns" :class="{ 'center_btns': hiddenCancel, 'mt18': transferSucc, 'mt34': transferFail }">
+          <div class="cancel" @click="cancel" v-if="!hiddenCancel">取消</div>
           <div class="confirm" @click="confim(flag ? inputMoney : wallectAddres)">确定</div>
         </div>
       </div>
@@ -33,7 +39,26 @@
 import { ref } from 'vue';
 let inputMoney = ref('');
 let wallectAddres = ref('');
-defineProps<{ alertShow: boolean, title: string, flag?: boolean }>()
+withDefaults(
+  defineProps<{
+    alertShow: boolean,
+    title: string,
+    flag?: boolean,
+    hiddenCancel?: boolean,
+    transferFail?: boolean,
+    transferSucc?: boolean,
+    hiddenInput?: boolean,
+    tipTextShow?: boolean
+  }>(),
+  {
+    hiddenCancel: false,
+    transferFail: false,
+    transferSucc: false,
+    hiddenInput: false,
+    tipTextShow: false
+
+  }
+)
 const emit = defineEmits(['updateShow', 'closeAlert', 'confirmAlert'])
 function updateShow() {
   emit('updateShow')
@@ -56,9 +81,23 @@ function confim(val: any) {
 
   .block {
     width: 334px;
-    height: 230px;
+    // height: 230px;
     background: #FFFFFF;
     border-radius: 10px 10px 10px 10px;
+
+    .succ {
+      display: block;
+      margin: 26px auto 0;
+      width: 68px;
+      height: 68px;
+    }
+
+    .succ_tip {
+      font-weight: 400;
+      font-size: 12px;
+      color: #313C5B;
+      text-align: center;
+    }
 
     .title {
       margin-top: 30px;
@@ -67,6 +106,20 @@ function confim(val: any) {
       font-weight: 600;
       font-size: 20px;
       color: #313C5B;
+    }
+
+    .title_succ {
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+
+    .tip_text {
+      width: 218px;
+      margin: 0 auto -14px;
+      text-align: center;
+      font-weight: 400;
+      font-size: 12px;
+      color: rgba(49, 60, 91, 0.6);
     }
 
     .input {
@@ -85,6 +138,7 @@ function confim(val: any) {
         border: none;
         padding-left: 17px;
         border-radius: 6px 6px 6px 6px;
+        font-size: 18px;
       }
 
 
@@ -116,6 +170,14 @@ function confim(val: any) {
         }
       }
 
+      .balance_not_enough {
+        position: absolute;
+        bottom: -20px;
+        font-weight: 400;
+        font-size: 12px;
+        color: #FF0000;
+      }
+
       .keyong {
         position: absolute;
         bottom: -20px;
@@ -138,6 +200,7 @@ function confim(val: any) {
       display: flex;
       padding: 0 17px;
       margin-top: 44px;
+      margin-bottom: 30px;
       justify-content: space-between;
 
       div {
@@ -161,6 +224,18 @@ function confim(val: any) {
       }
 
 
+    }
+
+    .mt18 {
+      margin-top: 18px;
+    }
+
+    .mt34 {
+      margin-top: 34px;
+    }
+
+    .center_btns {
+      justify-content: center;
     }
   }
 }

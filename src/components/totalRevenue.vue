@@ -15,7 +15,7 @@
       </div>
       <div class="title">
         <p class="revenue_title">总收益</p>
-        <div class="money">12, USDT</div>
+        <div class="money">12,678 USDT</div>
       </div>
     </div>
   </div>

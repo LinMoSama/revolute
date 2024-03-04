@@ -13,14 +13,14 @@
       <div class="bottom_left">
         <div class="left_top">
           <div class="onsale">在售</div>
-          <div class="product" v-if="type === 0">产品一</div>
-          <div class="product" v-if="type === 1">产品二</div>
-          <div class="product" v-if="type === 2">产品三</div>
+          <div class="product" v-if="type === 1">产品一</div>
+          <div class="product" v-if="type === 2">产品二</div>
+          <div class="product" v-if="type === 3">产品三</div>
         </div>
         <div class="left_bottom">
-          <p class="left_bottom_text" v-if="type === 0">投资精明选择！</p>
-          <p class="left_bottom_text" v-if="type === 1">实现财富增长！</p>
-          <p class="left_bottom_text" v-if="type === 2">财富稳步积累！</p>
+          <p class="left_bottom_text" v-if="type === 1">投资精明选择！</p>
+          <p class="left_bottom_text" v-if="type === 2">实现财富增长！</p>
+          <p class="left_bottom_text" v-if="type === 3">财富稳步积累！</p>
         </div>
       </div>
       <div class="bottom_right">

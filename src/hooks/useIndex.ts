@@ -1,10 +1,18 @@
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { getInvestList } from '@/service/api'
 export default function () {
   let alertShow = ref(false)
   const $router = useRouter()
+  const investList = ref([] as any[])
+  let isSowReference = ref(true)
 
-  let isSowReference = ref(false)
+  onMounted(async () => {
+    const {
+      data: { data: data },
+    } = await getInvestList()
+    investList.value = data
+  })
   const controlList = [
     {
       icon: '/src/assets/images/recharge.png',
@@ -22,7 +30,6 @@ export default function () {
       type: 2,
     },
   ]
-
   function closeAlert() {
     alertShow.value = false
   }
@@ -65,6 +72,7 @@ export default function () {
     alertShow.value = false
   }
   return {
+    investList,
     controlList,
     alertShow,
     isSowReference,

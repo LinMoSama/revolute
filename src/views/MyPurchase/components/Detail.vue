@@ -20,12 +20,12 @@
 
 
       </div>
-      <div class="Tips">
+      <div class="Tips" @click="tipHandler">
         <img src="@/assets/images/!.png" alt="">
         <p>温馨提示</p>
       </div>
 
-      <div class="btn">转出</div>
+      <div class="btn" @click="TransferOut">转出</div>
     </div>
     <div class="tabs">
       <van-tabs v-model:active="active" shrink>
@@ -103,31 +103,60 @@
       </van-tabs>
     </div>
   </div>
+
+  <Alert title="转出" :alert-show="alertShow" :flag="true" @close-alert="closeAlert" @confirm-alert="confirmHandler">
+  </Alert>
+  <Alert title="温馨提示" :alert-show="tipAlertShow" :hiddenInput="true" :hiddenCancel="true" :tipTextShow='true'
+    @confirm-alert="tipConfirmHandler">
+  </Alert>
+
+  <Alert title="转出成功" :alert-show="transferOutSucc" @confirm-alert="TransferOutSuccHandler" :hiddenCancel="true"
+    :transferSucc="true" :hiddenInput="true">
+  </Alert>
+  <Alert title="转出失败" :alert-show="transferOutFail" :transferFail="true" @confirm-alert="TransferOutFailHandler"
+    :hiddenCancel="true" :hiddenInput="true">
+  </Alert>
 </template>
 
 <script setup lang="ts">
 import Back from '@/components/Back.vue'
+import Alert from '@/components/Alert.vue'
 import { useRoute, useRouter } from 'vue-router'
 const { meta: { title } } = useRoute()
 import { ref } from 'vue';
 const router = useRouter()
 const active = ref(0)
-const listType = ref({
-  success: { color: '#4CCD78', text: '已完成', type: 0 },
-  failed: { color: '#FF0000', text: '失败', type: 1 },
-  default: { color: '#313C5B', text: '待确认', type: 2 },
-})
-const goInnerDetail = (status: any, type: any) => {
-  router.push({
-    path: 'withdrawinner',
-    query: {
-      status: status,//状态
-      type: type,//类型
-    }
-  })
+let alertShow = ref(false)
+let tipAlertShow = ref(false)
+let transferOutSucc = ref(false)
+let transferOutFail = ref(false)
+function tipHandler() {
+  tipAlertShow.value = true
+}
+function tipConfirmHandler() {
+  tipAlertShow.value = false
 }
 function onClickLeft() {
   router.back()
+}
+function TransferOut() {
+  alertShow.value = true
+}
+function closeAlert() {
+  alertShow.value = false
+}
+function confirmHandler(val: any) {
+  console.log('confirmHandler', val);
+  alertShow.value = false
+  transferOutSucc.value = true
+  // transferOutFail.value = true
+
+}
+function TransferOutSuccHandler() {
+  transferOutSucc.value = false
+}
+function TransferOutFailHandler() {
+  transferOutFail.value = false
 }
 </script>
 
@@ -273,12 +302,12 @@ function onClickLeft() {
 }
 
 
-::v-deep .van-tab--active {
+:deep(.van-tab--active) {
   color: #fff;
   background-color: #0359BD;
 }
 
-::v-deep .van-tab {
+:deep(.van-tab) {
   padding: 0px 10px;
   height: 30px;
   border: 1px solid #ddd;
@@ -287,7 +316,7 @@ function onClickLeft() {
 
 }
 
-::v-deep .van-tabs__line {
+:deep(.van-tabs__line) {
   background: transparent;
 }
 
