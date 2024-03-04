@@ -1,156 +1,52 @@
 <template>
   <div class='wrap'>
-    <div class="banner">
-      <div class="log">
-        <img src="@/assets/images/logo.png" alt="">
-      </div>
-      <div class="wallet_menu">
-        <img src="@/assets/images/wallet.png" alt="" @click="wallectStore.ConnectTheWallet" v-if="!account">
-        <div class="wallect" v-if="account">
-          <img src="@/assets/images/income1.png" alt="">
-          <div class="account">{{ formatName(account) }}</div>
-        </div>
-        <img src="@/assets/images/menu.png" alt="">
-      </div>
-
-    </div>
+    <Banner :menu="menu" :showWallect="true"></Banner>
     <div class="control">
       <div class="item" v-for="(item, index) in controlList" :key="index" @click="controlHandler(item.type)">
         <img :src="item.icon" alt="">
         <p>{{ item.title }}</p>
       </div>
     </div>
-    <totalRevenue></totalRevenue>
+    <TotalRevenue></TotalRevenue>
+
     <div class="main">
       <div class="bg">
         <img src="../../assets/images/maintext.png" alt="">
       </div>
     </div>
+    <Buy :percentage='0.8' :day='15' :type="0" @buy='buyHandle(1)'></Buy>
+    <Buy :percentage='1' :day='30' :type="1" @buy='buyHandle(2)'></Buy>
+    <Buy :percentage='1.2' :day='60' :type="2" @buy='buyHandle(3)'>
+    </Buy>
+    <Menu ref="menu"></Menu>
+    <Alert title='认购金额' :alertShow='alertShow' @updateShow="updateShow" @closeAlert="closeAlert"></Alert>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
-import totalRevenue from '@/components/totalRevenue.vue';
-import useWallect from '@/stores/wallect'
-import { storeToRefs } from 'pinia'
-import { formatName } from '@/utils/utils';
-const { account } = storeToRefs(useWallect())
-const wallectStore = useWallect()
-const controlList = [
-  {
-    icon: '/src/assets/images/recharge.png',
-    title: '充值',
-    type: 0
-  },
-  {
-    icon: '/src/assets/images/withdraw.png',
-    title: '提现',
-    type: 1
-  }, {
-    icon: '/src/assets/images/transfer.png',
-    title: '转账',
-    type: 2
-  }, {
-    icon: '/src/assets/images/Scan.png',
-    title: '扫一扫',
-    type: 3
-  },
-]
-function controlHandler(type: number) {
-  switch (type) {
-    case 0:
-      recharge()
-      break;
-    case 1:
-      wallet()
-      break;
-    case 2:
-      transfer()
-      break;
-    case 3:
-      Scan()
-      break;
-  }
-}
-// function ConnectTheWallet () {
-//   alert('ConnectTheWallet');
-// }
-function recharge() {
-  alert('充值')
-}
-function wallet() {
-  alert('提现')
-}
-function transfer() {
-  alert('转账')
-}
-function Scan() {
-  alert('扫一扫')
-}
+import { ref } from 'vue';
+import useIndex from '@/hooks/useIndex'
+import TotalRevenue from '@/components/TotalRevenue.vue';
+import Buy from '@/components/Buy.vue'
+import Alert from '@/components/Alert.vue'
+import Menu from '@/components/Menu.vue'
+import Banner from '@/components/Banner.vue'
+const { controlList, alertShow, controlHandler, buyHandle, updateShow, closeAlert } = useIndex()
+const menu = ref()
+
+
 </script>
 
 <style scoped lang="scss">
 .wrap {
   display: flex;
+  padding-bottom: 26px;
   flex-direction: column;
   align-items: center;
   background-color: #F7F7F7;
   overflow: hidden;
   min-height: 100vh;
 
-  .banner {
-    display: flex;
-    width: 100%;
-    height: 168px;
-    padding: 0 25px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #005ABD;
-
-    .log {
-      img {
-        width: 90px;
-        height: 50px;
-      }
-    }
-
-    .wallet_menu {
-      display: flex;
-      align-items: center;
-
-      img {
-        width: 24px;
-        height: 24px;
-
-        &:first-child {
-          margin-right: 16px;
-        }
-      }
-
-      .wallect {
-        display: flex;
-        align-items: center;
-        margin-right: 18px;
-        width: 111px;
-        height: 32px;
-        background: #FFFFFF;
-        border-radius: 10px 10px 10px 10px;
-
-        img {
-          margin: 0 10px;
-          width: 16px;
-          height: 13px;
-        }
-
-        .account {
-          font-size: 12px;
-          color: #333333
-        }
-      }
-    }
-
-
-  }
 
   .control {
     display: flex;

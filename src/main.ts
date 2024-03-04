@@ -1,4 +1,5 @@
 import 'amfe-flexible'
+import '@/utils/setRem'
 import './style/reset.scss'
 import './style/reset_van.scss'
 import { createApp } from 'vue'

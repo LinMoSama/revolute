@@ -7,12 +7,15 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Alert: typeof import('./src/components/Alert.vue')['default']
+    Banner: typeof import('./src/components/Banner.vue')['default']
+    Buy: typeof import('./src/components/Buy.vue')['default']
     Detail: typeof import('./src/components/Detail.vue')['default']
+    Menu: typeof import('./src/components/Menu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TotalRevenue: typeof import('./src/components/totalRevenue.vue')['default']
-    VanNavBar: typeof import('vant/es')['NavBar']
-    VanTab: typeof import('vant/es')['Tab']
-    VanTabs: typeof import('vant/es')['Tabs']
+    VanActionSheet: typeof import('vant/es')['ActionSheet']
+    VanOverlay: typeof import('vant/es')['Overlay']
   }
 }

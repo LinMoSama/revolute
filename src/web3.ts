@@ -18,15 +18,23 @@ export async function getWebData(to: any, from: any, next: any) {
       // ethereum.on('networkChanged', function (networkIDstring: string) {
       //   console.log('networkChanged', networkIDstring)
       // })
-      // ethereum.on('chainChanged', function (chainChanged: string) {
-      //   console.log('chainChanged', parseInt(chainChanged, 16))
-      // })
+      ethereum.on('chainChanged', function (chainChanged: string) {
+        console.log('chainChanged', parseInt(chainChanged, 16))
+      })
+      ethereum.on('disconnect', (error: any) => {
+        if (error) {
+          console.error('断开连接时发生错误:', error)
+        } else {
+          console.log('用户已断开连接钱包')
+          // 执行一些处理逻辑，如刷新页面或显示提示信息
+        }
+      })
     } catch (error: any) {
       console.log(error)
     }
   } else {
     // Metamask 未安装
-    console.log('Metamask 未安装')
+    alert('Metamask 未安装')
     localStorage.setItem('isInstall', 'false')
   }
   next()
