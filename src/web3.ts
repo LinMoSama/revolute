@@ -34,7 +34,7 @@ export async function getWebData(to: any, from: any, next: any) {
     }
   } else {
     // Metamask 未安装
-    alert('Metamask 未安装')
+    console.log('Metamask 未安装')
     localStorage.setItem('isInstall', 'false')
   }
   next()

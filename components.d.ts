@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Alert: typeof import('./src/components/Alert.vue')['default']
+    Back: typeof import('./src/components/Back.vue')['default']
     Banner: typeof import('./src/components/Banner.vue')['default']
     Buy: typeof import('./src/components/Buy.vue')['default']
     Detail: typeof import('./src/components/Detail.vue')['default']
@@ -16,6 +17,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     TotalRevenue: typeof import('./src/components/totalRevenue.vue')['default']
     VanActionSheet: typeof import('vant/es')['ActionSheet']
+    VanNavBar: typeof import('vant/es')['NavBar']
     VanOverlay: typeof import('vant/es')['Overlay']
     VanTab: typeof import('vant/es')['Tab']
     VanTabs: typeof import('vant/es')['Tabs']

@@ -74,7 +74,8 @@ function goTotalEarningsYesterday() {
           height: 12px;
           content: '';
           line-height: 12px;
-          background: url('@/assets/images/rightArrow.png') 100% no-repeat;
+          background: url('@/assets/images/rightArrow.png') no-repeat;
+          background-size: 100% 100%;
         }
       }
 

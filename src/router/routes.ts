@@ -3,22 +3,32 @@ export default [
     path: '/',
     redirect: '/home',
   },
+  // 主页
   {
     path: '/home',
     name: 'Home',
     component: () => import('@/views/Home/index.vue'),
   },
+  // 昨日总收益
   {
     path: '/totalEarningsYesterday',
     name: 'TotalEarningsYesterday',
     component: () => import('@/views/totalEarningsYesterday/index.vue'),
     meta: { title: '昨日总收益' },
   },
+  // 我的认购
   {
     path: '/myPurchase',
     name: 'MyPurchase',
     meta: { title: '我的认购' },
     component: () => import('@/views/MyPurchase/index.vue'),
+  },
+  // 我的认购详情
+  {
+    path: '/myPurchase/detail',
+    name: 'MyPurchaseDetail',
+    meta: { title: 'Compound Pool' },
+    component: () => import('@/views/MyPurchase/components/Detail.vue'),
   },
   // 提现
   {

@@ -4,6 +4,7 @@ export default function () {
   let alertShow = ref(false)
   const $router = useRouter()
 
+  let isSowReference = ref(false)
   const controlList = [
     {
       icon: '/src/assets/images/recharge.png',
@@ -24,6 +25,15 @@ export default function () {
 
   function closeAlert() {
     alertShow.value = false
+  }
+  function closeReferenceAlert() {
+    isSowReference.value = false
+  }
+  function ReferenceAlertConfirm(value: any) {
+    console.log('ReferenceAlertConfirm', value)
+  }
+  function confirmAlert(value: any) {
+    console.log('confirmAlert', value)
   }
   function buyHandle(value: any) {
     alertShow.value = true
@@ -57,9 +67,13 @@ export default function () {
   return {
     controlList,
     alertShow,
+    isSowReference,
     updateShow,
     controlHandler,
     buyHandle,
     closeAlert,
+    confirmAlert,
+    closeReferenceAlert,
+    ReferenceAlertConfirm,
   }
 }

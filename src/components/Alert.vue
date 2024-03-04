@@ -3,18 +3,26 @@
     <div class="wrapper" @click.stop>
       <div class="block">
         <p class="title">{{ title }}</p>
-        <div class="input">
-          <input type="number" v-model="inputMoney" placeholder="Min 100.00">
-          <div class="tool">
-            <div class="danwei">USDT</div>
-            <div class="max">MAX</div>
+        <template v-if="flag">
+          <div class="input">
+            <input type="number" v-model="inputMoney" placeholder="Min 100.00">
+            <div class="tool">
+              <div class="danwei">USDT</div>
+              <div class="max">MAX</div>
+            </div>
+            <span class="keyong">可用: 1,547.00USDT</span>
           </div>
-          <span class="keyong">可用: 1,547.00USDT</span>
-        </div>
 
+        </template>
+
+        <template v-else>
+          <div class="input input2">
+            <input type="text" placeholder="输入推荐钱包地址" v-model="wallectAddres">
+          </div>
+        </template>
         <div class="btns">
           <div class="cancel" @click="cancel">取消</div>
-          <div class="confirm" @click="confim">确定</div>
+          <div class="confirm" @click="confim(flag ? inputMoney : wallectAddres)">确定</div>
         </div>
       </div>
     </div>
@@ -24,17 +32,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 let inputMoney = ref('');
-defineProps<{ alertShow: boolean, title: string }>()
-const emit = defineEmits(['updateShow', 'closeAlert'])
+let wallectAddres = ref('');
+defineProps<{ alertShow: boolean, title: string, flag?: boolean }>()
+const emit = defineEmits(['updateShow', 'closeAlert', 'confirmAlert'])
 function updateShow() {
   emit('updateShow')
 }
 function cancel() {
   emit('closeAlert')
-  inputMoney.value = ''
+  inputMoney.value = wallectAddres.value = ''
 }
-function confim() {
-
+function confim(val: any) {
+  emit('confirmAlert', val)
 }
 </script>
 
@@ -78,6 +87,8 @@ function confim() {
         border-radius: 6px 6px 6px 6px;
       }
 
+
+
       .tool {
         display: flex;
         align-items: center;
@@ -113,6 +124,14 @@ function confim() {
         font-size: 12px;
         color: #313C5B;
       }
+    }
+
+    .input2 {
+      input {
+        width: 100%;
+        color: rgba(49, 60, 91, 0.3);
+      }
+
     }
 
     .btns {

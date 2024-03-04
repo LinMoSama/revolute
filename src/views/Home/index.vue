@@ -19,7 +19,12 @@
     <Buy :percentage='1.2' :day='60' :type="2" @buy='buyHandle(3)'>
     </Buy>
     <Menu ref="menu"></Menu>
-    <Alert title='认购金额' :alertShow='alertShow' @updateShow="updateShow" @closeAlert="closeAlert"></Alert>
+    <Alert title='认购金额' :alertShow='alertShow' @updateShow="updateShow" @closeAlert="closeAlert"
+      @confirmAlert="confirmAlert" :flag="true"></Alert>
+
+    <Alert title='推荐人' :alertShow='isSowReference' @updateShow="updateShow" @closeAlert="closeReferenceAlert"
+      @confirmAlert="ReferenceAlertConfirm">
+    </Alert>
   </div>
 </template>
 
@@ -32,7 +37,7 @@ import Alert from '@/components/Alert.vue'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { title } from 'process';
-const { controlList, alertShow, controlHandler, buyHandle, updateShow, closeAlert } = useIndex()
+const { controlList, alertShow, isSowReference, controlHandler, buyHandle, updateShow, closeAlert, confirmAlert, closeReferenceAlert, ReferenceAlertConfirm } = useIndex()
 const menu = ref()
 
 

@@ -12,10 +12,11 @@
           <div class="money">{{ item.money }}</div>
         </div>
       </template>
+
       <template v-else-if="type === 2">
         <div class="item" v-for="(item, index) in propsData2" :key="index">
           <div class="account">{{ item.acc }}</div>
-          <div class="classify">{{ item.classify }}</div>
+          <!-- <div class="classify">{{ item.classify }}</div> -->
           <div class="money">{{ item.income }}</div>
         </div>
       </template>
@@ -75,9 +76,10 @@ function rotate() {
       width: 12px;
       height: 12px;
       content: '';
-      background: url('@/assets/images/topArrow.png') no-repeat;
+      background: url('@/assets/images/topArrow.png') center center no-repeat;
       transform: rotate(180deg);
       transition: all 0.3s ease;
+      background-size: 100% 100%;
     }
   }
 

@@ -1,8 +1,7 @@
 <template>
   <div class="wrap">
-    <div class="back"> <van-nav-bar :title="title" left-text="Back" left-arrow @click-left="onClickLeft" /></div>
+    <Back :title="title" @click-left="onClickLeft"></Back>
     <div class="title">
-
       <p>昨日总收益</p>
       <div class="money">1,547.00</div>
       <div class="icon"></div>
@@ -15,49 +14,13 @@
 </template>
 
 <script setup lang="ts" name="totalEarningsYesterday">
-// import { onMounted } from 'vue'
+import Back from '@/components/Back.vue'
 import Detail from '@/components/Detail.vue'
-import { reactive } from 'vue';
-import { useRouter, useRoute } from 'vue-router'
-const router = useRouter()
-const { meta: { title } } = useRoute()
-function onClickLeft() {
-  router.back()
-}
-const propsData = reactive([
-  {
-    product: '产品一 (USDT)',
-    money: 149.50
-  },
-  {
-    product: '产品二 (USDT)',
-    money: 149.50
-  }, {
-    product: '产品三 (USDT)',
-    money: 149.50
-  }, {
-    product: '产品四 (USDT)',
-    money: 149.50
-  }
-])
-const propsData2 = reactive([
-  {
-    acc: '0x....sdfsfsd',
-    income: "+149.50",
-    classify: "一代"
-  }, {
-    acc: '0x....sdfsfsd',
-    income: "+149.50",
-    classify: "二代"
-  }, {
-    acc: '0x....sdfsfsd',
-    income: "+149.50",
-    classify: "三代"
-  }
-])
+import useTotalEarningsYesterday from '@/hooks/totalEarningsYesterday';
+const { title, propsData, propsData2, onClickLeft } = useTotalEarningsYesterday()
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
 .wrap {
   display: flex;
   flex-direction: column;
@@ -66,9 +29,7 @@ const propsData2 = reactive([
   background: #F7F7F7;
 }
 
-.back {
-  width: 100%;
-}
+
 
 .title {
   position: relative;

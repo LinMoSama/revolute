@@ -47,6 +47,8 @@ defineExpose({
   .icon {
     display: block;
     margin: 30px auto 9px;
+    width: 18px;
+    height: 12px;
   }
 
   ul {
