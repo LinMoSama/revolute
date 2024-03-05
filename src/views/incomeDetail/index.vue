@@ -20,7 +20,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ v.mun }}USDT</p>
+               <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ v.mun }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ v.mun }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ v.mun }}USDT</p>
+               <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ v.mun }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>

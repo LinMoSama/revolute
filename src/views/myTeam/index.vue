@@ -1,16 +1,21 @@
 <template>
-  <div class='wrap'>
+  <div class="wrap">
     <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
     <div class="control df aic jcsb">
       <div class="df aic">
-        <img src="../../assets/images/lv1.png" style="width: 30px;">
+        <img :src="levelArr[formData.user_level-1]" style="width: 30px" />
         <div class="ml20">
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
-          <p class="gray">团队收益率: {{ (formData.team_sum * 1).toFixed(2) }} %</p>
+          <p class="gray">
+            团队收益率: {{ (formData.team_sum * 1).toFixed(2) }} %
+          </p>
         </div>
       </div>
       <div class="level df aic jcsb">
-        <img src="../../assets/images/lv1.png" style="width: 15px;margin-right: 5px;">
+        <img
+          :src="levelArr[formData.user_level-1]"
+          style="width: 15px; margin-right: 5px"
+        />
         <p class="cfff">V{{ formData.user_level }}</p>
       </div>
     </div>
@@ -19,17 +24,23 @@
         <p class="fz12 gray">我的团队</p>
         <div class="fz12 b1 df aic" @click="$router.push('/teamDetail')">
           <p>查看成员</p>
-          <img src="../../assets/images/righticon.png" style="width: 10px;">
+          <img src="../../assets/images/righticon.png" style="width: 10px" />
         </div>
       </div>
       <div class="direct mt20 df fdc">
         <div class="df aic jcsb">
           <div class="df aic">
-            <img src="../../assets/images/team.png" style="width: 26px;margin-right: 5px;">
+            <img
+              src="../../assets/images/team.png"
+              style="width: 26px; margin-right: 5px"
+            />
             <p class="fz12">直推还差1人</p>
-            <img src="../../assets/images/upper.png" style="width: 20px;margin-left: 10px;">
+            <img
+              src="../../assets/images/upper.png"
+              style="width: 20px; margin-left: 10px"
+            />
           </div>
-          <div class="yell">收益率: 10%-15%</div>
+          <div class="yell">收益率: {{ formData.team_award_recommend }}%</div>
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
@@ -45,26 +56,31 @@
       <div class="upp df fdc mt20">
         <div class="df aic jcsb">
           <div class="df aic">
-            <img src="../../assets/images/data.png" style="width: 26px;margin-right: 5px;">
-            <p class="fz12">距离V5还差3个V4</p>
+            <img
+              src="../../assets/images/data.png"
+              style="width: 26px; margin-right: 5px"
+            />
+            <p class="fz12">{{ formData.level_if }}</p>
           </div>
-          <div class="yell">收益率: 10%</div>
+          <div class="yell">收益率: {{ formData.team_award_team }}%</div>
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
             <p class="mb20">直推业绩 (USDT)</p>
-            <p class="fw7 fz16">{{ formData.team_award_recommend }}</p>
+            <p class="fw7 fz16">{{ (formData.recommend_sum*1).toFixed(2) }}</p>
           </div>
           <div class="df fdc">
             <p class="mb20">团队业绩 (USDT)</p>
-            <p class="fw7 fz16">{{ (formData.team_finc_sum * 1).toFixed(2) }}</p>
+            <p class="fw7 fz16">
+              {{ (formData.team_finc_sum * 1).toFixed(2) }}
+            </p>
           </div>
         </div>
       </div>
     </div>
     <div class="content bsbb mt20">
-      <van-tabs v-model:active="active" shrink>
-        <van-tab title="全部">
+      <van-tabs v-model:active="active" shrink @change="changeType">
+        <!-- <van-tab title="全部">
           <div class="all">
             <div class="item df fdc">
               <div class="df aic jcsb">
@@ -87,31 +103,29 @@
               </div>
             </div>
           </div>
-        </van-tab>
+        </van-tab> -->
         <van-tab title="推荐奖励">
           <div class="recharge">
-            <div class="item df fdc">
-              <div class="df aic jcsb">
-                <p class="fw7 fz14 b2 mb10">0x...sdf4</p>
+            <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
+              <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">推荐奖励</p>
+                <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 100) }}</p>
               </div>
-              <div class="df aic jcsb">
-                <p class="fz14 gray">2024/02/28 15:00:00</p>
-                <p class="gray fz14">+10.00 USDT</p>
+              <div class="df fdc">
+                <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
               </div>
             </div>
           </div>
         </van-tab>
         <van-tab title="团队奖励">
           <div class="withdraw">
-            <div class="item df fdc">
-              <div class="df aic jcsb">
-                <p class="fw7 fz14 b2 mb10">0x...sdf4</p>
+            <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
+              <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">团队奖励</p>
+                <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 100) }}</p>
               </div>
-              <div class="df aic jcsb">
-                <p class="fz14 gray">2024/02/28 15:00:00</p>
-                <p class="gray fz14">+10.00 USDT</p>
+              <div class="df fdc">
+                <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
               </div>
             </div>
           </div>
@@ -123,38 +137,71 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { onMounted, ref, watch } from 'vue';
-import { useRouter } from 'vue-router'
-import Menu from '@/components/Menu.vue'
-import Banner from '@/components/Banner.vue'
-import { getUserTeam } from '../../service/api'
-import { hiddenUserAccount } from '../../utils/utils'
-const menu = ref()
-const $router = useRouter()
-const active = ref(0)
-const account = ref<any>(localStorage.getItem('account'))
-const formData = ref<any>({
-  address: '',
-  level: ''
-})
+import { onMounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import Menu from "@/components/Menu.vue";
+import Banner from "@/components/Banner.vue";
+import { getUserTeam, getFinancialList } from "../../service/api";
+import { hiddenUserAccount, getHMS } from "../../utils/utils";
+const menu = ref();
+const $router = useRouter();
+const active = ref(0);
+const account = ref(localStorage.getItem("account"));
+const levelArr = ref([
+  '/src/assets/images/lv1.png',
+  '/src/assets/images/lv2.png',
+  '/src/assets/images/lv3.png',
+  '/src/assets/images/lv4.png',
+  '/src/assets/images/lv5.png',
+  '/src/assets/images/lv6.png',
+ 
+])
+const params = ref<any>({
+  var_page: 1,
+  list_rows: 10,
+  award_type: 3,
+});
+const formData = ref<any>({});
+const dataList = ref<any>([]);
+const changeType = (number: number) => {
+  if (number == 0) {
+    params.value.award_type = 3;
+  } else {
+    params.value.award_type = 4;
+  }
+};
 const getUserTeamInfo = () => {
   getUserTeam().then((res: any) => {
-    formData.value = res.data.data
-  })
-}
+    formData.value = res.data.data;
+  });
+};
+
+const getListData = () => {
+  getFinancialList(params.value).then((res: any) => {
+    dataList.value = res.data.data.data;
+  });
+};
+watch(
+  () => params.value.award_type,
+  () => {
+    getListData();
+  }
+);
+
 onMounted(() => {
-  getUserTeamInfo()
-})
+  getUserTeamInfo();
+  getListData();
+});
 </script>
 
 <style scoped lang="scss">
 ::v-deep .van-tabs__nav {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
 ::v-deep .van-tab--active {
   color: #fff;
-  background-color: #0359BD;
+  background-color: #0359bd;
   font-weight: normal;
 }
 
@@ -177,13 +224,13 @@ onMounted(() => {
 }
 
 .co {
-  color: #0E1446;
+  color: #0e1446;
 }
 
 .wrap {
   display: flex;
   flex-direction: column;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   overflow: hidden;
   min-height: 100vh;
 
@@ -194,7 +241,7 @@ onMounted(() => {
     padding: 0 25px;
     justify-content: space-between;
     align-items: center;
-    background-color: #005ABD;
+    background-color: #005abd;
 
     .log {
       img {
@@ -213,15 +260,13 @@ onMounted(() => {
         }
       }
     }
-
-
   }
 
   .control {
     padding: 15px;
     width: 325px;
     height: 90px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 10px 10px 10px 10px;
     transform: translateY(-45%);
     margin: 0 auto;
@@ -231,7 +276,7 @@ onMounted(() => {
     }
 
     .level {
-      background-color: #005ABD;
+      background-color: #005abd;
       border-radius: 20px;
       padding: 5px 10px;
       box-sizing: border-box;
@@ -242,14 +287,14 @@ onMounted(() => {
     padding: 0 20px;
 
     .direct {
-      background-color: #005ABD;
+      background-color: #005abd;
       border-radius: 10px;
       padding: 20px 0 20px 20px;
       box-sizing: border-box;
       color: #fff;
 
       .yell {
-        background-color: #FFB41C;
+        background-color: #ffb41c;
         color: #fff;
         padding: 5px 5px 5px 10px;
         box-sizing: border-box;
@@ -262,14 +307,14 @@ onMounted(() => {
         font-size: 12px;
         margin-top: 30px;
 
-        >div {
+        > div {
           width: 50%;
         }
       }
     }
 
     .upp {
-      background-color: #FFB41C;
+      background-color: #ffb41c;
       border-radius: 10px;
       padding: 20px 0 20px 20px;
       box-sizing: border-box;
@@ -289,7 +334,7 @@ onMounted(() => {
         font-size: 12px;
         margin-top: 30px;
 
-        >div {
+        > div {
           width: 50%;
         }
       }

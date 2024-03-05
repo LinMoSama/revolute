@@ -71,5 +71,7 @@ export const getHMS = (timestamp: any) => {
 
 // 隐藏用户中间地址
 export const hiddenUserAccount = (addr: any) => {
-  return addr.slice(0, 2) + '...' + addr.slice(38, addr.length)
+  if (addr) {
+    return addr.slice(0, 2) + '...' + addr.slice(38, addr.length)
+  }
 }
