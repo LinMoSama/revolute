@@ -24,7 +24,7 @@ import { useRoute } from 'vue-router'
 
 import useBanner from '@/hooks/useBanner'
 const { wallectStore, account, formatName } = useBanner()
-const props = defineProps(['menu', 'showWallect','defaults'])
+const props = defineProps(['menu', 'showWallect', 'defaults'])
 let { meta: { title } } = useRoute()
 function updateMenu() {
   props.menu.showMenu()

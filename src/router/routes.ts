@@ -83,4 +83,9 @@ export default [
     name: 'teamDetail',
     component: () => import('@/views/myTeam/detail.vue'),
   },
+  {
+    path: '/teamDirectDetail',
+    name: 'teamDirectDetail',
+    component: () => import('@/views/myTeam/directDetail.vue'),
+  },
 ]

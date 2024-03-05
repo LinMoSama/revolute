@@ -12,10 +12,12 @@ const server = axios.create({
 server.interceptors.request.use(
     config => {
         const $userStore = useUserStore()
-        const token = $userStore.token
-        // if (token) {
-        //     config.headers!.authormaster = token
-        // }
+        // const token = $userStore.token
+        // const token = localStorage.getItem('token')
+        const token = 'b3dc0e31-3cdf-47ce-9fc7-124304970b0d'
+        if (token) {
+            config.headers!.token = token
+        }
         return config
     },
     err => {
@@ -37,9 +39,9 @@ server.interceptors.response.use(
     },
     err => {
         let { status } = err.response
-        errorCodeHandler(status)
+        // errorCodeHandler(status)
         if (err && err.response) {
-            errorCodeHandler(err.response.status)
+            // errorCodeHandler(err.response.status)
         } else {
             showFailToast('连接服务器失败!')
         }
