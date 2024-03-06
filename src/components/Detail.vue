@@ -2,7 +2,7 @@
   <div class="detail" @click="rotate" :class="{ 'radius': flag }">
     <i class="icon" v-if="flag" :class="{ 'rotate': f }"></i>
     <p>{{ title }}</p>
-    <p class="p2">{{ money }}USDT</p>
+    <p class="p2">{{ money }} USDT</p>
   </div>
   <transition name="fade" mode="in-out">
     <div class="content" v-if="flag && f">
@@ -33,7 +33,7 @@ const props = defineProps<{
   propsData?: propsDataInter[],
   propsData2?: propsDataInter2[],
   title: string,
-  money: number,
+  money: number | string,
   type?: number
 }>()
 

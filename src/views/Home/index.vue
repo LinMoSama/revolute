@@ -1,37 +1,64 @@
 <template>
   <div class="wrap">
-    <Banner :menu="menu" :showWallect="true"></Banner>
+    <Banner
+      :menu="menu"
+      :showWallect="true"
+      :isShowReferenceHandler="isShowReferenceHandler"
+    ></Banner>
     <div class="control">
-      <div class="item" v-for="(item, index) in controlList" :key="index" @click="controlHandler(item.type)">
+      <div
+        class="item"
+        v-for="(item, index) in controlList"
+        :key="index"
+        @click="controlHandler(item.type)"
+      >
         <img :src="item.icon" alt="" />
         <p>{{ item.title }}</p>
       </div>
     </div>
-    <TotalRevenue></TotalRevenue>
+    <TotalRevenue
+      :isShowReferenceHandler="isShowReferenceHandler"
+      :awardList="awardList"
+    ></TotalRevenue>
 
     <div class="main">
       <div class="bg">
         <img src="../../assets/images/maintext.png" alt="" />
       </div>
     </div>
-    <Buy :percentage="item.income" :day="item.subscription" :type="item.id" @buy="buyHandle(1)"
-      v-for="(item, index) in investList" :key="index"></Buy>
-    <!-- <Buy :percentage='1' :day='30'   :type="1" @buy='buyHandle(2)'></Buy>
-    <Buy :percentage='1.2' :day='60' :type="2" @buy='buyHandle(3)'>
-    </Buy> -->
+    <Buy
+      :percentage="item.income"
+      :day="item.subscription"
+      :type="item.id"
+      @buy="buyHandle(item.id)"
+      v-for="(item, index) in investList"
+      :key="index"
+    ></Buy>
     <Menu ref="menu"></Menu>
-    <Alert title="认购金额" :alertShow="alertShow" @updateShow="updateShow" @closeAlert="closeAlert"
-      @confirmAlert="confirmAlert" :flag="true"></Alert>
+    <Alert
+      title="认购金额"
+      :alertShow="alertShow"
+      @updateShow="updateShow"
+      @closeAlert="closeAlert"
+      @confirmAlert="confirmAlert"
+      :flag="true"
+    ></Alert>
 
-    <Alert title="推荐人" :alertShow="isSowReference" @updateShow="updateShow" @closeAlert="closeReferenceAlert"
-      @confirmAlert="ReferenceAlertConfirm">
+    <Alert
+      title="推荐人"
+      :alertShow="isShowReference"
+      @updateShow="updateShow"
+      @closeAlert="closeReferenceAlert"
+      @confirmAlert="ReferenceAlertConfirm"
+    >
     </Alert>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
-import { onMounted, ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import useIndex from '@/hooks/useIndex'
+import { getAwardList } from '@/service/api'
 import TotalRevenue from '@/components/totalRevenue.vue'
 import Buy from '@/components/Buy.vue'
 import Alert from '@/components/Alert.vue'
@@ -39,10 +66,11 @@ import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { title } from 'process'
 import { getUserInfo, getInit } from '../../service/api'
+// import { title } from 'process'
 const {
   controlList,
   alertShow,
-  isSowReference,
+  isShowReference,
   investList,
   controlHandler,
   buyHandle,
@@ -51,6 +79,7 @@ const {
   confirmAlert,
   closeReferenceAlert,
   ReferenceAlertConfirm,
+  isShowReferenceHandler,
 } = useIndex()
 const menu = ref()
 
@@ -65,6 +94,28 @@ const getInfo = () => {
 onMounted(() => {
   getInfo()
 })
+const awardList = ref({})
+//获取奖励明细
+const res = await getAwardList({
+  var_page: 1,
+  list_rows: 3,
+  award_type: 0,
+  yesterday: 1,
+})
+awardList.value = res.data.data
+// onMounted(async () => {
+//   try {
+//     const res = await getAwardList({
+//       var_page: 1,
+//       list_rows: 3,
+//       award_type: 0,
+//       yesterday: 1,
+//     })
+//     awardList.value = res.data.data
+//   } catch (error) {
+//     console.log(error)
+//   }
+// })
 </script>
 
 <style scoped lang="scss">

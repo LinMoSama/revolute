@@ -4,7 +4,6 @@ export async function getWebData(to: any, from: any, next: any) {
     // Metamask 已安装
     localStorage.setItem('isInstall', 'true')
     const ethereum = window.ethereum
-    const web3 = new Web3(ethereum)
     // 请求账户访问权限
     try {
       // // 获取当前以太坊网络的网络 ID

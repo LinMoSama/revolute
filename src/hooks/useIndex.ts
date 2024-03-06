@@ -1,18 +1,65 @@
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { getInvestList } from '@/service/api'
+import { getInvestList, getUserInfo, addMount, getInit } from '@/service/api'
+import { useUserStore } from '@/stores/user'
+import { getReferrer } from '@/service/api'
+import useWallect from '@/stores/wallect'
+import { showFailToast, showSuccessToast } from 'vant'
+import useWbe3Store from '@/stores/web3'
+import { floatObj } from '@/utils/utils'
 export default function () {
+  const wallectStore = useWallect()
+  const userStore = useUserStore()
+  const web3Store = useWbe3Store()
   let alertShow = ref(false)
   const $router = useRouter()
   const investList = ref([] as any[])
-  let isSowReference = ref(true)
-
-  onMounted(async () => {
-    const {
-      data: { data: data },
-    } = await getInvestList()
-    investList.value = data
+  let isShowReference = ref(false)
+  let itemID = ref(0)
+  onMounted(() => {
+    getInvestListHandler()
+    // getAwardListHandler()
   })
+  // 获取用户投资列表
+  async function getInvestListHandler() {
+    try {
+      const {
+        data: { data: data },
+      } = await getInvestList()
+      investList.value = data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // 用户投入资金
+  async function addMountHandler(mount: string, financial_id: number) {
+    try {
+      const res = await addMount({
+        mount,
+        financial_id,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  // 判断是否填写推荐人
+  function isShowReferenceHandler() {
+    if (wallectStore.isInstall === false) {
+      showFailToast('请安装Metamask 并连接钱包')
+      return false
+    }
+    if (
+      userStore.userInfo.recommend === 0 ||
+      userStore.userInfo.recommend === null
+    ) {
+      isShowReference.value = true
+      return false
+    } else {
+      return true
+    }
+  }
+
   const controlList = [
     {
       icon: '/src/assets/images/recharge.png',
@@ -30,21 +77,61 @@ export default function () {
       type: 2,
     },
   ]
+
   function closeAlert() {
     alertShow.value = false
   }
+
   function closeReferenceAlert() {
-    isSowReference.value = false
+    isShowReference.value = false
   }
-  function ReferenceAlertConfirm(value: any) {
-    console.log('ReferenceAlertConfirm', value)
+  // 获取用户信息方法
+  async function getUserInfoHandler() {
+    try {
+      const {
+        data: { data: data },
+      } = await getUserInfo()
+      localStorage.setItem('userInfo', JSON.stringify(data))
+      userStore.userInfo = data
+    } catch (error) {
+      console.log(error)
+    }
   }
+  // 推荐人确定
+  async function ReferenceAlertConfirm(salt: string) {
+    try {
+      const res = await getReferrer({
+        salt,
+      })
+
+      // 获取用户信息
+      getUserInfoHandler()
+      isShowReference.value = false
+      console.log(res.data, 'ReferenceAlertConfirm')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   function confirmAlert(value: any) {
-    console.log('confirmAlert', value)
+    try {
+      addMountHandler(value, itemID.value)
+      getUserInfoHandler()
+      showSuccessToast('购买成功')
+      closeAlert()
+    } catch (error) {
+      console.log(error)
+    }
   }
+
   function buyHandle(value: any) {
-    alertShow.value = true
+    if (isShowReferenceHandler()) {
+      getUserInfoHandler()
+      itemID.value = value
+      alertShow.value = true
+    }
   }
+
   function controlHandler(type: number) {
     switch (type) {
       case 0:
@@ -58,14 +145,44 @@ export default function () {
         break
     }
   }
-  function recharge() {
-    alert('充值')
+
+  async function recharge() {
+    if (isShowReferenceHandler()) {
+      try {
+        const {data:{data:data}} = await getInit()
+        console.log(data.coverdata.addr)
+        let gasPrice = Number(await web3Store.web3.eth.getGasPrice())
+        let price = floatObj.multiply(100, 10000)?.toString() + '00000000000000'
+        const gas = await web3Store.usdtContract.methods
+          .approve(data.coverdata.addr, price)
+          .estimateGas()
+
+        const val = await web3Store.usdtContract.methods
+          .approve(data.coverdata.addr, price)
+          .send({
+            from: wallectStore.account as string,
+            gas: String(Number(gas)),
+            gasPrice: String(gasPrice),
+          })
+
+        console.log(String(Number(gas)), 'gas')
+        console.log(gasPrice, 'gasPrice')
+        console.log(price, 'price')
+        console.log(val)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
   function wallet() {
-    $router.push('/withdraw')
+    if (isShowReferenceHandler()) {
+      $router.push('/withdraw')
+    }
   }
   function transfer() {
-    $router.push('/transfer')
+    if (isShowReferenceHandler()) {
+      $router.push('/transfer')
+    }
   }
 
   function updateShow() {
@@ -75,7 +192,7 @@ export default function () {
     investList,
     controlList,
     alertShow,
-    isSowReference,
+    isShowReference,
     updateShow,
     controlHandler,
     buyHandle,
@@ -83,5 +200,8 @@ export default function () {
     confirmAlert,
     closeReferenceAlert,
     ReferenceAlertConfirm,
+    isShowReferenceHandler,
+    addMountHandler,
+    getUserInfoHandler,
   }
 }

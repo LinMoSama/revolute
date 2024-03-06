@@ -32,9 +32,9 @@ server.interceptors.response.use(
         if (code === 20000) {
             showSuccessToast(msg)
         }
-        if (code && code !== 20000) {
-            showFailToast(msg)
-        }
+        // if (code && code !== 20000) {
+        //     showFailToast(msg)
+        // }
         return response
     },
     err => {

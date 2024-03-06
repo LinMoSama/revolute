@@ -2,32 +2,53 @@
   <div class="total-revenue">
     <div class="total_earnings_yesterday" @click="goTotalEarningsYesterday">
       <div class="icon">
-        <img src="@/assets/images/income1.png" alt="">
+        <img src="@/assets/images/income1.png" alt="" />
       </div>
       <div class="title">
         <p class="revenue_title">昨日总收益</p>
-        <div class="money">1,572 USDT</div>
+        <div class="money" v-if="token === ''">0.00 USDT</div>
+        <div class="money" v-else>{{ yesterdayCom }} USDT</div>
       </div>
     </div>
     <div class="total_earnings">
       <div class="icon">
-        <img src="@/assets/images/income2.png" alt="">
+        <img src="@/assets/images/income2.png" alt="" />
       </div>
       <div class="title">
         <p class="revenue_title">总收益</p>
-        <div class="money">12,678 USDT</div>
+        <div class="money" v-if="token === ''">0.00 USDT</div>
+        <div class="money" v-else>{{ sumAwardCom }} USDT</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { formatDecimal } from '@/utils/utils'
+
+const props = defineProps(['isShowReferenceHandler', 'awardList'])
 const router = useRouter()
+import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+const { token } = storeToRefs(useUserStore())
+const yesterdayCom = computed(() => {
+  return props.awardList.yesterday === null
+    ? '0.00'
+    : formatDecimal(props.awardList.yesterday)
+})
+const sumAwardCom = computed(() => {
+  return props.awardList.sum_award === null
+    ? '0.00'
+    : formatDecimal(props.awardList.sum_award)
+})
 function goTotalEarningsYesterday() {
-  router.push({
-    name: 'TotalEarningsYesterday',
-  })
+  if (props.isShowReferenceHandler()) {
+    router.push({
+      name: 'TotalEarningsYesterday',
+    })
+  }
 }
 </script>
 
@@ -44,7 +65,7 @@ function goTotalEarningsYesterday() {
     align-items: center;
     width: 158px;
     height: 68px;
-    background: #EBF2FF;
+    background: #ebf2ff;
     border-radius: 10px 10px 10px 10px;
 
     .icon {
@@ -63,7 +84,7 @@ function goTotalEarningsYesterday() {
       .revenue_title {
         position: relative;
         margin-bottom: 6px;
-        color: #464E59;
+        color: #464e59;
         font-size: 12px;
 
         &::after {
@@ -82,7 +103,7 @@ function goTotalEarningsYesterday() {
       .money {
         font-weight: bold;
         font-size: 14px;
-        color: #313C5B;
+        color: #313c5b;
       }
     }
   }
@@ -95,6 +116,5 @@ function goTotalEarningsYesterday() {
       }
     }
   }
-
 }
 </style>

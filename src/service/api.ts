@@ -1,5 +1,70 @@
 import request from './request'
 
+// 获取余额变动记录
+export const getMoneyLog = (data: any) => {
+  return request({
+    url: '/api/user/get_money_log',
+    method: 'post',
+    data,
+  })
+}
+// 复利池转出
+export const compoundOut = (data: any) => {
+  return request({
+    url: '/api/financial/set_money_award_to_money',
+    method: 'post',
+    data,
+  })
+}
+// 获取用户购买认购记录
+export const getUserFinancialList = (data: any) => {
+  return request({
+    url: '/api/financial/get_user_financial',
+    method: 'post',
+    data,
+  })
+}
+// 初始化加载
+export const getInit = () => {
+  return request({
+    url: '/api/common/get_init',
+    method: 'post',
+  })
+}
+// 用户投入资金
+export const addMount = (data: any) =>
+  request({
+    url: '/api/financial/add_mount',
+    method: 'post',
+    data,
+  })
+// 获取奖励明细
+export const getAwardList = (data: any) =>
+  request({
+    url: '/api/financial/get_user_award_log',
+    method: 'post',
+    data,
+  })
+// 获取用户信息
+export const getUserInfo = () =>
+  request({
+    url: '/api/user/get_user_info',
+    method: 'post',
+  })
+// 推荐人
+export const getReferrer = (data: any) =>
+  request({
+    url: '/api/user/user_recommend',
+    method: 'post',
+    data,
+  })
+// 获取奖励明细
+export const getRewardList = (data: any) =>
+  request({
+    url: '/api/financial/get_user_award_log',
+    method: 'post',
+    data,
+  })
 // 登录
 export const login = (data: any) =>
   request({
@@ -8,24 +73,10 @@ export const login = (data: any) =>
     data,
   })
 
-// 初始化数据
-export const getInit = () =>
-  request({
-    url: '/api/common/get_init',
-    method: 'post',
-  })
-
 // 获取用户投资列表
 export const getInvestList = () =>
   request({
     url: 'api/financial/get_list',
-    method: 'post',
-  })
-
-// 获取用户信息
-export const getUserInfo = () =>
-  request({
-    url: 'api/user/get_user_info',
     method: 'post',
   })
 
@@ -50,7 +101,7 @@ export const getUserTeamList = (data: any) => {
   return request({
     url: '/api/financial/get_user_team_list',
     method: 'post',
-    data
+    data,
   })
 }
 // 用户直推详情
@@ -58,7 +109,7 @@ export const getUserRecommendList = (data: any) => {
   return request({
     url: '/api/financial/get_user_recommend_list',
     method: 'post',
-    data
+    data,
   })
 }
 
@@ -93,6 +144,6 @@ export const getIdToSearch = (data: any) => {
   return request({
     url: '/api/financial/get_transfer',
     method: 'post',
-    data
+    data,
   })
 }

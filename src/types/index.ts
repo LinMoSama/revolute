@@ -6,5 +6,9 @@ export interface propsDataInter {
 export interface propsDataInter2 {
   acc: string
   income: string | number
-  classify:string
+  classify: string
+}
+export interface userInfoInter {
+  recommend: number | null
+  money:string | number
 }

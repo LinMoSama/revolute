@@ -2,15 +2,14 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { showFailToast } from 'vant'
 import { login } from '@/service/api'
+import { useUserStore } from './user'
 export default defineStore('wallect', () => {
+  const userStore = useUserStore()
   const isInstall =
     ref(localStorage.getItem('isInstall') === 'false' ? false : true) ||
     ref(false)
-
-  const ethereum = window.ethereum
-
   let account = ref(localStorage.getItem('account')) || ref('')
-
+  const ethereum = window.ethereum
   async function ConnectTheWallet() {
     try {
       if (!ethereum) return showFailToast('Metamask 未安装')
@@ -19,14 +18,15 @@ export default defineStore('wallect', () => {
       account.value = accounts[0]
       const {
         data: {
-          data: {
-            userinfo: { token },
-          },
+          data: { userinfo },
         },
       } = await login({
         account: accounts[0],
       })
-      localStorage.setItem('token', token)
+      userStore.userInfo = userinfo
+      userStore.token = userinfo.token
+      localStorage.setItem('userInfo', JSON.stringify(userinfo))
+      localStorage.setItem('token', userinfo.token)
     } catch (error: any) {
       console.log(error)
       if (error.code === 4001) {
@@ -35,5 +35,5 @@ export default defineStore('wallect', () => {
     }
   }
 
-  return { ConnectTheWallet, account, ethereum, isInstall }
+  return { ConnectTheWallet, account, isInstall }
 })
