@@ -4,35 +4,38 @@
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
-        <p class="fw7">25578</p>
+        <p class="fw7">{{ (userInfo.money * 1).toFixed(2) }}</p>
       </div>
-      <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="$router.push('/withdrawdetail')">
+      <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="goDetailList">
     </div>
     <div class="content bsbb">
       <p class="fz18 co fw7 mb20">接收方</p>
       <div class="df aic jcsb bb">
-        <input type="text" placeholder="请输入接收方地址" v-model="formData.toaddress">
-        <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;">
+        <input type="text" placeholder="请输入接收方地址" v-model="formData.to_username">
+        <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;"
+          @click="copyAdd(formData.to_username, $event)">
         <img v-else src="../../assets/images/frame0.png" style="width: 26px;">
       </div>
       <p class="fz18 co fw7 mt20">提现金额</p>
       <p class="fz14 mt10" style="color: #B7BAC2;">您需要提现多少USDT?</p>
       <div class="big">
-        <input type="text" placeholder="0.00">
+        <input type="number" placeholder="0.00" v-model="formData.mount">
       </div>
       <div class="df fdc gray li">
         <div class="df aic jcsb">
           <p>手续费</p>
-          <p>0.01%</p>
+          <p>{{ fixedTwo(initInfo.transfer_myzc_fee) }}%</p>
         </div>
         <div class="df aic jcsb">
           <p>实际到账</p>
-          <p>--</p>
+          <p v-if="!formData.mount">--</p>
+          <p v-else>{{ instanceAmount }}</p>
         </div>
       </div>
-      <div class="btn">确定</div>
+      <div class="btn" @click="confirmWithdraw">确定</div>
     </div>
     <Menu ref="menu"></Menu>
+    <van-loading v-model="showLoding" />
   </div>
 </template>
 
@@ -42,22 +45,64 @@ import { useRouter, useRoute } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { getWithdraw } from '@/service/api'
+import { useUserStore } from '../../stores/user'
+import clipboard from '../../utils/utils'
+import { fixedTwo } from '../../utils/utils'
+import { showSuccessToast, showFailToast } from 'vant';
+import { computed } from 'vue';
+const userStore = useUserStore()
+const userInfo = JSON.parse(userStore.userInfo)
+const initInfo = JSON.parse(userStore.initInfo)
 const menu = ref()
 const $router = useRouter()
-const formData = ref({
-  toaddress: '',
-  amount: ''
+const showLoding = ref(false)
+const formData = ref<any>({
+  to_username: '',
+  mount: ''
 })
 const flag = ref(false)
-watch(() => formData.value.toaddress, () => {
-  if (formData.value.toaddress) {
+const copyAdd = (text: string, event: any) => {
+  clipboard(text, event)
+  event.value = event
+}
+const goDetailList = () => {
+  $router.push({
+    path: '/withdrawdetail',
+    query: {
+      active: 3
+    }
+  })
+}
+watch(() => formData.value.to_username, () => {
+  if (formData.value.to_username) {
     flag.value = true
+  } else {
+    flag.value = false
   }
 })
+const instanceAmount = computed(() => {
+  return (formData.value.mount - (formData.value.mount * (initInfo.transfer_myzc_fee / 100))).toFixed(2)
+})
 
-const confirmWithdraw = ()=>{
-  getWithdraw({}).then(res=>{
-    console.log(res)
+const confirmWithdraw = () => {
+  if (!formData.value.mount) {
+    showFailToast('请检查转账数量的输入')
+    return
+  }
+  if (!formData.value.to_username) {
+    showFailToast('请检查转账地址的输入')
+    return
+  }
+  showLoding.value = true
+  getWithdraw(formData.value).then(res => {
+    if (res.data.code) {
+      showSuccessToast('提现成功')
+    } else {
+      showFailToast(res.data.msg)
+    }
+    showLoding.value = false
+  }).finally(() => {
+    showLoding.value = false
   })
 }
 </script>

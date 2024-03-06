@@ -75,3 +75,10 @@ export const hiddenUserAccount = (addr: any) => {
     return addr.slice(0, 2) + '...' + addr.slice(38, addr.length)
   }
 }
+
+// 保留两位小数
+export const fixedTwo = (num: number) => {
+  if (num) {
+    return (num * 1).toFixed(2)
+  }
+}

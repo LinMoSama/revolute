@@ -8,6 +8,13 @@ export const login = (data: any) =>
     data,
   })
 
+// 初始化数据
+export const getInit = () =>
+  request({
+    url: '/api/common/get_init',
+    method: 'post',
+  })
+
 // 获取用户投资列表
 export const getInvestList = () =>
   request({
@@ -25,18 +32,11 @@ export const getUserInfo = () =>
 // 用户提现
 export const getWithdraw = (data: any) => {
   return request({
-    url: '/financial/add_mount',
+    url: 'api/financial/money_withdrawal',
     method: 'post',
     data,
   })
 }
-// 获取提现记录
-// export const getWithdrawList = () => {
-//   return request({
-//     url: '/api/financial/get_list',
-//     method: 'post',
-//   })
-// }
 
 // 用户团队
 export const getUserTeam = () => {
@@ -71,4 +71,28 @@ export const getFinancialList = (data: any) => {
   })
 }
 
+// 用户转账
+export const getTransferTo = (data: any) => {
+  return request({
+    url: '/api/financial/transfer_money',
+    method: 'post',
+    data,
+  })
+}
+// 获取交易记录
+export const getTransferList = (data: any) => {
+  return request({
+    url: '/api/financial/get_transfer_list',
+    method: 'post',
+    data,
+  })
+}
 
+// 根据记录id查询交易详情
+export const getIdToSearch = (data: any) => {
+  return request({
+    url: '/api/financial/get_transfer',
+    method: 'post',
+    data
+  })
+}

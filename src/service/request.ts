@@ -14,7 +14,7 @@ server.interceptors.request.use(
         const $userStore = useUserStore()
         // const token = $userStore.token
         // const token = localStorage.getItem('token')
-        const token = 'b3dc0e31-3cdf-47ce-9fc7-124304970b0d'
+        const token = '8e7886ea-bdc9-4094-97b1-c3ccd61acc22'
         if (token) {
             config.headers!.token = token
         }

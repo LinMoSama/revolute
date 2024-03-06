@@ -2,12 +2,7 @@
   <div class="wrap">
     <Banner :menu="menu" :showWallect="true"></Banner>
     <div class="control">
-      <div
-        class="item"
-        v-for="(item, index) in controlList"
-        :key="index"
-        @click="controlHandler(item.type)"
-      >
+      <div class="item" v-for="(item, index) in controlList" :key="index" @click="controlHandler(item.type)">
         <img :src="item.icon" alt="" />
         <p>{{ item.title }}</p>
       </div>
@@ -19,40 +14,23 @@
         <img src="../../assets/images/maintext.png" alt="" />
       </div>
     </div>
-    <Buy
-      :percentage="item.income"
-      :day="item.subscription"
-      :type="item.id"
-      @buy="buyHandle(1)"
-      v-for="(item, index) in investList"
-      :key="index"
-    ></Buy>
+    <Buy :percentage="item.income" :day="item.subscription" :type="item.id" @buy="buyHandle(1)"
+      v-for="(item, index) in investList" :key="index"></Buy>
     <!-- <Buy :percentage='1' :day='30'   :type="1" @buy='buyHandle(2)'></Buy>
     <Buy :percentage='1.2' :day='60' :type="2" @buy='buyHandle(3)'>
     </Buy> -->
     <Menu ref="menu"></Menu>
-    <Alert
-      title="认购金额"
-      :alertShow="alertShow"
-      @updateShow="updateShow"
-      @closeAlert="closeAlert"
-      @confirmAlert="confirmAlert"
-      :flag="true"
-    ></Alert>
+    <Alert title="认购金额" :alertShow="alertShow" @updateShow="updateShow" @closeAlert="closeAlert"
+      @confirmAlert="confirmAlert" :flag="true"></Alert>
 
-    <Alert
-      title="推荐人"
-      :alertShow="isSowReference"
-      @updateShow="updateShow"
-      @closeAlert="closeReferenceAlert"
-      @confirmAlert="ReferenceAlertConfirm"
-    >
+    <Alert title="推荐人" :alertShow="isSowReference" @updateShow="updateShow" @closeAlert="closeReferenceAlert"
+      @confirmAlert="ReferenceAlertConfirm">
     </Alert>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import useIndex from '@/hooks/useIndex'
 import TotalRevenue from '@/components/totalRevenue.vue'
 import Buy from '@/components/Buy.vue'
@@ -60,6 +38,7 @@ import Alert from '@/components/Alert.vue'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { title } from 'process'
+import { getUserInfo, getInit } from '../../service/api'
 const {
   controlList,
   alertShow,
@@ -74,6 +53,18 @@ const {
   ReferenceAlertConfirm,
 } = useIndex()
 const menu = ref()
+
+const getInfo = () => {
+  getUserInfo().then((res: any) => {
+    localStorage.setItem('userInfo', JSON.stringify(res.data.data))
+  })
+  getInit().then((resp: any) => {
+    localStorage.setItem('initInfo', JSON.stringify(resp.data.data.coverdata))
+  })
+}
+onMounted(() => {
+  getInfo()
+})
 </script>
 
 <style scoped lang="scss">

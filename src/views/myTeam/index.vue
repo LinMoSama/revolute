@@ -3,7 +3,7 @@
     <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
     <div class="control df aic jcsb">
       <div class="df aic">
-        <img :src="levelArr[formData.user_level-1]" style="width: 30px" />
+        <img :src="levelArr[formData.user_level - 1]" style="width: 30px" />
         <div class="ml20">
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
           <p class="gray">
@@ -12,10 +12,7 @@
         </div>
       </div>
       <div class="level df aic jcsb">
-        <img
-          :src="levelArr[formData.user_level-1]"
-          style="width: 15px; margin-right: 5px"
-        />
+        <img :src="levelArr[formData.user_level - 1]" style="width: 15px; margin-right: 5px" />
         <p class="cfff">V{{ formData.user_level }}</p>
       </div>
     </div>
@@ -30,15 +27,9 @@
       <div class="direct mt20 df fdc">
         <div class="df aic jcsb">
           <div class="df aic">
-            <img
-              src="../../assets/images/team.png"
-              style="width: 26px; margin-right: 5px"
-            />
+            <img src="../../assets/images/team.png" style="width: 26px; margin-right: 5px" />
             <p class="fz12">直推还差1人</p>
-            <img
-              src="../../assets/images/upper.png"
-              style="width: 20px; margin-left: 10px"
-            />
+            <img src="../../assets/images/upper.png" style="width: 20px; margin-left: 10px" />
           </div>
           <div class="yell">收益率: {{ formData.team_award_recommend }}%</div>
         </div>
@@ -56,10 +47,7 @@
       <div class="upp df fdc mt20">
         <div class="df aic jcsb">
           <div class="df aic">
-            <img
-              src="../../assets/images/data.png"
-              style="width: 26px; margin-right: 5px"
-            />
+            <img src="../../assets/images/data.png" style="width: 26px; margin-right: 5px" />
             <p class="fz12">{{ formData.level_if }}</p>
           </div>
           <div class="yell">收益率: {{ formData.team_award_team }}%</div>
@@ -67,7 +55,7 @@
         <div class="df aic jcsb box">
           <div class="df fdc">
             <p class="mb20">直推业绩 (USDT)</p>
-            <p class="fw7 fz16">{{ (formData.recommend_sum*1).toFixed(2) }}</p>
+            <p class="fw7 fz16">{{ (formData.recommend_sum * 1).toFixed(2) }}</p>
           </div>
           <div class="df fdc">
             <p class="mb20">团队业绩 (USDT)</p>
@@ -104,8 +92,8 @@
             </div>
           </div>
         </van-tab> -->
-        <van-tab title="推荐奖励">
-          <div class="recharge">
+        <van-tab title="推荐奖励" name=0>
+          <div class="direct cont" ref="directRef" v-if="dataList.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">推荐奖励</p>
@@ -116,9 +104,12 @@
               </div>
             </div>
           </div>
+          <div class="nodata df aic jcc mt40 fz20 b2" v-else>
+            暂无数据
+          </div>
         </van-tab>
-        <van-tab title="团队奖励">
-          <div class="withdraw">
+        <van-tab title="团队奖励" name=1>
+          <div class="withdraw cont" ref="rewardRef" v-if="dataList.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">团队奖励</p>
@@ -128,6 +119,9 @@
                 <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
               </div>
             </div>
+          </div>
+          <div class="nodata df aic jcc mt40 fz20 b2" v-else>
+            暂无数据
           </div>
         </van-tab>
       </van-tabs>
@@ -143,6 +137,7 @@ import Menu from "@/components/Menu.vue";
 import Banner from "@/components/Banner.vue";
 import { getUserTeam, getFinancialList } from "../../service/api";
 import { hiddenUserAccount, getHMS } from "../../utils/utils";
+import { showSuccessToast, showFailToast } from 'vant';
 const menu = ref();
 const $router = useRouter();
 const active = ref(0);
@@ -154,7 +149,6 @@ const levelArr = ref([
   '/src/assets/images/lv4.png',
   '/src/assets/images/lv5.png',
   '/src/assets/images/lv6.png',
- 
 ])
 const params = ref<any>({
   var_page: 1,
@@ -169,7 +163,38 @@ const changeType = (number: number) => {
   } else {
     params.value.award_type = 4;
   }
+  active.value = number
 };
+
+
+const directRef = ref<any>(null)
+const rewardRef = ref<any>(null)
+const refList = ref<any>([
+  directRef,
+  rewardRef,
+])
+
+// 触底加载
+const loadMore = () => {
+  const activeRef = refList.value[active.value]
+  if (activeRef.value.scrollTop + activeRef.value.clientHeight >= activeRef.value.scrollHeight) {
+    pageAdd()
+  }
+}
+const pageAdd = async () => {
+  const nowPage = await ++params.value.var_page
+  getFinancialList({
+    var_page: nowPage,
+    list_rows: params.value.list_rows,
+    award_type: params.value.award_type
+  }).then((res: any) => {
+    if (!res.data.data.data.length) {
+      showFailToast('到底了')
+    } else {
+      dataList.value = [...res.data.data.data, ...dataList.value]
+    }
+  })
+}
 const getUserTeamInfo = () => {
   getUserTeam().then((res: any) => {
     formData.value = res.data.data;
@@ -307,7 +332,7 @@ onMounted(() => {
         font-size: 12px;
         margin-top: 30px;
 
-        > div {
+        >div {
           width: 50%;
         }
       }
@@ -334,7 +359,7 @@ onMounted(() => {
         font-size: 12px;
         margin-top: 30px;
 
-        > div {
+        >div {
           width: 50%;
         }
       }
@@ -350,6 +375,12 @@ onMounted(() => {
       padding: 15px 20px;
       box-sizing: border-box;
       margin-bottom: 20px;
+    }
+
+    .cont {
+      max-height: 500px;
+      overflow-y: scroll;
+
     }
   }
 }

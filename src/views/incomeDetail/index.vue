@@ -12,15 +12,15 @@
     </div>
     <div class="content bsbb">
       <van-tabs v-model:active="active" shrink @change="changeType">
-        <van-tab title="全部">
-          <div class="all" v-if="formData.length">
+        <van-tab title="全部" name=0>
+          <div class="all cont" ref="allRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-               <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -28,15 +28,15 @@
             暂无数据
           </div>
         </van-tab>
-        <van-tab title="理财">
-          <div class="recharge" v-if="formData.length">
+        <van-tab title="理财" name=1>
+          <div class="fund cont" ref="fundRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -44,15 +44,15 @@
             暂无数据
           </div>
         </van-tab>
-        <van-tab title="复利">
-          <div class="withdraw" v-if="formData.length">
+        <van-tab title="复利" name=2>
+          <div class="income cont" ref="incomeRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -60,15 +60,15 @@
             暂无数据
           </div>
         </van-tab>
-        <van-tab title="推荐">
-          <div class="transfer content" v-if="formData.length">
+        <van-tab title="推荐" name=3>
+          <div class="transfer cont" ref="recommendRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-               <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -76,15 +76,31 @@
             暂无数据
           </div>
         </van-tab>
-        <van-tab title="团队">
-          <div class="transfer" v-if="formData.length">
+        <van-tab title="团队" name=4>
+          <div class="transfer cont" ref="teamRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
                 <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun*1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
+              </div>
+            </div>
+          </div>
+          <div class="nodata df aic jcc mt40 fz20 b2" v-else>
+            暂无数据
+          </div>
+        </van-tab>
+        <van-tab title="平级" name=5>
+          <div class="transfer cont" ref="teamRef" v-if="formData.length" @scroll="loadMore">
+            <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
+              <div class="df fdc">
+                <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
+                <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
+              </div>
+              <div class="df aic jcsb">
+                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -103,8 +119,9 @@ import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
-import { getFinancialList } from '../../service/api'
+import { getFinancialList, getTransferList } from '../../service/api'
 import { getHMS } from '../../utils/utils'
+import { showSuccessToast, showFailToast } from 'vant';
 const menu = ref()
 const $router = useRouter()
 const active = ref(0)
@@ -115,15 +132,53 @@ const params = ref({
   award_type: 0
 })
 const typeList = ref([
+  '',
   '理财',
   '复利',
   '推荐',
-  '团队'
+  '团队',
+  '平级'
 ])
 const formData = ref<any>([])
 const changeType = (number: number) => {
   params.value.award_type = number
+  active.value = number
 }
+const allRef = ref<any>(null)
+const fundRef = ref<any>(null)
+const incomeRef = ref<any>(null)
+const recommendRef = ref<any>(null)
+const teamRef = ref<any>(null)
+const refList = ref<any>([
+  allRef,
+  fundRef,
+  incomeRef,
+  recommendRef,
+  teamRef
+])
+
+// 触底加载
+const loadMore = () => {
+  const activeRef = refList.value[active.value]
+  if (activeRef.value.scrollTop + activeRef.value.clientHeight >= activeRef.value.scrollHeight) {
+    pageAdd()
+  }
+}
+const pageAdd = async () => {
+  const nowPage = await ++params.value.var_page
+  getFinancialList({
+    var_page: nowPage,
+    list_rows: params.value.list_rows,
+    award_type: params.value.award_type
+  }).then((res: any) => {
+    if (!res.data.data.data.length) {
+      showFailToast('到底了')
+    } else {
+      formData.value = [...res.data.data.data, ...formData.value]
+    }
+  })
+}
+
 
 const getData = () => {
   getFinancialList(params.value).then((res: any) => {
@@ -249,6 +304,11 @@ watch(() => params.value.award_type, () => {
       padding: 15px 20px;
       box-sizing: border-box;
       margin-bottom: 20px;
+    }
+
+    .cont {
+      max-height: 300px;
+      overflow-y: scroll;
     }
   }
 }

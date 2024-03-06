@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="content mt20 p120 bsbb">
-            <van-tabs v-model:active="active" shrink>
+            <van-tabs v-model:active="active" shrink @change="changeType">
                 <!-- <van-tab title="全部">
                     <div class="all content">
                         <div class="item df fdc" v-for="(v, i) in allList" :key="i">
@@ -37,8 +37,8 @@
                         </div>
                     </div>
                 </van-tab> -->
-                <van-tab title="直推人员">
-                    <div class="recharge content">
+                <van-tab title="直推人员" name=0>
+                    <div class="direct cont" ref="directRef" v-if="recommendList.length" @scroll="loadMore">
                         <div class="item df fdc" v-for="(v, i) in recommendList" :key="i">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">
@@ -51,9 +51,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="nodata df aic jcc mt40 fz20 b2" v-else>
+                        暂无数据
+                    </div>
                 </van-tab>
-                <van-tab title="团队人员">
-                    <div class="withdraw content">
+                <van-tab title="团队人员" name=1>
+                    <div class="withdraw cont" ref="teamRef" v-if="teamList.length" @scroll="loadMore">
                         <div class="item df fdc" v-for="(v, i) in teamList" :key="i">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">
@@ -66,6 +69,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="nodata df aic jcc mt40 fz20 b2" v-else>
+                        暂无数据
+                    </div>
                 </van-tab>
             </van-tabs>
         </div>
@@ -77,6 +83,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { getUserTeamList } from '../../service/api'
 import { hiddenUserAccount, getHMS } from '../../utils/utils'
+import { showSuccessToast, showFailToast } from 'vant';
 const $router = useRouter()
 const $route = useRoute()
 const active = ref(0)
@@ -89,6 +96,38 @@ const formData = ref<any>({})
 const allList = ref<any>([])
 const recommendList = ref<any>([])
 const teamList = ref<any>([])
+
+const changeType = (number: number) => {
+    active.value = number
+}
+const directRef = ref<any>(null)
+const teamRef = ref<any>(null)
+const refList = ref<any>([
+    directRef,
+    teamRef,
+])
+
+// 触底加载
+const loadMore = () => {
+    const activeRef = refList.value[active.value]
+    if (activeRef.value.scrollTop + activeRef.value.clientHeight >= activeRef.value.scrollHeight) {
+        pageAdd()
+    }
+}
+const pageAdd = async () => {
+    const nowPage = await ++params.value.var_page
+    getUserTeamList({
+        var_page: nowPage,
+        list_rows: params.value.list_rows,
+    }).then((res: any) => {
+        if (!res.data.data.data.length) {
+            showFailToast('到底了')
+        } else {
+            recommendList.value = [...res.data.data.data, ...recommendList.value]
+            teamList.value = [...res.data.data.data, ...teamList.value]
+        }
+    })
+}
 const getData = () => {
     getUserTeamList(params.value).then((res: any) => {
         formData.value = res.data.data
@@ -175,6 +214,12 @@ p {
                 color: #fff;
                 font-size: 12px;
             }
+        }
+
+        .cont {
+            max-height: 500px;
+            overflow-y: scroll;
+
         }
     }
 }
