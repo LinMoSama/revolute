@@ -18,6 +18,7 @@ declare module 'vue' {
     TotalRevenue: typeof import('./src/components/totalRevenue.vue')['default']
     VanActionSheet: typeof import('vant/es')['ActionSheet']
     VanLoading: typeof import('vant/es')['Loading']
+    VanNavBar: typeof import('vant/es')['NavBar']
     VanOverlay: typeof import('vant/es')['Overlay']
     VanSticky: typeof import('vant/es')['Sticky']
     VanTab: typeof import('vant/es')['Tab']

@@ -147,6 +147,11 @@ function confim(val: any) {
   ) {
     return
   }
+  if (
+    inputMoney.value > props.userInfo.money_award
+  ) {
+    return
+  }
   if (!props.zhuanchu && Number(inputMoney.value) < 100) {
     return showFailToast('Min 100.00')
   }
