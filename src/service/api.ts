@@ -1,5 +1,12 @@
 import request from './request'
 
+// 用户充值成功
+export const rechargeSuccess = (data: any) =>
+  request({
+    url: 'api/financial/user_mycz',
+    method: 'post',
+    data,
+  })
 // 获取余额变动记录
 export const getMoneyLog = (data: any) => {
   return request({

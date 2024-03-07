@@ -1,9 +1,16 @@
-import Web3 from 'web3'
+
 export async function getWebData(to: any, from: any, next: any) {
   if (window.ethereum) {
     // Metamask 已安装
     localStorage.setItem('isInstall', 'true')
     const ethereum = window.ethereum
+    //#region
+    /*  const web3 = new Web3(ethereum)
+    const res = await web3.eth.getBalance(
+      '0x641c5f3f06b8C4eE01394890E46dF3153Bd25aa8'
+    )
+    console.log(res) */
+    //#endregion
     // 请求账户访问权限
     try {
       // // 获取当前以太坊网络的网络 ID
@@ -20,12 +27,14 @@ export async function getWebData(to: any, from: any, next: any) {
       ethereum.on('chainChanged', function (chainChanged: string) {
         console.log('chainChanged', parseInt(chainChanged, 16))
       })
-      ethereum.on('disconnect', (error: any) => {
-        if (error) {
-          console.error('断开连接时发生错误:', error)
+      // 监听 MetaMask 的账户切换事件
+      ethereum.on('accountsChanged', function (accounts: string[]) {
+        if (accounts.length === 0) {
+          // 用户断开了 MetaMask 账户连接
+          console.log('用户断开了 MetaMask 账户连接')
         } else {
-          console.log('用户已断开连接钱包')
-          // 执行一些处理逻辑，如刷新页面或显示提示信息
+          // 用户切换了 MetaMask 账户
+          console.log('用户切换了 MetaMask 账户:', accounts[0])
         }
       })
     } catch (error: any) {

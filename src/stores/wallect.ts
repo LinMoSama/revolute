@@ -10,6 +10,7 @@ export default defineStore('wallect', () => {
     ref(false)
   let account = ref(localStorage.getItem('account')) || ref('')
   const ethereum = window.ethereum
+  
   async function ConnectTheWallet() {
     try {
       if (!ethereum) return showFailToast('Metamask 未安装')

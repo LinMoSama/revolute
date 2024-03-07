@@ -2,7 +2,7 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getInvestList, getUserInfo, addMount, getInit } from '@/service/api'
 import { useUserStore } from '@/stores/user'
-import { getReferrer } from '@/service/api'
+import { getReferrer, rechargeSuccess } from '@/service/api'
 import useWallect from '@/stores/wallect'
 import { showFailToast, showSuccessToast } from 'vant'
 import useWbe3Store from '@/stores/web3'
@@ -16,6 +16,10 @@ export default function () {
   const investList = ref([] as any[])
   let isShowReference = ref(false)
   let itemID = ref(0)
+  let show = ref(false)
+  let balance = ref(100)
+  let inputMoney = ref('')
+  let loading = ref(false)
   onMounted(() => {
     getInvestListHandler()
     // getAwardListHandler()
@@ -31,7 +35,6 @@ export default function () {
       console.log(error)
     }
   }
-
   // 用户投入资金
   async function addMountHandler(mount: string, financial_id: number) {
     try {
@@ -156,51 +159,24 @@ export default function () {
         break
     }
   }
-
+  // 充值
   async function recharge() {
     if (isShowReferenceHandler()) {
       try {
-        const {
-          data: { data: data },
-        } = await getInit()
-        console.log(data.coverdata.addr)
-        console.log(web3Store.usdtContract.methods)
-        let gasPrice = Number(await web3Store.web3.eth.getGasPrice())
-        let price = floatObj.multiply(100, 10000)?.toString() + '00000000000000'
-        const gas = await web3Store.usdtContract.methods
-          .approve(data.coverdata.addr, price)
-          .estimateGas()
-
-        const val = await web3Store.usdtContract.methods
-          .approve(data.coverdata.addr, price)
-          .send({
-            from: wallectStore.account as string,
-            gas: String(Number(gas)),
-            gasPrice: String(gasPrice),
-          })
-
-        const gas2 = await web3Store.usdtContract.methods
-          .transfer(data.coverdata.addr, price)
-          .estimateGas()
-
-        const val2 = await web3Store.usdtContract.methods
-          .transfer(data.coverdata.addr, price)
-          .send({
-            from: wallectStore.account as string,
-            gas: String(Number(gas2)),
-            gasPrice: String(gasPrice),
-          })
-
-        console.log(String(Number(gas)), 'gas')
-        console.log(String(Number(gas2)), 'gas2')
-        console.log(gasPrice, 'gasPrice')
-        console.log(price, 'price')
-        console.log(val)
+        show.value = true
+        //查询余额
+        const res = await web3Store.usdtContract.methods
+          .balanceOf(wallectStore.account)
+          .call()
+        let b = Number(res) / 10 ** 18
+        balance.value = b
+        console.log(b)
       } catch (error) {
         console.log(error)
       }
     }
   }
+
   function wallet() {
     if (isShowReferenceHandler()) {
       $router.push('/withdraw')
@@ -215,11 +191,113 @@ export default function () {
   function updateShow() {
     alertShow.value = false
   }
+  function cancel() {
+    inputMoney.value = ''
+    show.value = false
+  }
+  // 充值确定按钮调合约
+  async function confim() {
+    try {
+      if (Number(inputMoney.value) > balance.value) {
+        return
+      }
+      if (Number(inputMoney.value) <= 0) {
+        return
+      }
+      let iptMoney = Number(inputMoney.value)
+      show.value = false
+      inputMoney.value = ''
+      loading.value = true
+      const {
+        data: { data: data },
+      } = await getInit()
+      console.log(data.coverdata.addr, 'addr')
+      console.log(
+        web3Store.usdtContract.methods,
+        '(web3Store.usdtContract.methods'
+      )
+
+      //授权
+      let gasPrice = Number(await web3Store.web3.eth.getGasPrice())
+      console.log(gasPrice, 'gasPrice')
+      let price =
+        floatObj.multiply(iptMoney, 10000)?.toString() + '00000000000000'
+      console.log(price, 'price')
+      const approveGas = await web3Store.usdtContract.methods
+        .approve(data.coverdata.addr, price)
+        .estimateGas()
+
+      const approveRes = await web3Store.usdtContract.methods
+        .approve(data.coverdata.addr, price)
+        .send({
+          from: wallectStore.account as string,
+          gas: String(Number(approveGas)),
+          gasPrice: String(gasPrice),
+        })
+      console.log(approveRes, '授权')
+      console.log(String(Number(approveGas)), 'approveGas')
+      //调用转账合约
+      const transferGas = await web3Store.usdtContract.methods
+        .transfer(data.coverdata.addr, price)
+        .estimateGas()
+
+      const transferRes = await web3Store.usdtContract.methods
+        .transfer(data.coverdata.addr, price)
+        .send({
+          from: wallectStore.account as string,
+          gas: String(Number(transferGas)),
+          gasPrice: String(gasPrice),
+        })
+
+      console.log(String(Number(transferGas)), 'transferGas')
+      console.log(price, 'price')
+      console.log(transferRes, '转账')
+      // let obj = convertBigIntToNumber(transferRes)
+      // rechargeSuccessHandler(obj)
+      loading.value = false
+      showSuccessToast('操作成功')
+    } catch (error: any) {
+      loading.value = false
+      if (error.code === 4001) {
+        showFailToast('已拒绝')
+      } else {
+        alert(JSON.stringify(error))
+        showFailToast('操作失败')
+      }
+      console.log(error)
+    }
+  }
+
+  async function rechargeSuccessHandler(obj: any) {
+    let res = await rechargeSuccess({
+      data_list: JSON.stringify(obj),
+    })
+  }
+  function convertBigIntToNumber(
+    obj: Record<string, unknown>
+  ): Record<string, unknown> {
+    for (const key in obj) {
+      if (typeof obj[key] === 'bigint') {
+        obj[key] = Number(obj[key])
+      } else if (typeof obj[key] === 'object') {
+        obj[key] = convertBigIntToNumber(obj[key] as Record<string, unknown>)
+      }
+    }
+    return obj
+  }
+  function max() {
+    console.log('max')
+    inputMoney.value = String(balance.value)
+  }
   return {
+    loading,
+    inputMoney,
+    balance,
     investList,
     controlList,
     alertShow,
     isShowReference,
+    show,
     updateShow,
     controlHandler,
     buyHandle,
@@ -230,5 +308,8 @@ export default function () {
     isShowReferenceHandler,
     addMountHandler,
     getUserInfoHandler,
+    cancel,
+    confim,
+    max,
   }
 }
