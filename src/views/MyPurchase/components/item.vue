@@ -18,7 +18,7 @@
       />
       <div class="product">
         <p>{{ productType }}/{{ item.subscription }}天</p>
-        <span :class="{ redemption: leaveDaysCom <= 0 }">{{
+        <span :class="{ redemption: item.status===0 }">{{
           isInFinancialManagement
         }}</span>
       </div>
@@ -114,7 +114,7 @@ function formtTime(timestamp: number) {
   return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
 }
 let isInFinancialManagement = computed(() => {
-  return leaveDaysCom.value <= 0 ? '已赎回' : '理财中'
+  return props.item.status === 0 ? '已赎回' : '理财中'
 })
 </script>
 

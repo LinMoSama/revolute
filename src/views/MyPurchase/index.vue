@@ -17,7 +17,8 @@
         </div>
       </div>
     </div>
-    <div class="scroll" @scroll="scrollLoading">
+    <div class="scroll" v-if="userFinancialList.length===0"></div>
+    <div class="scroll" @scroll="scrollLoading" v-else>
       <Item
         v-for="(item, index) in userFinancialList.data"
         :key="index"
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="ts" name="MyPurchase">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import useMyPurchase from '@/hooks/useMyPurchase'

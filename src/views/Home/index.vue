@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import useIndex from '@/hooks/useIndex'
 import { getAwardList } from '@/service/api'
 import TotalRevenue from '@/components/totalRevenue.vue'
@@ -66,6 +66,8 @@ import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { title } from 'process'
 import { getUserInfo, getInit } from '../../service/api'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
 // import { title } from 'process'
 const {
   controlList,
@@ -82,7 +84,7 @@ const {
   isShowReferenceHandler,
 } = useIndex()
 const menu = ref()
-
+const awardList = ref({})
 const getInfo = () => {
   getUserInfo().then((res: any) => {
     localStorage.setItem('userInfo', JSON.stringify(res.data.data))
@@ -92,17 +94,26 @@ const getInfo = () => {
   })
 }
 onMounted(() => {
-  getInfo()
+  // getInfo()
 })
-const awardList = ref({})
-//获取奖励明细
-const res = await getAwardList({
-  var_page: 1,
-  list_rows: 3,
-  award_type: 0,
-  yesterday: 1,
-})
-awardList.value = res.data.data
+watch(
+  () => userStore.token,
+  async val => {
+    if (val) {
+      getInfo()
+      //获取奖励明细
+      const res = await getAwardList({
+        var_page: 1,
+        list_rows: 3,
+        award_type: 0,
+        yesterday: 1,
+      })
+      awardList.value = res.data.data
+    }
+  },
+  { immediate: true }
+)
+
 // onMounted(async () => {
 //   try {
 //     const res = await getAwardList({

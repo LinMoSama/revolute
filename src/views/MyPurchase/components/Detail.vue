@@ -28,7 +28,14 @@
     <div class="tabs" @scroll="scrollLoading">
       <van-tabs v-model:active="active" shrink>
         <van-tab title="全部">
-          <div class="item" v-for="(item, index) in awardList" :key="index">
+          <div v-if="awardList.length === 0" class="no_data">暂无数据</div>
+
+          <div
+            class="item"
+            v-for="(item, index) in awardList"
+            :key="index"
+            v-else
+          >
             <div class="left">
               <p>Compound Pool</p>
               <!-- <span>{{ formtTime(item.createtime) }}</span> -->
@@ -42,7 +49,14 @@
         </van-tab>
 
         <van-tab title="认购收益">
-          <div class="item" v-for="(item, index) in awardList2" :key="index">
+          <div v-if="awardList2.length === 0" class="no_data">暂无数据</div>
+
+          <div
+            class="item"
+            v-for="(item, index) in awardList2"
+            :key="index"
+            v-else
+          >
             <div class="left">
               <p>Compound Pool</p>
               <span>{{ formtTime(item.createtime) }}</span>
@@ -55,7 +69,13 @@
         </van-tab>
 
         <van-tab title="转出记录">
-          <div class="item" v-for="(item, index) in moneyLogList" :key="index">
+          <div v-if="moneyLogList.length === 0" class="no_data">暂无数据</div>
+          <div
+            class="item"
+            v-for="(item, index) in moneyLogList"
+            :key="index"
+            v-else
+          >
             <div class="left">
               <p>Compound Pool</p>
               <span>{{ formtTime(item.createtime) }}</span>
@@ -68,7 +88,14 @@
         </van-tab>
 
         <van-tab title="复利收益">
-          <div class="item" v-for="(item, index) in awardList3" :key="index">
+          <div v-if="awardList3.length === 0" class="no_data">暂无数据</div>
+
+          <div
+            class="item"
+            v-for="(item, index) in awardList3"
+            :key="index"
+            v-else
+          >
             <div class="left">
               <p>Compound Pool</p>
               <span>{{ formtTime(item.createtime) }}</span>
@@ -336,7 +363,9 @@ function TransferOutFailHandler() {
 .content {
   background-color: #f7f7f7;
   overflow: hidden;
-
+  .no_data {
+    text-align: center;
+  }
   .tabs {
     margin-top: 26px;
     overflow: auto;
