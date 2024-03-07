@@ -1,6 +1,6 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
@@ -50,6 +50,8 @@ import clipboard from '../../utils/utils'
 import { fixedTwo } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import { computed } from 'vue';
+import useIndex from '@/hooks/useIndex'
+const {isShowReferenceHandler} = useIndex()
 const userStore = useUserStore()
 const userInfo = JSON.parse(userStore.userInfo)
 const initInfo = JSON.parse(userStore.initInfo)

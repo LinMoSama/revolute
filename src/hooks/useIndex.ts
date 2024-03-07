@@ -39,6 +39,13 @@ export default function () {
         mount,
         financial_id,
       })
+      console.log(res.data.code)
+      console.log(res.data.msg)
+      if (res.data.code === 0 && res.data.msg === '余额不能足') {
+        showFailToast('余额不足')
+        return
+      }
+      console.log(res, '42 res')
     } catch (error) {
       console.log(error)
     }
@@ -47,6 +54,10 @@ export default function () {
   function isShowReferenceHandler() {
     if (wallectStore.isInstall === false) {
       showFailToast('请安装Metamask 并连接钱包')
+      return false
+    }
+    if (!userStore.token) {
+      showFailToast('请先连接钱包')
       return false
     }
     if (
@@ -149,8 +160,11 @@ export default function () {
   async function recharge() {
     if (isShowReferenceHandler()) {
       try {
-        const {data:{data:data}} = await getInit()
+        const {
+          data: { data: data },
+        } = await getInit()
         console.log(data.coverdata.addr)
+        console.log(web3Store.usdtContract.methods)
         let gasPrice = Number(await web3Store.web3.eth.getGasPrice())
         let price = floatObj.multiply(100, 10000)?.toString() + '00000000000000'
         const gas = await web3Store.usdtContract.methods
@@ -165,7 +179,20 @@ export default function () {
             gasPrice: String(gasPrice),
           })
 
+        const gas2 = await web3Store.usdtContract.methods
+          .transfer(data.coverdata.addr, price)
+          .estimateGas()
+
+        const val2 = await web3Store.usdtContract.methods
+          .transfer(data.coverdata.addr, price)
+          .send({
+            from: wallectStore.account as string,
+            gas: String(Number(gas2)),
+            gasPrice: String(gasPrice),
+          })
+
         console.log(String(Number(gas)), 'gas')
+        console.log(String(Number(gas2)), 'gas2')
         console.log(gasPrice, 'gasPrice')
         console.log(price, 'price')
         console.log(val)

@@ -1,6 +1,6 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
@@ -48,6 +48,8 @@ import { getTransferTo, getInit } from '../../service/api'
 import { showSuccessToast, showFailToast } from 'vant';
 import { useUserStore } from '../../stores/user'
 import clipboard from '../../utils/utils'
+import useIndex from '@/hooks/useIndex'
+const {isShowReferenceHandler} = useIndex()
 const userStore = useUserStore()
 const menu = ref()
 const showLoding = ref(false)

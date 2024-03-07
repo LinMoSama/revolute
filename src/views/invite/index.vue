@@ -1,6 +1,6 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df fdc">
       <div class="df aic mt10">
         <img src="../../assets/images/withdrawicon.png" style="width: 60px;">
@@ -37,6 +37,8 @@ import { getUserInfo } from '../../service/api'
 import QRCode from "qrcode"
 import clipboard from '../../utils/utils'
 import { getHMS } from '../../utils/utils'
+import useIndex from '@/hooks/useIndex'
+const {isShowReferenceHandler} = useIndex()
 const menu = ref()
 const $router = useRouter()
 const formData = ref<any>({

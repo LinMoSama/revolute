@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df aic">
         <img :src="levelArr[formData.user_level - 1]" style="width: 30px" />
@@ -138,6 +138,8 @@ import Banner from "@/components/Banner.vue";
 import { getUserTeam, getFinancialList } from "../../service/api";
 import { hiddenUserAccount, getHMS } from "../../utils/utils";
 import { showSuccessToast, showFailToast } from 'vant';
+import useIndex from '@/hooks/useIndex'
+const {isShowReferenceHandler} = useIndex()
 const menu = ref();
 const $router = useRouter();
 const active = ref(0);

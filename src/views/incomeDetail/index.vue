@@ -1,6 +1,6 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu" :showWallect="true" :defaults="true"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic fdc">
       <p class="c999 mb10">账户余额(USDT)</p>
       <p class="fw7 fz30">9,856.00</p>
@@ -122,6 +122,8 @@ import Banner from '@/components/Banner.vue'
 import { getFinancialList, getTransferList } from '../../service/api'
 import { getHMS } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
+import useIndex from '@/hooks/useIndex'
+const {isShowReferenceHandler} = useIndex()
 const menu = ref()
 const $router = useRouter()
 const active = ref(0)
