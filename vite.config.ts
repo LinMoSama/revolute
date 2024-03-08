@@ -33,21 +33,21 @@ export default defineConfig({
       external: ['qrcode','clipboard'],
     },
   },
-  server: {
-    host: '0.0.0.0',
-    open: true,
-    port: 8080,
-    // proxy: {
-    //   '/api': {
-    //     // target: 'http://192.168.2.177:7786',
-    //     target: 'http://api.revolute.cc',
+  // server: {
+  //   host: '0.0.0.0',
+  //   open: true,
+  //   port: 8080,
+  //   // proxy: {
+  //   //   '/api': {
+  //   //     // target: 'http://192.168.2.177:7786',
+  //   //     target: 'http://api.revolute.cc',
 
-    //     // 192.168.1.16
-    //     // http://192.168.2.177:7786
-    //     changeOrigin: true,
-    //   },
-    // },
-  },
+  //   //     // 192.168.1.16
+  //   //     // http://192.168.2.177:7786
+  //   //     changeOrigin: true,
+  //   //   },
+  //   // },
+  // },
 
   css: {
     postcss: {

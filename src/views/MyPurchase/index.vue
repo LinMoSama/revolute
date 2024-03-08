@@ -13,11 +13,11 @@
           <div class="more" @click="goDetail">More</div>
         </div>
         <div class="right">
-          <img src="@/assets/images/rengou_img.png" alt="" />
+          <img src="../../assets/images/rengou_img.png" alt="" />
         </div>
       </div>
     </div>
-    <div class="scroll" v-if="userFinancialList.length===0"></div>
+    <div class="scroll" v-if="userFinancialList.length === 0"></div>
     <div class="scroll" @scroll="scrollLoading" v-else>
       <Item
         v-for="(item, index) in userFinancialList.data"
@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts" name="MyPurchase">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import useMyPurchase from '@/hooks/useMyPurchase'
@@ -40,10 +40,9 @@ import useIndex from '@/hooks/useIndex'
 import { getUserFinancialList } from '@/service/api'
 const { isShowReferenceHandler } = useIndex()
 const { menu, goDetail } = useMyPurchase()
-const userFinancialList = ref()
+const userFinancialList = ref<any>({})
 let page = ref(1)
-
-async function scrollLoading(e: any) {
+function scrollLoading(e: any) {
   const dom = e.target
   var scrollTop = dom.scrollTop //滑入屏幕上方的高度
   var windowHeitht = dom.clientHeight //能看到的页面的高度
@@ -54,30 +53,24 @@ async function scrollLoading(e: any) {
       return
     }
     page.value++
-    try {
-      const res = await getUserFinancialList({
-        var_page: page.value,
-        list_rows: 5,
-      })
+    getUserFinancialList({
+      var_page: page.value,
+      list_rows: 5,
+    }).then(res => {
       userFinancialList.value.data = [
         ...userFinancialList.value.data,
         ...res.data.data.data,
       ]
-    } catch (error) {
-      console.log(error)
-    }
+    })
   }
 }
 
-try {
-  const res = await getUserFinancialList({
-    var_page: page.value,
-    list_rows: 5,
-  })
+getUserFinancialList({
+  var_page: page.value,
+  list_rows: 5,
+}).then(res => {
   userFinancialList.value = res.data.data
-} catch (error) {
-  console.log(error)
-}
+})
 </script>
 
 <style lang="scss" scoped>

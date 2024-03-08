@@ -2,7 +2,7 @@
   <div class="total-revenue">
     <div class="total_earnings_yesterday" @click="goTotalEarningsYesterday">
       <div class="icon">
-        <img src="@/assets/images/income1.png" alt="" />
+        <img src="../assets/images/income1.png" alt="" />
       </div>
       <div class="title">
         <p class="revenue_title">昨日总收益</p>
@@ -12,7 +12,7 @@
     </div>
     <div class="total_earnings">
       <div class="icon">
-        <img src="@/assets/images/income2.png" alt="" />
+        <img src="../assets/images/income2.png" alt="" />
       </div>
       <div class="title">
         <p class="revenue_title">总收益</p>

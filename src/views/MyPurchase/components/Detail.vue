@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="Tips" @click="tipHandler">
-        <img src="@/assets/images/!.png" alt="" />
+        <img src="../../../assets/images/!.png" alt="" />
         <p>温馨提示</p>
       </div>
 

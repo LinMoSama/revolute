@@ -4,6 +4,7 @@ import { showSuccessToast, showFailToast } from 'vant';
 import { errorCodeHandler } from '@/utils/errorCodeHandler'
 const server = axios.create({
     baseURL: 'http://api.revolute.cc',
+    // baseURL:'http://192.168.2.177:7786',
     timeout: 10000,
 })
 

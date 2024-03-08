@@ -2,17 +2,17 @@
   <div class="content">
     <div class="item">
       <img
-        src="@/assets/images/pur_icon.png"
+        src="../../../assets/images/pur_icon.png"
         alt=""
         v-if="item.financial_id === 1"
       />
       <img
-        src="@/assets/images/pur_icon2.png"
+        src="../../../assets/images/pur_icon2.png"
         alt=""
         v-else-if="item.financial_id === 2"
       />
       <img
-        src="@/assets/images/pur_icon3.png"
+        src="../../../assets/images/pur_icon3.png"
         alt=""
         v-else-if="item.financial_id === 3"
       />

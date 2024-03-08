@@ -1,25 +1,25 @@
 <template>
   <div class="banner">
     <div class="log">
-      <img src="@/assets/images/logo.png" alt="" />
+      <img src="../assets/images/logo.png" alt="" />
     </div>
     <p class="title">{{ title }}</p>
     <div class="wallet_menu">
       <div v-if="!defaults">
         <img
-          src="@/assets/images/wallet.png"
+          src="../assets/images/wallet.png"
           alt=""
           @click="wallectStore.ConnectTheWallet"
           v-if="!account"
         />
         <template v-if="showWallect">
           <div class="wallect" v-if="account">
-            <img src="@/assets/images/wallect_icon.png" alt="" />
+            <img src="../assets/images/wallect_icon.png" alt="" />
             <div class="account">{{ formatName(account) }}</div>
           </div>
         </template>
       </div>
-      <img src="@/assets/images/menu.png" alt="" @click="updateMenu" />
+      <img src="../assets/images/menu.png" alt="" @click="updateMenu" />
     </div>
   </div>
 </template>
