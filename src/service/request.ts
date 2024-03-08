@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 import { showSuccessToast, showFailToast } from 'vant';
 import { errorCodeHandler } from '@/utils/errorCodeHandler'
 const server = axios.create({
-    baseURL: '',
+    baseURL: 'http://api.revolute.cc',
     timeout: 10000,
 })
 

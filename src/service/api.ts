@@ -3,7 +3,7 @@ import request from './request'
 // 用户充值成功
 export const rechargeSuccess = (data: any) => {
   return request({
-    url: 'api/financial/user_mycz',
+    url: '/api/financial/user_mycz',
     method: 'post',
     data,
   })

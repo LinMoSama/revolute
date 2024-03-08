@@ -33,14 +33,16 @@ export default defineConfig({
     host: '0.0.0.0',
     open: true,
     port: 8080,
-    proxy: {
-      '/api': {
-        target: 'http://192.168.2.177:7786',
-        // 192.168.1.16
-        // http://192.168.2.177:7786
-        changeOrigin: true,
-      },
-    },
+    // proxy: {
+    //   '/api': {
+    //     // target: 'http://192.168.2.177:7786',
+    //     target: 'http://api.revolute.cc',
+
+    //     // 192.168.1.16
+    //     // http://192.168.2.177:7786
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 
   css: {
