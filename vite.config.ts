@@ -8,6 +8,7 @@ import { VantResolver } from '@vant/auto-import-resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
     vue(),
     Components({
@@ -29,9 +30,9 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    rollupOptions: {
-      external: ['qrcode','clipboard'],
-    },
+    // rollupOptions: {
+    //   external: ['qrcode','clipboard'],
+    // },
   },
   // server: {
   //   host: '0.0.0.0',

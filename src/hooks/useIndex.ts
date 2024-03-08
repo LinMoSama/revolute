@@ -76,17 +76,17 @@ export default function () {
 
   const controlList = [
     {
-      icon: '/src/assets/images/recharge.png',
+      icon: '../assets/images/recharge.png',
       title: '充值',
       type: 0,
     },
     {
-      icon: '/src/assets/images/withdraw.png',
+      icon: '../assets/images/withdraw.png',
       title: '提现',
       type: 1,
     },
     {
-      icon: '/src/assets/images/transfer.png',
+      icon: '../assets/images/transfer.png',
       title: '转账',
       type: 2,
     },
@@ -321,5 +321,6 @@ export default function () {
     cancel,
     confim,
     max,
+    recharge,
   }
 }

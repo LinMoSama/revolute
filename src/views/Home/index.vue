@@ -6,14 +6,17 @@
       :isShowReferenceHandler="isShowReferenceHandler"
     ></Banner>
     <div class="control">
-      <div
-        class="item"
-        v-for="(item, index) in controlList"
-        :key="index"
-        @click="controlHandler(item.type)"
-      >
-        <img :src="item.icon" alt="" />
-        <p>{{ item.title }}</p>
+      <div class="item" @click="controlHandler(0)">
+        <img src="../../assets/images/recharge.png" alt="" />
+        <p>充值</p>
+      </div>
+      <div class="item" @click="controlHandler(1)">
+        <img src="../../assets/images/withdraw.png" alt="" />
+        <p>提现</p>
+      </div>
+      <div class="item" @click="controlHandler(2)">
+        <img src="../../assets/images/transfer.png" alt="" />
+        <p>转账</p>
       </div>
     </div>
     <TotalRevenue
@@ -59,7 +62,11 @@
           <p class="title">充值</p>
           <div class="input">
             <img src="../../assets/images/usdt_icon.png" alt="" />
-            <input type="number" v-model.trim="inputMoney" placeholder="enter the amount"/>
+            <input
+              type="number"
+              v-model.trim="inputMoney"
+              placeholder="enter the amount"
+            />
             <div class="tool">
               <div class="danwei">USDT</div>
               <div class="max" @click="max">MAX</div>

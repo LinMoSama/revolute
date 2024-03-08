@@ -5,7 +5,14 @@
         <img class="icon" src="../assets/images/bottomArrow.png" @click="changeShow" />
         <ul>
           <li @click="changRoute(item.title)" v-for="(item, index) in homeIconList" :key="index">
-            <img :src="item.src" alt="" class="home_icon">
+            <img src="../assets/images/home_icon.png" alt="" class="home_icon" v-if="item.title ==='首页'">
+            <img src="../assets/images/chongzhi_icon.png" alt="" class="home_icon" v-if="item.title ==='充值'">
+            <img src="../assets/images/tixian_icon.png" alt="" class="home_icon" v-if="item.title ==='提现'">
+            <img src="../assets/images/zhuanzhang_icon.png" alt="" class="home_icon" v-if="item.title ==='转账'">
+            <img src="../assets/images/rengou_icon.png" alt="" class="home_icon" v-if="item.title ==='我的认购'">
+            <img src="../assets/images/mingxi_icon.png" alt="" class="home_icon" v-if="item.title ==='收益明细'">
+            <img src="../assets/images/yaoqing_icon.png" alt="" class="home_icon" v-if="item.title ==='邀请好友'">
+            <img src="../assets/images/team_icon.png" alt="" class="home_icon" v-if="item.title ==='我的团队'">
             <p>{{ item.title }}</p>
             <img src="../assets/images/rightArrow.png" alt="" class="arrow_icon">
           </li>
@@ -16,10 +23,11 @@
 </template>
 
 <script setup lang="ts">
+
 import useMenu from '@/hooks/useMenu'
 import { ref } from 'vue'
-let show = ref(false)
-const { homeIconList, changRoute } = useMenu()
+// let show = ref(false)
+const { homeIconList, changRoute,show } = useMenu()
 function changeShow() {
   show.value = false
 }

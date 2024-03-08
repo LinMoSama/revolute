@@ -6,7 +6,9 @@
         <div class="top_left_bottom">助您轻松实现财务目标！</div>
       </div>
       <div class="top_right">
-        <img :src="iconList[type - 1 ]" alt="" v-if="iconList[type -1 ]">
+        <img src="../assets/images/buy_icon1.png" alt="" v-if="type===1">
+        <img src="../assets/images/buy_icon2.png" alt="" v-if="type===2">
+        <img src="../assets/images/buy_icon3.png" alt="" v-if="type===3">
       </div>
     </div>
     <div class="bottom">
@@ -38,11 +40,11 @@ defineProps<{
   type: number
   percentage: string
 }>()
-const iconList = [
-  '../assets/images/buy_icon1.png',
-  '../assets/images/buy_icon2.png',
-  '..//assets/images/buy_icon3.png'
-]
+// const iconList = [
+//   '@//assets/images/buy_icon1.png',
+//   '@//assets/images/buy_icon2.png',
+//   '@//assets/images/buy_icon3.png'
+// ]
 const emit = defineEmits(['buy'])
 
 function buy() {
