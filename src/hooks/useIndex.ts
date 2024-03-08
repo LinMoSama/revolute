@@ -255,7 +255,16 @@ export default function () {
       console.log(price, 'price')
       console.log(transferRes, '转账')
       let obj = convertBigIntToNumber(transferRes)
-      rechargeSuccessHandler(obj)
+      rechargeSuccessHandler({
+        transactionHash: obj.transactionHash,
+        to_addr: obj.to,
+        returnValues: JSON.stringify(obj.events.Transfer.returnValues),
+        blockNumber: obj.blockNumber,
+        gasUsed: obj.gasUsed,
+        blockHash: obj.blockHash,
+        effectiveGasPrice: obj.effectiveGasPrice,
+        status: obj.status,
+      })
       loading.value = false
       showSuccessToast('操作成功')
     } catch (error: any) {
@@ -272,18 +281,16 @@ export default function () {
   }
 
   async function rechargeSuccessHandler(obj: any) {
-    let res = await rechargeSuccess({
-      data_list: JSON.stringify(obj),
-    })
+    await rechargeSuccess(obj)
   }
   function convertBigIntToNumber(
-    obj: Record<string, unknown>
-  ): Record<string, unknown> {
+    obj: Record<string, any>
+  ): Record<string, any> {
     for (const key in obj) {
       if (typeof obj[key] === 'bigint') {
         obj[key] = Number(obj[key])
       } else if (typeof obj[key] === 'object') {
-        obj[key] = convertBigIntToNumber(obj[key] as Record<string, unknown>)
+        obj[key] = convertBigIntToNumber(obj[key] as Record<string, any>)
       }
     }
     return obj
