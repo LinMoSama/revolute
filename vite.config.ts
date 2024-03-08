@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import postCssPxToRem from 'postcss-pxtorem'
 import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from '@vant/auto-import-resolver'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -27,6 +28,9 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
       },
+    },
+    rollupOptions: {
+      external: ['qrcode','clipboard'],
     },
   },
   server: {
