@@ -1,8 +1,7 @@
-
 export async function getWebData(to: any, from: any, next: any) {
   if (window.ethereum) {
     // Metamask 已安装
-    localStorage.setItem('isInstall', 'true')
+    sessionStorage.setItem('isInstall', 'true')
     const ethereum = window.ethereum
     //#region
     /*  const web3 = new Web3(ethereum)
@@ -26,13 +25,30 @@ export async function getWebData(to: any, from: any, next: any) {
       // })
       ethereum.on('chainChanged', function (chainChanged: string) {
         console.log('chainChanged', parseInt(chainChanged, 16))
+        // localStorage.clear()
+        sessionStorage.clear()
+        window.location.reload()
       })
       // 监听 MetaMask 的账户切换事件
       ethereum.on('accountsChanged', function (accounts: string[]) {
         if (accounts.length === 0) {
           // 用户断开了 MetaMask 账户连接
           console.log('用户断开了 MetaMask 账户连接')
+          // localStorage.clear()
+          sessionStorage.clear()
+
+          window.location.reload()
         } else {
+          // let account = localStorage.getItem('account')
+          let account = sessionStorage.getItem('account')
+
+          console.log(account)
+          if (account && account !== accounts[0]) {
+            // localStorage.clear()
+            sessionStorage.clear()
+
+            window.location.reload()
+          }
           // 用户切换了 MetaMask 账户
           console.log('用户切换了 MetaMask 账户:', accounts[0])
         }
@@ -43,7 +59,7 @@ export async function getWebData(to: any, from: any, next: any) {
   } else {
     // Metamask 未安装
     console.log('Metamask 未安装')
-    localStorage.setItem('isInstall', 'false')
+    sessionStorage.setItem('isInstall', 'false')
   }
   next()
 }

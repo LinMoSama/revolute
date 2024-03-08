@@ -105,7 +105,9 @@ export default function () {
       const {
         data: { data: data },
       } = await getUserInfo()
-      localStorage.setItem('userInfo', JSON.stringify(data))
+      // localStorage.setItem('userInfo', JSON.stringify(data))
+      sessionStorage.setItem('userInfo', JSON.stringify(data))
+
       userStore.userInfo = data
     } catch (error) {
       console.log(error)
@@ -216,10 +218,10 @@ export default function () {
         web3Store.usdtContract.methods,
         '(web3Store.usdtContract.methods'
       )
-
       //授权
       let gasPrice = Number(await web3Store.web3.eth.getGasPrice())
       console.log(gasPrice, 'gasPrice')
+
       let price =
         floatObj.multiply(iptMoney, 10000)?.toString() + '00000000000000'
       console.log(price, 'price')
@@ -252,16 +254,17 @@ export default function () {
       console.log(String(Number(transferGas)), 'transferGas')
       console.log(price, 'price')
       console.log(transferRes, '转账')
-      // let obj = convertBigIntToNumber(transferRes)
-      // rechargeSuccessHandler(obj)
+      let obj = convertBigIntToNumber(transferRes)
+      rechargeSuccessHandler(obj)
       loading.value = false
       showSuccessToast('操作成功')
     } catch (error: any) {
       loading.value = false
+      console.log(error)
       if (error.code === 4001) {
         showFailToast('已拒绝')
       } else {
-        alert(JSON.stringify(error))
+        console.log(error)
         showFailToast('操作失败')
       }
       console.log(error)

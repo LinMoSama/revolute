@@ -6,16 +6,16 @@ import { useUserStore } from './user'
 export default defineStore('wallect', () => {
   const userStore = useUserStore()
   const isInstall =
-    ref(localStorage.getItem('isInstall') === 'false' ? false : true) ||
+    ref(sessionStorage.getItem('isInstall') === 'false' ? false : true) ||
     ref(false)
-  let account = ref(localStorage.getItem('account')) || ref('')
+  let account = ref(sessionStorage.getItem('account')) || ref('')
   const ethereum = window.ethereum
-  
+
   async function ConnectTheWallet() {
     try {
       if (!ethereum) return showFailToast('Metamask 未安装')
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-      localStorage.setItem('account', accounts[0])
+      sessionStorage.setItem('account', accounts[0])
       account.value = accounts[0]
       const {
         data: {
@@ -24,10 +24,13 @@ export default defineStore('wallect', () => {
       } = await login({
         account: accounts[0],
       })
+      console.log(accounts[0], 'accounts[0]')
+      console.log('account', accounts[0])
       userStore.userInfo = userinfo
       userStore.token = userinfo.token
-      localStorage.setItem('userInfo', JSON.stringify(userinfo))
-      localStorage.setItem('token', userinfo.token)
+      sessionStorage.setItem('userInfo', JSON.stringify(userinfo))
+      sessionStorage.setItem('token', userinfo.token)
+      window.location.reload()
     } catch (error: any) {
       console.log(error)
       if (error.code === 4001) {

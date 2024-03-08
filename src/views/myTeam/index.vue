@@ -143,7 +143,7 @@ const {isShowReferenceHandler} = useIndex()
 const menu = ref();
 const $router = useRouter();
 const active = ref(0);
-const account = ref(localStorage.getItem("account"));
+const account = ref(sessionStorage.getItem("account"));
 const levelArr = ref([
   '/src/assets/images/lv1.png',
   '/src/assets/images/lv2.png',

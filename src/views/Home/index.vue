@@ -139,10 +139,10 @@ const menu = ref()
 const awardList = ref({})
 const getInfo = () => {
   getUserInfo().then((res: any) => {
-    localStorage.setItem('userInfo', JSON.stringify(res.data.data))
+    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
   })
   getInit().then((resp: any) => {
-    localStorage.setItem('initInfo', JSON.stringify(resp.data.data.coverdata))
+    sessionStorage.setItem('initInfo', JSON.stringify(resp.data.data.coverdata))
   })
 }
 onMounted(() => {
