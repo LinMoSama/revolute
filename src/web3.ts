@@ -1,4 +1,4 @@
-export async function getWebData(to: any, from: any, next: any) {
+export function getWebData(to: any, from: any, next: any) {
   if (window.ethereum) {
     // Metamask 已安装
     sessionStorage.setItem('isInstall', 'true')
