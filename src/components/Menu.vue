@@ -2,12 +2,12 @@
   <div class="wrap">
     <van-action-sheet v-model:show="show" :closeable='false'>
       <div class="content">
-        <img class="icon" src="@/assets/images/bottomArrow.png" @click="changeShow" />
+        <img class="icon" src="../assets/images/bottomArrow.png" @click="changeShow" />
         <ul>
           <li @click="changRoute(item.title)" v-for="(item, index) in homeIconList" :key="index">
             <img :src="item.src" alt="" class="home_icon">
             <p>{{ item.title }}</p>
-            <img src="@/assets/images/rightArrow.png" alt="" class="arrow_icon">
+            <img src="../assets/images/rightArrow.png" alt="" class="arrow_icon">
           </li>
         </ul>
       </div>

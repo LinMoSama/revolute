@@ -39,9 +39,9 @@ defineProps<{
   percentage: string
 }>()
 const iconList = [
-  '/src/assets/images/buy_icon1.png',
-  '/src/assets/images/buy_icon2.png',
-  '/src/assets/images/buy_icon3.png'
+  '../assets/images/buy_icon1.png',
+  '../assets/images/buy_icon2.png',
+  '..//assets/images/buy_icon3.png'
 ]
 const emit = defineEmits(['buy'])
 
