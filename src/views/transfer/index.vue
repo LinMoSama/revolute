@@ -56,7 +56,9 @@ const showLoding = ref(false)
 const $router = useRouter()
 
 const userInfo = JSON.parse(userStore.userInfo)
-const initInfo = JSON.parse(userStore.initInfo)
+// const initInfo = JSON.parse(userStore.initInfo)
+const initInfo = JSON.parse(sessionStorage.getItem('initInfo') || '{}')
+
 const formData = ref<any>({
   to_username: '',
   mount: ''

@@ -54,7 +54,9 @@ import useIndex from '@/hooks/useIndex'
 const {isShowReferenceHandler} = useIndex()
 const userStore = useUserStore()
 const userInfo = JSON.parse(userStore.userInfo)
-const initInfo = JSON.parse(userStore.initInfo)
+// const initInfo = JSON.parse(userStore.initInfo)
+const initInfo = JSON.parse(sessionStorage.getItem('initInfo') || '{}')
+
 const menu = ref()
 const $router = useRouter()
 const showLoding = ref(false)
@@ -62,6 +64,7 @@ const formData = ref<any>({
   to_username: '',
   mount: ''
 })
+console.log(initInfo);
 const flag = ref(false)
 const copyAdd = (text: string, event: any) => {
   clipboard(text, event)

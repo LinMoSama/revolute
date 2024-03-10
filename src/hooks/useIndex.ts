@@ -56,7 +56,7 @@ export default function () {
   // 判断是否填写推荐人
   function isShowReferenceHandler() {
     if (wallectStore.isInstall === false) {
-      showFailToast('请安装Metamask 并连接钱包')
+      showFailToast('请安装并连接钱包')
       return false
     }
     if (!userStore.token) {
@@ -64,8 +64,8 @@ export default function () {
       return false
     }
     if (
-      userStore.userInfo.recommend === 0 ||
-      userStore.userInfo.recommend === null
+      JSON.parse(userStore.userInfo).recommend === 0 ||
+      JSON.parse(userStore.userInfo).recommend === null
     ) {
       isShowReference.value = true
       return false
