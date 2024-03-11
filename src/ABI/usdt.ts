@@ -1,6 +1,6 @@
-// const usdtContractAddress = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
-const usdtContractAddress = '0x638ff0E03eA3cbBDDE58708827Bf237e80A4d600'
- export const usdtContractABI = [
+const usdtContractAddress = '0x55d398326f99059ff775485246999027b3197955' // 正式
+// const usdtContractAddress = '0x638ff0E03eA3cbBDDE58708827Bf237e80A4d600'// 测试
+export const usdtContractABI = [
   {
     inputs: [],
     payable: false,
@@ -265,6 +265,6 @@ const usdtContractAddress = '0x638ff0E03eA3cbBDDE58708827Bf237e80A4d600'
     stateMutability: 'nonpayable',
     type: 'function',
   },
-] 
+]
 
 export { usdtContractAddress }

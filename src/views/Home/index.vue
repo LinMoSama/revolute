@@ -56,7 +56,7 @@
     >
     </Alert>
 
-    <van-overlay :show="show">
+    <van-overlay :show="Chongzhishow">
       <div class="wrapper" @click.stop>
         <div class="block">
           <p class="title">充值</p>
@@ -128,7 +128,7 @@ const {
   alertShow,
   isShowReference,
   investList,
-  show,
+  Chongzhishow,
   balance,
   controlHandler,
   buyHandle,
@@ -152,9 +152,7 @@ const getInfo = () => {
     sessionStorage.setItem('initInfo', JSON.stringify(resp.data.data.coverdata))
   })
 }
-onMounted(() => {
-  // getInfo()
-})
+
 watch(
   () => userStore.token,
   async val => {
@@ -172,9 +170,6 @@ watch(
   },
   { immediate: true }
 )
-onMounted(async () => {
-  // console.log(await checkBalance())
-})
 </script>
 
 <style scoped lang="scss">

@@ -16,8 +16,8 @@ export default function () {
   const investList = ref([] as any[])
   let isShowReference = ref(false)
   let itemID = ref(0)
-  let show = ref(false)
-  let balance = ref(100)
+  let Chongzhishow = ref(false)
+  let balance = ref(0)
   let inputMoney = ref('')
   let loading = ref(false)
   onMounted(() => {
@@ -165,7 +165,7 @@ export default function () {
   async function recharge() {
     if (isShowReferenceHandler()) {
       try {
-        show.value = true
+        Chongzhishow.value = true
         //查询余额
         const res = await web3Store.usdtContract.methods
           .balanceOf(wallectStore.account)
@@ -173,6 +173,7 @@ export default function () {
         let b = Number(res) / 10 ** 18
         balance.value = b
         console.log(b)
+        console.log(res, 'res');
       } catch (error) {
         console.log(error)
       }
@@ -195,7 +196,7 @@ export default function () {
   }
   function cancel() {
     inputMoney.value = ''
-    show.value = false
+    Chongzhishow.value = false
   }
   // 充值确定按钮调合约
   async function confim() {
@@ -207,7 +208,7 @@ export default function () {
         return
       }
       let iptMoney = Number(inputMoney.value)
-      show.value = false
+      Chongzhishow.value = false
       inputMoney.value = ''
       loading.value = true
       const {
@@ -307,7 +308,7 @@ export default function () {
     controlList,
     alertShow,
     isShowReference,
-    show,
+    Chongzhishow,
     updateShow,
     controlHandler,
     buyHandle,
