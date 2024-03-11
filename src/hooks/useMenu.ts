@@ -7,35 +7,24 @@ export default function () {
   let show = ref(false)
   const homeIconList = [
     {
-      src: '/src/assets/images/home_icon.png',
       title: '首页',
     },
-    // {
-    //   src: '/src/assets/images/chongzhi_icon.png',
-    //   title: '充值',
-    // },
     {
-      src: '/src/assets/images/tixian_icon.png',
       title: '提现',
     },
     {
-      src: '/src/assets/images/zhuanzhang_icon.png',
       title: '转账',
     },
     {
-      src: '/src/assets/images/rengou_icon.png',
       title: '我的认购',
     },
     {
-      src: '/src/assets/images/mingxi_icon.png',
       title: '我的钱包',
     },
     {
-      src: '/src/assets/images/yaoqing_icon.png',
       title: '邀请好友',
     },
     {
-      src: '/src/assets/images/team_icon.png',
       title: '我的团队',
     },
     {
@@ -48,14 +37,6 @@ export default function () {
         router.push({
           path: '/home',
         })
-        break
-      case '充值':
-        // show.value = false
-        // recharge()
-        // controlHandler(0)
-        // router.push({
-        //   path: '/home',
-        // })
         break
       case '提现':
         router.push({
