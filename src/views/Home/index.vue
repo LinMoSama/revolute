@@ -26,7 +26,13 @@
       :awardList="awardList"
     ></TotalRevenue>
 
-    <SlideShow></SlideShow>
+    <div class="main">
+      <div class="bg">
+        <img src="../../assets/images/maintext.png" alt="" />
+      </div>
+    </div>
+
+    <!-- <SlideShow></SlideShow> -->
 
     <Buy
       :percentage="item.income"
@@ -123,7 +129,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Footer from '@/components/Footer.vue'
-import SlideShow from '@/components/SlideShow.vue'
+// import SlideShow from '@/components/SlideShow.vue'
 import useIndex from '@/hooks/useIndex'
 import { getAwardList } from '@/service/api'
 import TotalRevenue from '@/components/totalRevenue.vue'
@@ -174,12 +180,10 @@ onMounted(() => {
   if (route.query.salt && !sessionStorage.getItem('token')) {
     return showToast('请先登录')
   }
+  let userInfo = JSON.parse(sessionStorage.getItem('userInfo')!)
   if (JSON.parse(sessionStorage.getItem('userInfo')!)) {
-    if (
-      JSON.parse(sessionStorage.getItem('userInfo')!).recommend === 0 ||
-      (JSON.parse(sessionStorage.getItem('userInfo')!).recommend === null &&
-        route.query.salt)
-    ) {
+    if (userInfo.recommend === 0 && route.query.salt !== undefined) {
+      console.log(route.query.salt)
       isShowReference.value = true
       reference.value.recommenderAddress = route.query.salt
     }
@@ -220,7 +224,7 @@ watch(
     height: 80px;
     background: #ffffff;
     border-radius: 10px 10px 10px 10px;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
 
     .item {
       img {

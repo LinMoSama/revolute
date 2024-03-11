@@ -19,7 +19,6 @@
 
 <style scoped lang="scss">
 .my-swipe {
-  margin-top: 10px;
   width: 325px;
   height: 180px;
   .van-swipe-item {

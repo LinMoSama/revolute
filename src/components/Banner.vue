@@ -1,32 +1,49 @@
 <template>
   <div class="banner">
-    <div class="log">
-      <img
-        src="../assets/images/menu.png"
-        alt=""
-        class="menu"
-        @click="updateMenu"
-      />
-      <img src="../assets/images/logo.png" alt="" />
-    </div>
-    <p class="title">{{ title }}</p>
-    <div class="wallet_menu">
-      <template v-if="!defaults">
-        <img
-          src="../assets/images/wallet.png"
-          alt=""
-          @click="wallectStore.ConnectTheWallet"
-          v-if="!account"
-        />
+    <van-swipe class="my-swipe" :autoplay="2500" indicator-color="white">
+      <van-swipe-item>
+        <img src="../assets/images/slideshow_bg1.png" alt="" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img src="../assets/images/slideshow_bg2.png" alt="" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img src="../assets/images/slideshow_bg3.png" alt="" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img src="../assets/images/slideshow_bg4.png" alt="" />
+      </van-swipe-item>
+    </van-swipe>
 
-        <template v-if="showWallect">
-          <div class="wallect" v-if="account">
-            <img src="../assets/images/wallect_icon.png" alt="" />
-            <div class="account">{{ formatName(account) }}</div>
-          </div>
+    <div class="content">
+      <div class="log">
+        <img
+          src="../assets/images/menu.png"
+          alt=""
+          class="menu"
+          @click="updateMenu"
+        />
+        <img src="../assets/images/logo.png" alt="" />
+      </div>
+      <p class="title">{{ title }}</p>
+      <div class="wallet_menu">
+        <template v-if="!defaults">
+          <img
+            src="../assets/images/wallet.png"
+            alt=""
+            @click="wallectStore.ConnectTheWallet"
+            v-if="!account"
+          />
+
+          <template v-if="showWallect">
+            <div class="wallect" v-if="account">
+              <img src="../assets/images/wallect_icon.png" alt="" />
+              <div class="account">{{ formatName(account) }}</div>
+            </div>
+          </template>
         </template>
-      </template>
-      <img src="../assets/images/lang_icon.png" alt="" @click="langChange" />
+        <img src="../assets/images/lang_icon.png" alt="" @click="langChange" />
+      </div>
     </div>
   </div>
 </template>
@@ -56,15 +73,33 @@ function langChange() {
 </script>
 
 <style lang="scss" scoped>
+.my-swipe {
+  position: relative;
+  // width: 100%;
+  // height: 210px;
+  .van-swipe-item {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
 .banner {
-  display: flex;
+  position: relative;
   width: 100%;
-  height: 168px;
-  padding: 0 25px;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #005abd;
-
+  height: 211px;
+  // padding: 20px 25px 0px;
+  // background-color: #005abd;
+  .content {
+    position: absolute;
+    top: 20px;
+    z-index: 999;
+    padding: 0 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
   .log {
     display: flex;
     align-items: center;
@@ -118,5 +153,17 @@ function langChange() {
     font-size: 16px;
     color: #ffffff;
   }
+}
+:deep(.van-swipe__indicators) {
+  bottom: 48px;
+  margin-right: 6px;
+}
+:deep(.van-swipe__indicator) {
+  margin-right: 6px;
+  background: #ffffff;
+  opacity: 1;
+}
+:deep(.van-swipe__indicator--active) {
+  background-color: #0359bd !important;
 }
 </style>
