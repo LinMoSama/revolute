@@ -63,7 +63,11 @@ export default function () {
       showFailToast('请先连接钱包')
       return false
     }
-    console.log(JSON.parse(sessionStorage.getItem('userInfo')!), 'userInfo')
+    // alert(
+    //   JSON.parse(sessionStorage.getItem('userInfo')!).recommend +
+    //     '====' +
+    //     '测试代码'
+    // )
     if (
       JSON.parse(sessionStorage.getItem('userInfo')!).recommend === 0 ||
       JSON.parse(sessionStorage.getItem('userInfo')!).recommend === null
@@ -124,6 +128,12 @@ export default function () {
       // 获取用户信息
       getUserInfoHandler()
       isShowReference.value = false
+      if (res.data.code === 1) {
+        showSuccessToast('绑定成功')
+      } else {
+        showFailToast('绑定失败')
+      }
+
       // window.location.reload()
       console.log(res.data, 'ReferenceAlertConfirm')
     } catch (error) {
@@ -175,7 +185,7 @@ export default function () {
         let b = Number(res) / 10 ** 18
         balance.value = b
         console.log(b)
-        console.log(res, 'res');
+        console.log(res, 'res')
       } catch (error) {
         console.log(error)
       }

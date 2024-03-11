@@ -38,6 +38,9 @@ export default function () {
       src: '/src/assets/images/team_icon.png',
       title: '我的团队',
     },
+    {
+      title: '交易明细',
+    },
   ]
   function changRoute(value: string) {
     switch (value) {
@@ -83,6 +86,12 @@ export default function () {
         router.push({
           path: '/myTeam',
         })
+        break
+      case '交易明细':
+        alert('交易明细')
+        // router.push({
+        //   path: '/myTeam',
+        // })
         break
     }
   }

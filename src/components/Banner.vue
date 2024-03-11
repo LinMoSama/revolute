@@ -1,25 +1,32 @@
 <template>
   <div class="banner">
     <div class="log">
+      <img
+        src="../assets/images/menu.png"
+        alt=""
+        class="menu"
+        @click="updateMenu"
+      />
       <img src="../assets/images/logo.png" alt="" />
     </div>
     <p class="title">{{ title }}</p>
     <div class="wallet_menu">
-      <div v-if="!defaults">
+      <template v-if="!defaults">
         <img
           src="../assets/images/wallet.png"
           alt=""
           @click="wallectStore.ConnectTheWallet"
           v-if="!account"
         />
+
         <template v-if="showWallect">
           <div class="wallect" v-if="account">
             <img src="../assets/images/wallect_icon.png" alt="" />
             <div class="account">{{ formatName(account) }}</div>
           </div>
         </template>
-      </div>
-      <img src="../assets/images/menu.png" alt="" @click="updateMenu" />
+      </template>
+      <img src="../assets/images/lang_icon.png" alt="" @click="langChange" />
     </div>
   </div>
 </template>
@@ -28,7 +35,12 @@
 import { useRoute } from 'vue-router'
 import useBanner from '@/hooks/useBanner'
 const { wallectStore, account, formatName } = useBanner()
-const props = defineProps(['menu', 'showWallect', 'defaults','isShowReferenceHandler'])
+const props = defineProps([
+  'menu',
+  'showWallect',
+  'defaults',
+  'isShowReferenceHandler',
+])
 let {
   meta: { title },
 } = useRoute()
@@ -37,6 +49,9 @@ function updateMenu() {
   if (props.isShowReferenceHandler()) {
     props.menu.showMenu()
   }
+}
+function langChange() {
+  alert('langChange')
 }
 </script>
 
@@ -51,24 +66,22 @@ function updateMenu() {
   background-color: #005abd;
 
   .log {
+    display: flex;
+    align-items: center;
     img {
       width: 90px;
       height: 50px;
+    }
+    .menu {
+      width: 24px;
+      height: 24px;
+      margin-right: 11px;
     }
   }
 
   .wallet_menu {
     display: flex;
     align-items: center;
-
-    img {
-      width: 24px;
-      height: 24px;
-
-      &:first-child {
-        margin-right: 16px;
-      }
-    }
 
     .wallect {
       display: flex;
@@ -80,7 +93,7 @@ function updateMenu() {
       border-radius: 10px 10px 10px 10px;
 
       img {
-        margin: 0 10px;
+        margin: 0 10px !important;
         width: 16px;
         height: 16px;
       }
@@ -88,6 +101,13 @@ function updateMenu() {
       .account {
         font-size: 12px;
         color: #333333;
+      }
+    }
+    img {
+      width: 24px;
+      height: 24px;
+      &:first-child {
+        margin-right: 17px;
       }
     }
   }

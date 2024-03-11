@@ -1,10 +1,12 @@
 <template>
   <div class="wrap">
+    
     <Banner
       :menu="menu"
       :showWallect="true"
       :isShowReferenceHandler="isShowReferenceHandler"
     ></Banner>
+
     <div class="control">
       <div class="item" @click="controlHandler(0)">
         <img src="../../assets/images/recharge.png" alt="" />
@@ -19,16 +21,14 @@
         <p>转账</p>
       </div>
     </div>
+
     <TotalRevenue
       :isShowReferenceHandler="isShowReferenceHandler"
       :awardList="awardList"
     ></TotalRevenue>
 
-    <div class="main">
-      <div class="bg">
-        <img src="../../assets/images/maintext.png" alt="" />
-      </div>
-    </div>
+    <SlideShow></SlideShow>
+
     <Buy
       :percentage="item.income"
       :day="item.subscription"
@@ -37,7 +37,10 @@
       v-for="(item, index) in investList"
       :key="index"
     ></Buy>
+
     <Menu ref="menu"></Menu>
+
+    <!-- 认购金额 -->
     <Alert
       title="认购金额"
       :alertShow="alertShow"
@@ -47,6 +50,7 @@
       :flag="true"
     ></Alert>
 
+    <!-- 推荐人 -->
     <Alert
       title="推荐人"
       :alertShow="isShowReference"
@@ -56,6 +60,7 @@
     >
     </Alert>
 
+    <!-- 充弹框值 -->
     <van-overlay :show="Chongzhishow">
       <div class="wrapper" @click.stop>
         <div class="block">
@@ -95,6 +100,8 @@
         </div>
       </div>
     </van-overlay>
+
+    <!-- 充值加载 -->
     <van-overlay :show="loading">
       <div class="wrapper">
         <van-loading vertical color="#fff">
@@ -105,11 +112,17 @@
         </van-loading>
       </div>
     </van-overlay>
+
+    <h2 class="slogan">探索未来的数字金融世界</h2>
+
+    <Footer></Footer>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref, onMounted, watch } from 'vue'
+import { ref, watch } from 'vue'
+import Footer from '@/components/Footer.vue'
+import SlideShow from '@/components/SlideShow.vue'
 import useIndex from '@/hooks/useIndex'
 import { getAwardList } from '@/service/api'
 import TotalRevenue from '@/components/totalRevenue.vue'
@@ -175,7 +188,6 @@ watch(
 <style scoped lang="scss">
 .wrap {
   display: flex;
-  padding-bottom: 26px;
   flex-direction: column;
   align-items: center;
   background-color: #f7f7f7;
@@ -222,6 +234,12 @@ watch(
         height: 100%;
       }
     }
+  }
+  .slogan {
+    margin: 21px 0;
+    font-weight: 400;
+    font-size: 12px;
+    color: #313c5b;
   }
 }
 .wrapper {
