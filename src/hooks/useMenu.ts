@@ -28,7 +28,7 @@ export default function () {
     },
     {
       src: '/src/assets/images/mingxi_icon.png',
-      title: '收益明细',
+      title: '我的钱包',
     },
     {
       src: '/src/assets/images/yaoqing_icon.png',
@@ -69,7 +69,7 @@ export default function () {
           path: '/myPurchase',
         })
         break
-      case '收益明细':
+      case '我的钱包':
         router.push({
           path: '/incomeDetail',
         })

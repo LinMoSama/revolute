@@ -49,7 +49,7 @@ import { showSuccessToast, showFailToast } from 'vant';
 import { useUserStore } from '../../stores/user'
 import clipboard from '../../utils/utils'
 import useIndex from '@/hooks/useIndex'
-const {isShowReferenceHandler} = useIndex()
+const { isShowReferenceHandler } = useIndex()
 const userStore = useUserStore()
 const menu = ref()
 const showLoding = ref(false)
@@ -123,8 +123,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   background-color: #F7F7F7;
-  overflow: hidden;
-  min-height: 100vh;
+  overflow: auto;
 
   .banner {
     display: flex;

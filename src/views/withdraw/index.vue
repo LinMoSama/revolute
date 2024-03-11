@@ -56,15 +56,14 @@ const userStore = useUserStore()
 const userInfo = JSON.parse(userStore.userInfo)
 // const initInfo = JSON.parse(userStore.initInfo)
 const initInfo = JSON.parse(sessionStorage.getItem('initInfo') || '{}')
-
+const account = ref(sessionStorage.getItem('account'))
 const menu = ref()
 const $router = useRouter()
 const showLoding = ref(false)
 const formData = ref<any>({
-  to_username: '',
+  to_username: account.value,
   mount: ''
 })
-console.log(initInfo);
 const flag = ref(false)
 const copyAdd = (text: string, event: any) => {
   clipboard(text, event)
@@ -121,8 +120,7 @@ const confirmWithdraw = () => {
   display: flex;
   flex-direction: column;
   background-color: #F7F7F7;
-  overflow: hidden;
-  min-height: 100vh;
+  overflow: auto;
 
   .banner {
     display: flex;
@@ -180,6 +178,7 @@ const confirmWithdraw = () => {
         outline: none;
         background-color: #f7f7f7;
         font-size: 12px;
+        width: 100%;
       }
 
       input::placeholder {

@@ -10,7 +10,7 @@
             <img src="../assets/images/tixian_icon.png" alt="" class="home_icon" v-if="item.title ==='提现'">
             <img src="../assets/images/zhuanzhang_icon.png" alt="" class="home_icon" v-if="item.title ==='转账'">
             <img src="../assets/images/rengou_icon.png" alt="" class="home_icon" v-if="item.title ==='我的认购'">
-            <img src="../assets/images/mingxi_icon.png" alt="" class="home_icon" v-if="item.title ==='收益明细'">
+            <img src="../assets/images/mingxi_icon.png" alt="" class="home_icon" v-if="item.title ==='我的钱包'">
             <img src="../assets/images/yaoqing_icon.png" alt="" class="home_icon" v-if="item.title ==='邀请好友'">
             <img src="../assets/images/team_icon.png" alt="" class="home_icon" v-if="item.title ==='我的团队'">
             <p>{{ item.title }}</p>

@@ -18,7 +18,7 @@
       <div class="invi df aic jcsb">
         <div class="df fdc mr10">
           <p class="fz12 gray mb10">邀请链接</p>
-          <p style="word-break:break-all" class="fz14">{{ formData.salt }}</p>
+          <p style="word-break:break-all" class="fz14">{{ inviteCode }}</p>
         </div>
         <img src="../../assets/images/copy.png" style="width: 40px;" @click="copyAdd(formData.salt, $event)">
       </div>
@@ -38,7 +38,7 @@ import QRCode from "qrcode"
 import clipboard from '../../utils/utils'
 import { getHMS } from '../../utils/utils'
 import useIndex from '@/hooks/useIndex'
-const {isShowReferenceHandler} = useIndex()
+const { isShowReferenceHandler } = useIndex()
 const menu = ref()
 const $router = useRouter()
 const formData = ref<any>({
@@ -46,7 +46,7 @@ const formData = ref<any>({
   avatar: '',
   time: ''
 })
-
+const inviteCode = ref('')
 const copyAdd = (text: string, event: any) => {
   clipboard(text, event)
   event.value = event
@@ -55,6 +55,7 @@ onMounted(() => {
   getUserInfo().then((res: any) => {
     formData.value.salt = res.data.data.salt
     formData.value.avatar = res.data.data.avatar
+    inviteCode.value = `http://api.revolute.cc/#/home?salt=${formData.value.salt}`
     // formData.value.time = getHMS(res.data.time * 100)
     const opts = {
       errorCorrectionLevel: "H",

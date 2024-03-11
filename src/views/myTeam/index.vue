@@ -7,11 +7,13 @@
         <div class="ml20">
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
           <p class="gray">
-            团队收益率: {{ (formData.team_sum * 1).toFixed(2) }} %
+            <span>团队收益率:</span>
+            <span v-if="hasTeam"> {{ (formData.team_sum * 1).toFixed(2) }} %</span>
+            <span v-else>-- %</span>
           </p>
         </div>
       </div>
-      <div class="level df aic jcsb">
+      <div class="level df aic jcsb" v-if="hasTeam && formData.user_level !== 0">
         <img :src="levelArr[formData.user_level - 1]" style="width: 15px; margin-right: 5px" />
         <p class="cfff">V{{ formData.user_level }}</p>
       </div>
@@ -36,11 +38,13 @@
         <div class="df aic jcsb box">
           <div class="df fdc">
             <p class="mb20">直推人数 (人)</p>
-            <p class="fw7 fz16">{{ formData.recommend_count }}</p>
+            <p class="fw7 fz16" v-if="formData.recommend_count">{{ formData.recommend_count }}</p>
+            <p class="fw7 fz16" v-else>--</p>
           </div>
           <div class="df fdc">
             <p class="mb20">团队人数 (人)</p>
-            <p class="fw7 fz16">{{ formData.team_coun }}</p>
+            <p class="fw7 fz16" v-if="formData.team_coun">{{ formData.team_coun }}</p>
+            <p class="fw7 fz16" v-else>--</p>
           </div>
         </div>
       </div>
@@ -48,7 +52,8 @@
         <div class="df aic jcsb">
           <div class="df aic">
             <img src="../../assets/images/data.png" style="width: 26px; margin-right: 5px" />
-            <p class="fz12">{{ formData.level_if }}</p>
+            <p class="fz12" v-if="hasTeam">{{ formData.level_if }}</p>
+            <p class="fz12" v-else>--</p>
           </div>
           <div class="yell">收益率: {{ formData.team_award_team }}%</div>
         </div>
@@ -139,7 +144,7 @@ import { getUserTeam, getFinancialList } from "../../service/api";
 import { hiddenUserAccount, getHMS } from "../../utils/utils";
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
-const {isShowReferenceHandler} = useIndex()
+const { isShowReferenceHandler } = useIndex()
 const menu = ref();
 const $router = useRouter();
 const active = ref(0);
@@ -197,9 +202,15 @@ const pageAdd = async () => {
     }
   })
 }
+const hasTeam = ref(true)
 const getUserTeamInfo = () => {
   getUserTeam().then((res: any) => {
-    formData.value = res.data.data;
+    if (!res.data.data) {
+      hasTeam.value = false
+    } else {
+      formData.value = res.data.data;
+    }
+
   });
 };
 
@@ -258,8 +269,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   background-color: #f7f7f7;
-  overflow: hidden;
-  min-height: 100vh;
+  overflow: auto;
 
   .banner {
     display: flex;

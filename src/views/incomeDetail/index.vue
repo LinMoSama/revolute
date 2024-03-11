@@ -11,7 +11,7 @@
       </p>
       <div class="btns df aic jcse">
         <div class="with" @click="$router.push('/withdraw')">提现</div>
-        <div class="recharge">充值</div>
+        <div class="recharge" @click="controlHandler(0)">充值</div>
       </div>
     </div>
     <div class="content bsbb">
@@ -32,7 +32,7 @@
             暂无数据
           </div>
         </van-tab>
-        <van-tab title="理财" name=1>
+        <van-tab title="认购" name=1>
           <div class="fund cont" ref="fundRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
@@ -115,6 +115,33 @@
       </van-tabs>
     </div>
     <Menu ref="menu"></Menu>
+    <van-overlay :show="Chongzhishow">
+      <div class="wrapper" @click.stop>
+        <div class="block">
+          <p class="title">充值</p>
+          <div class="input">
+            <img src="../../assets/images/usdt_icon.png" alt="" />
+            <input type="number" v-model.trim="inputMoney" placeholder="enter the amount" />
+            <div class="tool">
+              <div class="danwei">USDT</div>
+              <div class="max" @click="max">MAX</div>
+            </div>
+            <span class="balance_not_enough" v-if="Number(inputMoney) > balance">余额不足</span>
+            <span class="keyong" v-if="balance <= 0">可用: 0.00USDT</span>
+            <span class="keyong" v-else>可用: {{ formatDecimal(balance) }}USDT</span>
+          </div>
+          <div class="btns">
+            <div class="cancel" @click="cancel">取消</div>
+            <div class="confirm" @click="confim" :class="{
+      disabled:
+        Number(inputMoney) > balance || Number(inputMoney) <= 0,
+    }">
+              确定
+            </div>
+          </div>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
@@ -124,11 +151,12 @@ import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { getFinancialList, getTransferList, getUserTeam } from '../../service/api'
-import { getHMS } from '../../utils/utils'
+import { getHMS, formatDecimal } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
+// import { formatDecimal } from '@/utils/utils'
 const userInfo = ref<any>(JSON.parse(sessionStorage.getItem('userInfo')!))
-const { isShowReferenceHandler } = useIndex()
+const { isShowReferenceHandler, controlHandler, Chongzhishow, inputMoney, max, balance, cancel, confim } = useIndex()
 const menu = ref()
 const $router = useRouter()
 const active = ref(0)
@@ -140,7 +168,7 @@ const params = ref({
 })
 const typeList = ref([
   '',
-  '理财',
+  '认购',
   '复利',
   '推荐',
   '团队',
@@ -244,6 +272,136 @@ onMounted(() => {
 
 .co {
   color: #0E1446;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  width: 334px;
+  height: 230px;
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+
+  .input {
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    width: 300px;
+    height: 52px;
+    background: #ebf2ff;
+    border-radius: 6px 6px 6px 6px;
+
+    img {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      width: 24px;
+      height: 24px;
+    }
+
+    input {
+      width: 194px;
+      height: 100%;
+      background: #ebf2ff;
+      border: none;
+      padding-left: 47px;
+      border-radius: 6px 6px 6px 6px;
+      font-size: 18px;
+    }
+
+    .tool {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: calc(300px - 194px);
+      height: 100%;
+      border-radius: 6px 6px 6px 6px;
+
+      .danwei {
+        font-weight: 500;
+        font-size: 14px;
+        color: #0359bd;
+      }
+
+      .max {
+        width: 50px;
+        height: 26px;
+        background: #0359bd;
+        border-radius: 2px 2px 2px 2px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 26px;
+      }
+    }
+
+    .balance_not_enough {
+      position: absolute;
+      bottom: -20px;
+      font-weight: 400;
+      font-size: 12px;
+      color: #ff0000;
+    }
+
+    .keyong {
+      position: absolute;
+      bottom: -20px;
+      right: 0px;
+      font-weight: 400;
+      font-size: 12px;
+      color: #313c5b;
+    }
+  }
+
+  .title {
+    margin-top: 30px;
+    margin-bottom: 26px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    color: #313c5b;
+  }
+
+  .btns {
+    display: flex;
+    padding: 0 17px;
+    margin-top: 44px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+
+    div {
+      width: 146px;
+      height: 40px;
+      border-radius: 6px 6px 6px 6px;
+      font-weight: 400;
+      font-size: 16px;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .cancel {
+      background: #d9d9d9;
+      color: #2f354d;
+    }
+
+    .confirm {
+      background: #0359bd;
+      color: #ffffff;
+    }
+
+    .disabled {
+      width: 146px;
+      height: 40px;
+      background: rgba(3, 89, 189, 0.5);
+      border-radius: 6px 6px 6px 6px;
+    }
+  }
 }
 
 .wrap {
