@@ -258,7 +258,7 @@ p {
 .detail {
     background-color: #F7F7F7;
     min-height: 100vh;
-    overflow-y: hidden;
+    overflow: hidden;
 
     .content {
         height: calc(100% - 60px);

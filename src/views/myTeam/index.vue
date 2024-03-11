@@ -55,18 +55,24 @@
             <p class="fz12" v-if="hasTeam">{{ formData.level_if }}</p>
             <p class="fz12" v-else>--</p>
           </div>
-          <div class="yell">收益率: {{ formData.team_award_team }}%</div>
+          <div class="yell df aic">
+            <p>收益率 :</p>
+            <p v-if="hasTeam"> {{ formData.team_award_team }}%</p>
+            <p class="fz12" v-else>0%</p>
+          </div>
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
             <p class="mb20">直推业绩 (USDT)</p>
-            <p class="fw7 fz16">{{ (formData.recommend_sum * 1).toFixed(2) }}</p>
+            <p class="fw7 fz16" v-if="hasTeam">{{ (formData.recommend_sum * 1).toFixed(2) }}</p>
+            <p class="fz12" v-else>0%</p>
           </div>
           <div class="df fdc">
             <p class="mb20">团队业绩 (USDT)</p>
-            <p class="fw7 fz16">
+            <p class="fw7 fz16" v-if="hasTeam">
               {{ (formData.team_finc_sum * 1).toFixed(2) }}
             </p>
+            <p class="fz12" v-else>0%</p>
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@
           <p class="fz12 gray mb10">邀请链接</p>
           <p style="word-break:break-all" class="fz14">{{ inviteCode }}</p>
         </div>
-        <img src="../../assets/images/copy.png" style="width: 40px;" @click="copyAdd(formData.salt, $event)">
+        <img src="../../assets/images/copy.png" style="width: 40px;" @click="copyAdd(inviteCode, $event)">
       </div>
       <div class="btn">去邀请</div>
     </div>
