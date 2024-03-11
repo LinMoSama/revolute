@@ -3,8 +3,12 @@
     <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic fdc">
       <p class="c999 mb10">账户余额(USDT)</p>
-      <p class="fw7 fz30">9,856.00</p>
-      <p class="fz14 gray mt20">团队累积收益: 1,547.00USDT</p>
+      <p class="fw7 fz30">{{ (userInfo.money * 1).toFixed(2) }}</p>
+      <p class="fz14 gray mt20">
+        <span>团队累积收益:</span>
+        <span v-if="!noTeam">-- USDT</span>
+        <span v-else>{{ (teamInfo.team_sum * 1).toFixed(2) }}</span>
+      </p>
       <div class="btns df aic jcse">
         <div class="with" @click="$router.push('/withdraw')">提现</div>
         <div class="recharge">充值</div>
@@ -115,15 +119,16 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
-import { getFinancialList, getTransferList } from '../../service/api'
+import { getFinancialList, getTransferList, getUserTeam } from '../../service/api'
 import { getHMS } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
-const {isShowReferenceHandler} = useIndex()
+const userInfo = ref<any>(JSON.parse(sessionStorage.getItem('userInfo')!))
+const { isShowReferenceHandler } = useIndex()
 const menu = ref()
 const $router = useRouter()
 const active = ref(0)
@@ -187,9 +192,24 @@ const getData = () => {
     formData.value = res.data.data.data
   })
 }
-getData()
+const teamInfo = ref<any>({})
+const noTeam = ref(true)
+const getTeamIncome = () => {
+  getUserTeam().then((res: any) => {
+    if (!res.data.data) {
+      noTeam.value = res.data.data
+    } else {
+      teamInfo.value = res.data.data
+    }
+  })
+}
 watch(() => params.value.award_type, () => {
   getData()
+})
+
+onMounted(() => {
+  getData()
+  getTeamIncome()
 })
 </script>
 
