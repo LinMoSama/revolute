@@ -56,7 +56,7 @@
           <div class="input input2" v-if="!hiddenInput">
             <input
               type="text"
-              placeholder="输入推荐码"
+              placeholder="输入推荐钱包地址"
               v-model.trim="recommenderAddress"
             />
           </div>
@@ -140,6 +140,7 @@ function confim(val: any) {
     props.title === '转出失败' ||
     props.title === '推荐人'
   ) {
+    recommenderAddress.value = ''
     return emit('confirmAlert', val)
   }
   if (inputMoney.value > userStore.userInfo.money) {

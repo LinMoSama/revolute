@@ -1,0 +1,56 @@
+<template>
+  <div class="footer_wrap">
+    <img src="../assets/images/footer_img.png" alt="" />
+    <ul>
+      <li>
+        <a href="#">
+          <img src="../assets/images/footer_icon.png" alt="" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="../assets/images/footer_icon1.png" alt="" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="../assets/images/footer_icon2.png" alt="" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup lang="ts" name="Footer"></script>
+
+<style lang="scss" scoped>
+.footer_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  width: 375px;
+  height: 88px;
+  background: #ffffff;
+  border-radius: 0px 0px 0px 0px;
+  img {
+    width: 87px;
+    height: 50px;
+  }
+  ul {
+    display: flex;
+    li {
+      img {
+        margin-right: 11px;
+        width: 24px;
+        height: 24px;
+      }
+      &:last-child {
+        img {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+</style>
