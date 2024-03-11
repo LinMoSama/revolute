@@ -53,7 +53,8 @@ import { computed } from 'vue';
 import useIndex from '@/hooks/useIndex'
 const {isShowReferenceHandler} = useIndex()
 const userStore = useUserStore()
-const userInfo = JSON.parse(userStore.userInfo)
+// const userInfo = JSON.parse(userStore.userInfo)
+const userInfo = JSON.parse(sessionStorage.getItem('userInfo')!)
 // const initInfo = JSON.parse(userStore.initInfo)
 const initInfo = JSON.parse(sessionStorage.getItem('initInfo') || '{}')
 

@@ -55,7 +55,9 @@ const menu = ref()
 const showLoding = ref(false)
 const $router = useRouter()
 
-const userInfo = JSON.parse(userStore.userInfo)
+// const userInfo = JSON.parse(userStore.userInfo)
+const userInfo = JSON.parse(sessionStorage.getItem('userInfo')!)
+
 // const initInfo = JSON.parse(userStore.initInfo)
 const initInfo = JSON.parse(sessionStorage.getItem('initInfo') || '{}')
 

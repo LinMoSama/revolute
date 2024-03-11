@@ -24,8 +24,10 @@ export default defineStore('wallect', () => {
       } = await login({
         account: accounts[0],
       })
+
       console.log(accounts[0], 'accounts[0]')
       console.log('account', accounts[0])
+      debugger;
       userStore.userInfo = userinfo
       userStore.token = userinfo.token
       sessionStorage.setItem('userInfo', JSON.stringify(userinfo))
