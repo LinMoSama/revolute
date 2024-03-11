@@ -60,7 +60,7 @@ export default [
   {
     path: '/incomeDetail',
     name: 'incomeDetail',
-    meta: { title: '收益明细' },
+    meta: { title: '我的钱包' },
     component: () => import('@/views/incomeDetail/index.vue'),
   },
   // 邀请好友

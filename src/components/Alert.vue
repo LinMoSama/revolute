@@ -87,7 +87,6 @@ import { computed, ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { showFailToast } from 'vant'
 import { formatDecimal } from '@/utils/utils'
-
 let inputMoney = ref('')
 let recommenderAddress = ref('')
 const userStore = useUserStore()
@@ -102,7 +101,7 @@ const props = withDefaults(
     hiddenInput?: boolean
     tipTextShow?: boolean
     zhuanchu?: boolean
-    userInfo?: any
+    userInfo?: any,
   }>(),
   {
     hiddenCancel: false,
@@ -113,7 +112,6 @@ const props = withDefaults(
     zhuanchu: false,
   }
 )
-
 const emit = defineEmits(['updateShow', 'closeAlert', 'confirmAlert'])
 const keYongMoney = computed(() => {
   if (props.zhuanchu) {
@@ -169,6 +167,9 @@ function max() {
     inputMoney.value = String(userStore.userInfo.money)
   }
 }
+defineExpose({
+  recommenderAddress
+})
 </script>
 
 <style lang="scss" scoped>

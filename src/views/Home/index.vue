@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    
     <Banner
       :menu="menu"
       :showWallect="true"
@@ -57,6 +56,7 @@
       @updateShow="updateShow"
       @closeAlert="closeReferenceAlert"
       @confirmAlert="ReferenceAlertConfirm"
+      ref="reference"
     >
     </Alert>
 
@@ -120,7 +120,8 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Footer from '@/components/Footer.vue'
 import SlideShow from '@/components/SlideShow.vue'
 import useIndex from '@/hooks/useIndex'
@@ -133,7 +134,11 @@ import Banner from '@/components/Banner.vue'
 import { getUserInfo, getInit } from '../../service/api'
 import { useUserStore } from '@/stores/user'
 import { formatDecimal } from '@/utils/utils'
+import { showToast } from 'vant'
+
 const userStore = useUserStore()
+const route = useRoute()
+const reference = ref()
 const {
   loading,
   inputMoney,
@@ -165,7 +170,21 @@ const getInfo = () => {
     sessionStorage.setItem('initInfo', JSON.stringify(resp.data.data.coverdata))
   })
 }
-
+onMounted(() => {
+  if (route.query.salt && !sessionStorage.getItem('token')) {
+    return showToast('请先登录')
+  }
+  if (JSON.parse(sessionStorage.getItem('userInfo')!)) {
+    if (
+      JSON.parse(sessionStorage.getItem('userInfo')!).recommend === 0 ||
+      (JSON.parse(sessionStorage.getItem('userInfo')!).recommend === null &&
+        route.query.salt)
+    ) {
+      isShowReference.value = true
+      reference.value.recommenderAddress = route.query.salt
+    }
+  }
+})
 watch(
   () => userStore.token,
   async val => {
