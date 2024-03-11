@@ -152,9 +152,7 @@ const getInfo = () => {
     sessionStorage.setItem('initInfo', JSON.stringify(resp.data.data.coverdata))
   })
 }
-onMounted(() => {
-  // getInfo()
-})
+
 watch(
   () => userStore.token,
   async val => {
@@ -172,9 +170,6 @@ watch(
   },
   { immediate: true }
 )
-onMounted(async () => {
-  // console.log(await checkBalance())
-})
 </script>
 
 <style scoped lang="scss">
