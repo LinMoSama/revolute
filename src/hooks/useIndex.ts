@@ -63,9 +63,10 @@ export default function () {
       showFailToast('请先连接钱包')
       return false
     }
+    console.log(JSON.parse(sessionStorage.getItem('userInfo')!), 'userInfo')
     if (
-      JSON.parse(userStore.userInfo).recommend === 0 ||
-      JSON.parse(userStore.userInfo).recommend === null
+      JSON.parse(sessionStorage.getItem('userInfo')!).recommend === 0 ||
+      JSON.parse(sessionStorage.getItem('userInfo')!).recommend === null
     ) {
       isShowReference.value = true
       return false
@@ -123,6 +124,7 @@ export default function () {
       // 获取用户信息
       getUserInfoHandler()
       isShowReference.value = false
+      // window.location.reload()
       console.log(res.data, 'ReferenceAlertConfirm')
     } catch (error) {
       console.log(error)
