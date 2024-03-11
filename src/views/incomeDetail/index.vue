@@ -96,7 +96,7 @@
             暂无数据
           </div>
         </van-tab>
-        <van-tab title="平级" name=5>
+        <!-- <van-tab title="平级" name=5>
           <div class="transfer cont" ref="teamRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
@@ -111,7 +111,7 @@
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
             暂无数据
           </div>
-        </van-tab>
+        </van-tab> -->
       </van-tabs>
     </div>
     <Menu ref="menu"></Menu>

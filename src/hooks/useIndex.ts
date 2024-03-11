@@ -21,8 +21,8 @@ export default function () {
   let inputMoney = ref('')
   let loading = ref(false)
   onMounted(() => {
+  
     getInvestListHandler()
-    // getAwardListHandler()
   })
   // 获取用户投资列表
   async function getInvestListHandler() {
