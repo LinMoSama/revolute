@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
-    <Banner :menu="menu"  :showSwiper="true" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
+      :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df aic">
         <img :src="levelArr[formData.user_level - 1]" style="width: 30px" />
@@ -30,10 +31,18 @@
         <div class="df aic jcsb">
           <div class="df aic">
             <img src="../../assets/images/team.png" style="width: 26px; margin-right: 5px" />
-            <p class="fz12">直推还差1人</p>
+            <p class="fz12">
+              <span>直推还差</span>
+              <span v-if="formData.recommend_count">1人</span>
+              <span v-else>2人</span>
+            </p>
             <img src="../../assets/images/upper.png" style="width: 20px; margin-left: 10px" />
           </div>
-          <div class="yell">收益率: {{ formData.team_award_recommend }}%</div>
+          <div class="yell df aic">
+            <p>收益率 :</p>
+            <p v-if="hasTeam"> {{ formData.team_award_recommend }}%</p>
+            <p class="fz12" v-else>0%</p>
+          </div>
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
@@ -65,14 +74,14 @@
           <div class="df fdc">
             <p class="mb20">直推业绩 (USDT)</p>
             <p class="fw7 fz16" v-if="hasTeam">{{ (formData.recommend_sum * 1).toFixed(2) }}</p>
-            <p class="fz12" v-else>0%</p>
+            <p class="fz12" v-else>--</p>
           </div>
           <div class="df fdc">
             <p class="mb20">团队业绩 (USDT)</p>
             <p class="fw7 fz16" v-if="hasTeam">
               {{ (formData.team_finc_sum * 1).toFixed(2) }}
             </p>
-            <p class="fz12" v-else>0%</p>
+            <p class="fz12" v-else>--</p>
           </div>
         </div>
       </div>

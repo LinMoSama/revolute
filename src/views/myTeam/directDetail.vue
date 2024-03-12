@@ -16,7 +16,7 @@
                         <p class="fz12 b2 fw7">{{ hiddenUserAccount(v.username) }}</p>
                     </div>
                     <div class="df aic jcsb ani">
-                        <img src="../../assets/images/lv1.png" style="width:18px;margin-right:5px">
+                        <img v-if="v.level" src="../../assets/images/lv1.png" style="width:18px;margin-right:5px">
                         <p class="fz12">V{{ v.level }}</p>
                     </div>
                 </div>
