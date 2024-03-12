@@ -21,7 +21,6 @@ export default function () {
   let inputMoney = ref('')
   let loading = ref(false)
   onMounted(() => {
-  
     getInvestListHandler()
   })
   // 获取用户投资列表
@@ -125,17 +124,16 @@ export default function () {
         salt,
       })
 
-      // 获取用户信息
-      getUserInfoHandler()
       isShowReference.value = false
       if (res.data.code === 1) {
         showSuccessToast('绑定成功')
       } else {
         showFailToast('绑定失败')
       }
-
-      // window.location.reload()
       console.log(res.data, 'ReferenceAlertConfirm')
+      // 获取用户信息
+      getUserInfoHandler()
+      // window.location.reload()
     } catch (error) {
       console.log(error)
     }
