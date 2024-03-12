@@ -37,13 +37,13 @@
             src="../assets/images/wallet.png"
             alt=""
             @click="wallectStore.ConnectTheWallet"
-            v-if="!account"
+            v-if="!token"
           />
 
           <template v-if="showWallect">
-            <div class="wallect" v-if="account">
+            <div class="wallect" v-if="token">
               <img src="../assets/images/wallect_icon.png" alt="" />
-              <div class="account">{{ formatName(account) }}</div>
+              <div class="account">{{ formatName(account as string) }}</div>
             </div>
           </template>
         </template>
@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import useBanner from '@/hooks/useBanner'
-const { wallectStore, account, formatName } = useBanner()
+const { wallectStore, account, formatName,token } = useBanner()
 const props = defineProps([
   'menu',
   'showWallect',

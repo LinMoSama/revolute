@@ -1,7 +1,9 @@
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { showSuccessToast, showFailToast } from 'vant'
 import { errorCodeHandler } from '@/utils/errorCodeHandler'
+const $router = useRouter()
 const server = axios.create({
   // baseURL: 'http://api.revolute.cc',
   baseURL: 'http://192.168.2.177:7786',
@@ -38,14 +40,15 @@ server.interceptors.response.use(
     return response
   },
   err => {
-    console.log(err.response.data)
+    console.log(err)
     if (
       err.response.data.code === 401 &&
       err.response.data.msg === '请登录后操作'
     ) {
-      console.log(1)
+      showFailToast('登录失效，请重新登录')
       sessionStorage.clear()
-      window.location.reload()
+      window.location.href = '/home'
+      // window.location.reload()
     }
     let { status } = err.response
     // errorCodeHandler(status)
