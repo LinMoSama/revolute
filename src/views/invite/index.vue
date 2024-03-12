@@ -60,7 +60,7 @@ onMounted(() => {
     formData.value.salt = res.data.data.salt
     formData.value.avatar = res.data.data.avatar
     formData.value.username = res.data.data.username
-    inviteCode.value = `http://${window.location.hostname}:${window.location.port}/home?salt=${res.data.data.username}`
+    inviteCode.value = `http://${window.location.hostname}:${window.location.port}/#/home?salt=${res.data.data.username}`
     // formData.value.time = getHMS(res.data.time * 100)
     const opts = {
       errorCorrectionLevel: "H",
