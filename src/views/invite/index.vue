@@ -91,35 +91,35 @@ onMounted(() => {
   overflow: hidden;
   min-height: 100vh;
 
-  .banner {
-    display: flex;
-    width: 100%;
-    height: 168px;
-    padding: 0 25px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #005ABD;
+  // .banner {
+  //   display: flex;
+  //   width: 100%;
+  //   height: 168px;
+  //   padding: 0 25px;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   background-color: #005ABD;
 
-    .log {
-      img {
-        width: 90px;
-        height: 50px;
-      }
-    }
+  //   .log {
+  //     img {
+  //       width: 90px;
+  //       height: 50px;
+  //     }
+  //   }
 
-    .wallet_menu {
-      img {
-        width: 24px;
-        height: 24px;
+  //   .wallet_menu {
+  //     img {
+  //       width: 24px;
+  //       height: 24px;
 
-        &:first-child {
-          margin-right: 16px;
-        }
-      }
-    }
+  //       &:first-child {
+  //         margin-right: 16px;
+  //       }
+  //     }
+  //   }
 
 
-  }
+  // }
 
   .control {
     padding: 15px;
