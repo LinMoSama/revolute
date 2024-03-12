@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <van-swipe class="my-swipe" :autoplay="2500" indicator-color="white">
+    <van-swipe class="my-swipe" :autoplay="2500" indicator-color="white" v-if="!showSwiper">
       <van-swipe-item>
         <img src="../assets/images/slideshow_bg1.png" alt="" />
       </van-swipe-item>
@@ -57,6 +57,7 @@ const props = defineProps([
   'showWallect',
   'defaults',
   'isShowReferenceHandler',
+  'showSwiper'
 ])
 let {
   meta: { title },
@@ -75,8 +76,8 @@ function langChange() {
 <style lang="scss" scoped>
 .my-swipe {
   position: relative;
-  // width: 100%;
-  // height: 210px;
+  width: 100%;
+  height: 212px;
   .van-swipe-item {
     img {
       width: 100%;
@@ -88,8 +89,9 @@ function langChange() {
   position: relative;
   width: 100%;
   height: 211px;
+  background-color: #005abd;
+
   // padding: 20px 25px 0px;
-  // background-color: #005abd;
   .content {
     position: absolute;
     top: 20px;

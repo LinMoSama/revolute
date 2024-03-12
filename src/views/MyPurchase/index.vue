@@ -1,6 +1,6 @@
 <template>
   <div class="pur_wrap">
-    <Banner
+    <Banner  :showSwiper="true"
       :menu="menu"
       title="我的认购"
       :isShowReferenceHandler="isShowReferenceHandler"

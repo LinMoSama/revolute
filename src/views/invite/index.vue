@@ -1,6 +1,7 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"
+      :showSwiper="true"></Banner>
     <div class="control df fdc">
       <div class="df aic mt10">
         <img src="../../assets/images/withdrawicon.png" style="width: 60px;">

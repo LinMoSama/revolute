@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu"  :showSwiper="true" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df aic">
         <img :src="levelArr[formData.user_level - 1]" style="width: 30px" />

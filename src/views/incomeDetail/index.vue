@@ -1,6 +1,6 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu"  :showSwiper="true" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic fdc">
       <p class="c999 mb10">账户余额(USDT)</p>
       <p class="fw7 fz30">{{ (userInfo.money * 1).toFixed(2) }}</p>
