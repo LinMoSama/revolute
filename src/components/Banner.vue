@@ -1,5 +1,5 @@
 <template>
-  <div class="banner">
+  <div class="banner" :class="{'b2':showSwiper}">
     <van-swipe
       class="my-swipe"
       :autoplay="2500"
@@ -90,6 +90,7 @@ function langChange() {
     }
   }
 }
+
 .banner {
   position: relative;
   width: 100%;
@@ -159,6 +160,13 @@ function langChange() {
     font-weight: 600;
     font-size: 16px;
     color: #ffffff;
+  }
+}
+.b2 {
+  height: 168px;
+  .content {
+    top: 50%;
+    transform: translateY(-85%);
   }
 }
 :deep(.van-swipe__indicators) {
