@@ -1,6 +1,11 @@
 <template>
-  <div class="banner">
-    <van-swipe class="my-swipe" :autoplay="2500" indicator-color="white" v-if="!showSwiper">
+  <div class="banner" :class="{'b2':showSwiper}">
+    <van-swipe
+      class="my-swipe"
+      :autoplay="2500"
+      indicator-color="white"
+      v-if="!showSwiper"
+    >
       <van-swipe-item>
         <img src="../assets/images/slideshow_bg1.png" alt="" />
       </van-swipe-item>
@@ -32,13 +37,13 @@
             src="../assets/images/wallet.png"
             alt=""
             @click="wallectStore.ConnectTheWallet"
-            v-if="!account"
+            v-if="!token"
           />
 
           <template v-if="showWallect">
-            <div class="wallect" v-if="account">
+            <div class="wallect" v-if="token">
               <img src="../assets/images/wallect_icon.png" alt="" />
-              <div class="account">{{ formatName(account) }}</div>
+              <div class="account">{{ formatName(account as string) }}</div>
             </div>
           </template>
         </template>
@@ -51,18 +56,17 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import useBanner from '@/hooks/useBanner'
-const { wallectStore, account, formatName } = useBanner()
+const { wallectStore, account, formatName,token } = useBanner()
 const props = defineProps([
   'menu',
   'showWallect',
   'defaults',
   'isShowReferenceHandler',
-  'showSwiper'
+  'showSwiper',
 ])
 let {
   meta: { title },
 } = useRoute()
-
 function updateMenu() {
   if (props.isShowReferenceHandler()) {
     props.menu.showMenu()
@@ -70,6 +74,7 @@ function updateMenu() {
 }
 function langChange() {
   console.log('langChange')
+  
 }
 </script>
 
@@ -85,6 +90,7 @@ function langChange() {
     }
   }
 }
+
 .banner {
   position: relative;
   width: 100%;
@@ -154,6 +160,13 @@ function langChange() {
     font-weight: 600;
     font-size: 16px;
     color: #ffffff;
+  }
+}
+.b2 {
+  height: 168px;
+  .content {
+    top: 50%;
+    transform: translateY(-85%);
   }
 }
 :deep(.van-swipe__indicators) {

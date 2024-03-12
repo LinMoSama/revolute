@@ -6,7 +6,7 @@
                     <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.go(-1)">
                     <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
                 </div>
-                <p class="bl fz14 fw7">记录详情</p>
+                <p class="bl fz14 fw7">交易明细</p>
                 <p style="width: 40px;"></p>
             </div>
         </van-sticky>

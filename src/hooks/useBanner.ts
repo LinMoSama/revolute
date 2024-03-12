@@ -4,6 +4,6 @@ import { formatName } from '@/utils/utils'
 export default function () {
   const { account } = storeToRefs(useWallect())
   const wallectStore = useWallect()
-
-  return { wallectStore, account, formatName }
+  let token = sessionStorage.getItem('token')
+  return { wallectStore, account, formatName, token }
 }
