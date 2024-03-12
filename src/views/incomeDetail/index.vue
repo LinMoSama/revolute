@@ -21,7 +21,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
               </div>
               <div class="df aic jcsb">
                 <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
@@ -37,7 +37,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
               </div>
               <div class="df aic jcsb">
                 <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
@@ -53,7 +53,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
               </div>
               <div class="df aic jcsb">
                 <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
@@ -69,7 +69,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
               </div>
               <div class="df aic jcsb">
                 <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
@@ -85,7 +85,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime) }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
               </div>
               <div class="df aic jcsb">
                 <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>

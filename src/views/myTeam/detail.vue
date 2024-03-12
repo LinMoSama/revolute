@@ -47,7 +47,7 @@
                                 <p class="fw7 fz14 b2">直推人员</p>
                             </div>
                             <div class="df aic jcsb">
-                                <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 100) }}</p>
+                                <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 <p class="fw7 fz14 b2">间推人员</p>
                             </div>
                             <div class="df aic jcsb">
-                                <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 100) }}</p>
+                                <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
                             </div>
                         </div>
                     </div>

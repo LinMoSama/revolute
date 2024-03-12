@@ -184,6 +184,7 @@ export default function () {
         balance.value = b
         console.log(b)
         console.log(res, 'res')
+        getUserInfoHandler()
       } catch (error) {
         console.log(error)
       }

@@ -1,6 +1,7 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu"  :showSwiper="true" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
+      :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
@@ -35,7 +36,7 @@
       <div class="btn" @click="transferTo">确定</div>
     </div>
     <Menu ref="menu"></Menu>
-    <van-loading v-model="showLoding" />
+    <van-loading v-if="showLoding" />
   </div>
 </template>
 

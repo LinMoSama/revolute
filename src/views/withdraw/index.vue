@@ -35,7 +35,7 @@
       <div class="btn" @click="confirmWithdraw">确定</div>
     </div>
     <Menu ref="menu"></Menu>
-    <van-loading v-model="showLoding" />
+    <van-loading v-if="showLoding" />
   </div>
 </template>
 

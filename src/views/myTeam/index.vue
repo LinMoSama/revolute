@@ -117,7 +117,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">推荐奖励</p>
-                <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 100) }}</p>
+                <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
                 <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
@@ -133,7 +133,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">团队奖励</p>
-                <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 100) }}</p>
+                <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
                 <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
