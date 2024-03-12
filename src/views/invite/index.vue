@@ -7,7 +7,8 @@
         <img src="../../assets/images/withdrawicon.png" style="width: 60px;">
         <div class="df fdc ml20">
           <p class="b2 mb10 fw7 fz16">我的邀请码</p>
-          <p class="gray fz12">{{ formData.salt }}</p>
+          <p class="gray fz12">{{ formatName(formData.username)}}</p>
+         
         </div>
       </div>
       <div class="df aic jcc">
@@ -31,6 +32,7 @@
 
 <script setup lang="ts" name="Home">
 import { onMounted, ref, watch } from 'vue';
+import {formatName} from '@/utils/utils'
 import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
@@ -45,7 +47,8 @@ const $router = useRouter()
 const formData = ref<any>({
   salt: '',
   avatar: '',
-  time: ''
+  time: '',
+  username: ''
 })
 const inviteCode = ref('')
 const copyAdd = (text: string, event: any) => {
@@ -56,7 +59,8 @@ onMounted(() => {
   getUserInfo().then((res: any) => {
     formData.value.salt = res.data.data.salt
     formData.value.avatar = res.data.data.avatar
-    inviteCode.value = `http://api.revolute.cc/#/home?salt=${formData.value.salt}`
+    formData.value.username = res.data.data.username
+    inviteCode.value = `http://${window.location.hostname}:${window.location.port}/home?salt=${res.data.data.username}`
     // formData.value.time = getHMS(res.data.time * 100)
     const opts = {
       errorCorrectionLevel: "H",
@@ -89,7 +93,7 @@ onMounted(() => {
   flex-direction: column;
   background-color: #F7F7F7;
   overflow: hidden;
-  min-height: 100vh;
+  // min-height: 100vh;
 
   // .banner {
   //   display: flex;
