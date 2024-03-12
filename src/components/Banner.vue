@@ -1,6 +1,11 @@
 <template>
   <div class="banner">
-    <van-swipe class="my-swipe" :autoplay="2500" indicator-color="white" v-if="!showSwiper">
+    <van-swipe
+      class="my-swipe"
+      :autoplay="2500"
+      indicator-color="white"
+      v-if="!showSwiper"
+    >
       <van-swipe-item>
         <img src="../assets/images/slideshow_bg1.png" alt="" />
       </van-swipe-item>
@@ -57,12 +62,11 @@ const props = defineProps([
   'showWallect',
   'defaults',
   'isShowReferenceHandler',
-  'showSwiper'
+  'showSwiper',
 ])
 let {
   meta: { title },
 } = useRoute()
-
 function updateMenu() {
   if (props.isShowReferenceHandler()) {
     props.menu.showMenu()
@@ -70,6 +74,7 @@ function updateMenu() {
 }
 function langChange() {
   console.log('langChange')
+  
 }
 </script>
 

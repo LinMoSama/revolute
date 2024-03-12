@@ -69,10 +69,9 @@ export default function () {
         })
         break
       case '交易明细':
-        alert('交易明细')
-        // router.push({
-        //   path: '/myTeam',
-        // })
+        router.push({
+          path: '/withdrawdetail?active=0',
+        })
         break
     }
   }
