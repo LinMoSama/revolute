@@ -72,6 +72,8 @@ export const getHMS = (timestamp: any) => {
 export const hiddenUserAccount = (addr: any) => {
   if (addr) {
     return addr.slice(0, 2) + '...' + addr.slice(38, addr.length)
+  }else{
+    return addr
   }
 }
 

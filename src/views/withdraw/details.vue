@@ -27,7 +27,7 @@
                                 <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方:
                                     {{ hiddenUserAccount(v.add_username) }}
                                 </p>
-                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{ v.add_username }}
+                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{  hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
                             </div>
@@ -146,6 +146,7 @@ const refList = ref<any>([
     withdrawRef
 ])
 const changeType = (number: number) => {
+    params.value.var_page = 1
     params.value.transfer_type = number * 1
     active.value = number
 }
