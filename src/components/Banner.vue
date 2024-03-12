@@ -68,7 +68,7 @@ function updateMenu() {
   }
 }
 function langChange() {
-  alert('langChange')
+  console.log('langChange')
 }
 </script>
 
