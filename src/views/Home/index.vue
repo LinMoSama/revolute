@@ -75,7 +75,7 @@
             <img src="../../assets/images/usdt_icon.png" alt="" />
             <input
               type="number"
-              v-model.trim="inputMoney"
+              v-model.number.trim="inputMoney"
               placeholder="enter the amount"
             />
             <div class="tool">
