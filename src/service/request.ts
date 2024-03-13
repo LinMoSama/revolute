@@ -4,7 +4,7 @@ import { showSuccessToast, showFailToast } from 'vant'
 import { errorCodeHandler } from '@/utils/errorCodeHandler'
 let urlPro = 'http://api.revolute.cc'
 let urlDeve = 'http://192.168.2.177:7786'
-alert(process.env.NODE_ENV);
+// alert(process.env.NODE_ENV);
 const server = axios.create({ 
   baseURL: process.env.NODE_ENV === 'development' ? urlDeve : urlPro,
   // baseURL: 'http://192.168.2.177:7786',
