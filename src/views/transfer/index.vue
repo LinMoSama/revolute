@@ -99,14 +99,20 @@ const transferTo = () => {
   }
   showLoding.value = true
   getTransferTo(formData.value).then((res: any) => {
-    if (res.data.code) {
+    if (res.data.data.code) {
       showSuccessToast('转账成功')
     } else {
       showFailToast(res.data.msg)
     }
     showLoding.value = false
+    for (let i in formData) {
+      formData.value[i] = ''
+    }
   }).finally(() => {
     showLoding.value = false
+    for (let i in formData) {
+      formData.value[i] = ''
+    }
   })
 }
 
