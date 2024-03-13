@@ -37,11 +37,11 @@
             src="../assets/images/wallet.png"
             alt=""
             @click="wallectStore.ConnectTheWallet"
-            v-if="!token && !account"
+            v-show="!account"
           />
 
           <template v-if="showWallect">
-            <div class="wallect" v-if="token && account">
+            <div class="wallect" v-show="account">
               <img src="../assets/images/wallect_icon.png" alt="" />
               <div class="account">{{ formatName(account as string) }}</div>
             </div>

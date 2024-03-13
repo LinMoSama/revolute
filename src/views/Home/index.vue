@@ -141,7 +141,6 @@ import { getUserInfo, getInit } from '../../service/api'
 import { useUserStore } from '@/stores/user'
 import { formatDecimal } from '@/utils/utils'
 import { showToast } from 'vant'
-
 const userStore = useUserStore()
 const route = useRoute()
 const reference = ref()

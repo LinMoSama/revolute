@@ -36,21 +36,16 @@ export function getWebData(to: any, from: any, next: any) {
           console.log('用户断开了 MetaMask 账户连接')
           // localStorage.clear()
           sessionStorage.clear()
-
           window.location.reload()
         } else {
-          // let account = localStorage.getItem('account')
           let account = sessionStorage.getItem('account')
-
           console.log(account)
           if (account && account !== accounts[0]) {
-            // localStorage.clear()
             sessionStorage.clear()
-
             window.location.reload()
           }
           // 用户切换了 MetaMask 账户
-          console.log('用户切换了 MetaMask 账户:', accounts[0])
+          // console.log('用户切换了 MetaMask 账户:', accounts[0])
         }
       })
     } catch (error: any) {
@@ -59,6 +54,7 @@ export function getWebData(to: any, from: any, next: any) {
   } else {
     // Metamask 未安装
     console.log('Metamask 未安装')
+    sessionStorage.clear()
     sessionStorage.setItem('isInstall', 'false')
   }
   next()

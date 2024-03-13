@@ -290,6 +290,7 @@ defineExpose({
       input {
         width: 100%;
         font-size: 12px;
+        padding-left: 0px;
         color: rgba(49, 60, 91, 0.3);
       }
     }
