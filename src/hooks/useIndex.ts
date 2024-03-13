@@ -54,7 +54,7 @@ export default function () {
   }
   // 判断是否填写推荐人
   function isShowReferenceHandler() {
-    if (wallectStore.isInstall === false) {
+    if (wallectStore.isInstall === false && !sessionStorage.getItem('account')) {
       showFailToast('请安装并连接钱包')
       return false
     }

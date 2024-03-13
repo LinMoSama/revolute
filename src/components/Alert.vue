@@ -289,6 +289,7 @@ defineExpose({
     .input2 {
       input {
         width: 100%;
+        font-size: 12px;
         color: rgba(49, 60, 91, 0.3);
       }
     }

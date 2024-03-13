@@ -1,5 +1,5 @@
 <template>
-  <div class="banner" :class="{'b2':showSwiper}">
+  <div class="banner" :class="{ b2: showSwiper }">
     <van-swipe
       class="my-swipe"
       :autoplay="2500"
@@ -37,11 +37,11 @@
             src="../assets/images/wallet.png"
             alt=""
             @click="wallectStore.ConnectTheWallet"
-            v-if="!token"
+            v-if="!token && !account"
           />
 
           <template v-if="showWallect">
-            <div class="wallect" v-if="token">
+            <div class="wallect" v-if="token && account">
               <img src="../assets/images/wallect_icon.png" alt="" />
               <div class="account">{{ formatName(account as string) }}</div>
             </div>
@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import useBanner from '@/hooks/useBanner'
-const { wallectStore, account, formatName,token } = useBanner()
+const { wallectStore, account, formatName, token } = useBanner()
 const props = defineProps([
   'menu',
   'showWallect',
@@ -74,7 +74,6 @@ function updateMenu() {
 }
 function langChange() {
   console.log('langChange')
-  
 }
 </script>
 
