@@ -74,10 +74,10 @@ onMounted(() => {
       width: 300,
     };
     //这一步就是生成二维码图片，然后赋值给上面的img标签
-    QRCode.toDataURL(formData.value.salt, opts, function (err: any, url: any) {
+    QRCode.toDataURL( (inviteCode.value as any), opts, function (err: any, url: any) {
       if (err) throw err;
       var img = document.getElementById("images");
-      img.src = url;
+      (img as HTMLImageElement).src = url;
     })
   })
 })
