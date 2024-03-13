@@ -14,7 +14,7 @@ export default defineStore('wallect', () => {
 
   async function ConnectTheWallet() {
     try {
-      if (!ethereum) return showFailToast('Metamask 未安装')
+      if (!isInstall) return showFailToast('Metamask 未安装')
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       sessionStorage.setItem('account', accounts[0])
       account.value = accounts[0]
