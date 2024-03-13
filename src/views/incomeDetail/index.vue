@@ -409,7 +409,7 @@ onMounted(() => {
   flex-direction: column;
   background-color: #F7F7F7;
   overflow: hidden;
-  min-height: 100vh;
+  // min-height: 100vh;
 
   // .banner {
   //   display: flex;

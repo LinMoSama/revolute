@@ -18,7 +18,7 @@
         <p class="tip_text" v-if="tipTextShow">
           基金收益+复利的收益总和大于本金时， 不再享受复利收益
         </p>
-        <p v-if="transferSucc" class="succ_tip">请在收益明细中查看</p>
+        <p v-if="transferSucc" class="succ_tip">请在我的钱包中查看</p>
         <template v-if="flag">
           <div class="input">
             <input

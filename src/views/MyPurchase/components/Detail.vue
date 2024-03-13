@@ -38,8 +38,7 @@
           >
             <div class="left">
               <p>Compound Pool</p>
-              <!-- <span>{{ formtTime(item.createtime) }}</span> -->
-              <span>{{ item.createtime }}</span>
+              <span>{{ formtTime(item.createtime) }}</span>
             </div>
             <div class="right">
               <p>{{ titleComputed }}</p>
