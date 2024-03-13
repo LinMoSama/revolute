@@ -123,8 +123,8 @@ const pageAdd = async () => {
         if (!res.data.data.data.length) {
             showFailToast('到底了')
         } else {
-            recommendList.value = [...res.data.data.data, ...recommendList.value]
-            teamList.value = [...res.data.data.data, ...teamList.value]
+            recommendList.value = [...recommendList.value, ...res.data.data.data]
+            teamList.value = [...teamList.value, ...res.data.data.data]
         }
     })
 }

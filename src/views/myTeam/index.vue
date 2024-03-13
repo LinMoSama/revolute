@@ -213,7 +213,7 @@ const pageAdd = async () => {
     if (!res.data.data.data.length) {
       showFailToast('到底了')
     } else {
-      dataList.value = [...res.data.data.data, ...dataList.value]
+      dataList.value = [...dataList.value, ...res.data.data.data]
     }
   })
 }

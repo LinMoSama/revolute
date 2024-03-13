@@ -70,7 +70,7 @@ const pageAdd = async () => {
         if (!res.data.data.data.length) {
             showFailToast('到底了')
         } else {
-            formData.value = [...res.data.data.data, ...formData.value]
+            formData.value = [ ...formData.value,...res.data.data.data]
         }
     })
 }

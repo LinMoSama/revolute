@@ -27,7 +27,8 @@
                                 <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方:
                                     {{ hiddenUserAccount(v.add_username) }}
                                 </p>
-                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{  hiddenUserAccount(v.add_username) }}
+                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
+                        hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
                             </div>
@@ -199,7 +200,7 @@ const pageAdd = async () => {
         if (!res.data.data.data.length) {
             showFailToast('到底了')
         } else {
-            formData.value = [...res.data.data.data, ...formData.value]
+            formData.value = [...formData.value, ...res.data.data.data]
         }
     })
 }
