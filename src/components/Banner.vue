@@ -101,7 +101,7 @@ function langChange() {
   .content {
     position: absolute;
     top: 20px;
-    z-index: 999;
+    z-index: 1;
     padding: 0 26px;
     display: flex;
     align-items: center;
