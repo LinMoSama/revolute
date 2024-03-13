@@ -1,15 +1,13 @@
 <template>
     <div class="detail">
-        <van-sticky>
-            <div class="top df aic jcsb p20 bsbb">
-                <div class="df aic">
-                    <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.push('/home')">
-                    <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
-                </div>
-                <p class="bl fz14 fw7">交易明细</p>
-                <p style="width: 40px;"></p>
+        <div class="top df aic jcsb p20 bsbb">
+            <div class="df aic">
+                <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.push('/home')">
+                <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
             </div>
-        </van-sticky>
+            <p class="bl fz14 fw7">交易明细</p>
+            <p style="width: 40px;"></p>
+        </div>
         <div class="content mt20">
             <van-tabs v-model:active="active" sticky shrink @change="changeType" offset-top="20px">
                 <van-tab title="全部" name=0>
@@ -20,7 +18,7 @@
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
-                        stateType[v.status - 1].text }}
+                    stateType[v.status - 1].text }}
                                 </p>
                             </div>
                             <div class="df aic jcsb">
@@ -28,7 +26,7 @@
                                     {{ hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
-                        hiddenUserAccount(v.add_username) }}
+                    hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
                             </div>
@@ -46,7 +44,7 @@
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
-                        stateType[v.status - 1].text }}
+                    stateType[v.status - 1].text }}
                                 </p>
                             </div>
                             <div class="df aic jcsb">
@@ -54,7 +52,7 @@
                                     {{ hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
-                        hiddenUserAccount(v.add_username) }}
+                    hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
                             </div>
@@ -72,15 +70,15 @@
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
-                        stateType[v.status - 1].text }}
+                    stateType[v.status - 1].text }}
                                 </p>
                             </div>
                             <div class="df aic jcsb">
                                 <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方: {{
-                        hiddenUserAccount(v.add_username) }}
+                    hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
-                        v.add_username }}
+                    v.add_username }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
                             </div>
@@ -98,12 +96,12 @@
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
-                        stateType[v.status - 1].text }}
+                    stateType[v.status - 1].text }}
                                 </p>
                             </div>
                             <div class="df aic jcsb">
                                 <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方: {{
-                        hiddenUserAccount(v.add_username) }}
+                    hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
                                     v.add_username }}
@@ -261,6 +259,10 @@ p {
     background-color: #F7F7F7;
     min-height: 100vh;
     overflow: hidden;
+
+    .top {
+        z-index:3;
+    }
 
     .content {
         height: calc(100% - 60px);

@@ -22,7 +22,8 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
-                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="fw7 fz14 b2 mb10" v-if="v.memo == '复利池转出'">复利池转入</p>
+                <p class="fw7 fz14 b2 mb10" v-else>{{ v.memo }}</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
@@ -57,7 +58,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}转入</p> -->
-                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="fw7 fz14 b2 mb10">复利池转入</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
@@ -173,10 +174,6 @@ const params = ref({
   list_rows: 10,
   mome: ''
 })
-const param = ref({
-  var_page: 1,
-  list_rows: 10,
-})
 const typeList = ref([
   '',
   '认购',
@@ -196,6 +193,7 @@ const formData = ref<any>([])
 const changeType = (number: number) => {
   params.value.mome = typeArr[number]
   active.value = number
+  params.value.var_page = 1
 }
 const allRef = ref<any>(null)
 const fundRef = ref<any>(null)

@@ -9,14 +9,14 @@
             <p style="width: 50px;font-size: 12px;" class="b1"></p>
         </div>
         <div class="content mt20 p120 bsbb" ref="contentRef" v-if="formData.length" @scroll="loadMore">
-            <div class="item df fdc" v-for="(v, i) in formData" :key="i">
+            <div class="item df fdc" v-for="(v, i) in formData" :key="i" :class="v.level ? '' : 'active'">
                 <div class="df aic jcsb" style="border-bottom:1px dashed #f7f7f7;padding-bottom:20px">
                     <div class="df aic">
                         <img :src="v.url" style="width:30px">
                         <p class="fz12 b2 fw7">{{ hiddenUserAccount(v.username) }}</p>
                     </div>
-                    <div class="df aic jcsb ani">
-                        <img v-if="v.level" src="../../assets/images/lv1.png" style="width:18px;margin-right:5px">
+                    <div class="df aic jcsb ani" v-if="v.level">
+                        <img src="../../assets/images/lv1.png" style="width:18px;margin-right:5px">
                         <p class="fz12">V{{ v.level }}</p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ const pageAdd = async () => {
         if (!res.data.data.data.length) {
             showFailToast('到底了')
         } else {
-            formData.value = [ ...formData.value,...res.data.data.data]
+            formData.value = [...formData.value, ...res.data.data.data]
         }
     })
 }
@@ -152,6 +152,10 @@ p {
             box-sizing: border-box;
             margin-bottom: 20px;
 
+            &.active {
+                background: url('../../assets/images/lv0.png') no-repeat center;
+                background-size: cover;
+            }
 
             .ani {
                 background-color: #0359BD;

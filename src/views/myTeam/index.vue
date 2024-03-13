@@ -2,7 +2,7 @@
   <div class="wrap">
     <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
       :isShowReferenceHandler="isShowReferenceHandler"></Banner>
-    <div class="control df aic jcsb" :class="!hasTeam ? 'active' : ''">
+    <div class="control df aic jcsb" :class="!hasTeam ? 'active' : '' || formData.user_level == 0 ? 'active' : ''">
       <div class=" df aic">
         <!-- <img :src="levelArr[formData.user_level - 1]" style="width: 30px" /> -->
         <img :src="userInfo.avatar" style="width: 50px;height: 50px;border-radius: 50%;" />
@@ -67,7 +67,8 @@
           </div>
           <div class="yell df aic">
             <p>收益率 :</p>
-            <p v-if="hasTeam"> {{ formData.team_award_team }}%</p>
+            <!-- <p v-if="hasTeam"> {{ formData.team_award_team }}%</p> -->
+            <p v-if="hasTeam">{{ (formData.team_sum * 1).toFixed(2) }} %</p>
             <p class="fz12" v-else>0%</p>
           </div>
         </div>
