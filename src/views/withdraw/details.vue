@@ -3,7 +3,7 @@
         <van-sticky>
             <div class="top df aic jcsb p20 bsbb">
                 <div class="df aic">
-                    <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.go(-1)">
+                    <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.push('/home')">
                     <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
                 </div>
                 <p class="bl fz14 fw7">交易明细</p>
@@ -15,7 +15,7 @@
                 <van-tab title="全部" name=0>
                     <div class="all cont" ref="allRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
-                            @click="goInnerDetail(v.type, stateType[v.status].type, v.id)">
+                            @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
@@ -41,7 +41,7 @@
                 <van-tab title="转账" name=1>
                     <div class="transfer cont" ref="transRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
-                            @click="goInnerDetail(v.type, stateType[v.status].type, v.id)">
+                            @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
@@ -67,7 +67,7 @@
                 <van-tab title="充值" name=2>
                     <div class="recharge cont" ref="rechargeRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
-                            @click="goInnerDetail(v.type, stateType[v.status].type, v.id)">
+                            @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
@@ -93,7 +93,7 @@
                 <van-tab title="提现" name=3>
                     <div class="withdraw cont" ref="withdrawRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
-                            @click="goInnerDetail(v.type, stateType[v.status].type, v.id)">
+                            @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
@@ -162,9 +162,9 @@ const statusList = ref([
     '确认中'
 ])
 const stateType = ref([
-    { color: '#4CCD78', text: '已完成', type: 0 },
-    { color: '#FF0000', text: '失败', type: 1 },
-    { color: '#313C5B', text: '待确认', type: 2 },
+    { color: '#4CCD78', text: '已完成', type: 1 },
+    { color: '#FF0000', text: '失败', type: 2 },
+    { color: '#313C5B', text: '待确认', type: 3 },
 ])
 const goInnerDetail = (status: any, type: any, id: number) => {
     $router.push({
@@ -172,7 +172,8 @@ const goInnerDetail = (status: any, type: any, id: number) => {
         query: {
             status: status,//状态
             type: type,//类型
-            id: id
+            id: id,
+            active: active.value
         }
     })
 }

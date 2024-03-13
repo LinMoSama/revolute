@@ -2,9 +2,10 @@
   <div class="wrap">
     <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
       :isShowReferenceHandler="isShowReferenceHandler"></Banner>
-    <div class="control df aic jcsb">
-      <div class="df aic">
-        <img :src="levelArr[formData.user_level - 1]" style="width: 30px" />
+    <div class="control df aic jcsb" :class="!hasTeam ? 'active' : ''">
+      <div class=" df aic">
+        <!-- <img :src="levelArr[formData.user_level - 1]" style="width: 30px" /> -->
+        <img :src="userInfo.avatar" style="width: 50px;height: 50px;border-radius: 50%;" />
         <div class="ml20">
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
           <p class="gray">
@@ -88,33 +89,9 @@
     </div>
     <div class="content bsbb mt20">
       <van-tabs v-model:active="active" shrink @change="changeType">
-        <!-- <van-tab title="全部">
-          <div class="all">
-            <div class="item df fdc">
-              <div class="df aic jcsb">
-                <p class="fw7 fz14 b2 mb10">0x...sdf4</p>
-                <p class="fw7 fz14 b2 mb10">推荐奖励</p>
-              </div>
-              <div class="df aic jcsb">
-                <p class="fz14 gray">2024/02/28 15:00:00</p>
-                <p class="gray fz14">+10.00 USDT</p>
-              </div>
-            </div>
-            <div class="item df fdc">
-              <div class="df aic jcsb">
-                <p class="fw7 fz14 b2 mb10">0x...sdf4</p>
-                <p class="fw7 fz14 b2 mb10">团队奖励</p>
-              </div>
-              <div class="df aic jcsb">
-                <p class="fz14 gray">2024/02/28 15:00:00</p>
-                <p class="gray fz14">+10.00 USDT</p>
-              </div>
-            </div>
-          </div>
-        </van-tab> -->
         <van-tab title="推荐奖励" name=0>
           <div class="direct cont" ref="directRef" v-if="dataList.length" @scroll="loadMore">
-            <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
+            <div class="item df aic jcsb" v-for="( v, i ) in  dataList " :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">推荐奖励</p>
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
@@ -130,7 +107,7 @@
         </van-tab>
         <van-tab title="团队奖励" name=1>
           <div class="withdraw cont" ref="rewardRef" v-if="dataList.length" @scroll="loadMore">
-            <div class="item df aic jcsb" v-for="(v, i) in dataList" :key="i">
+            <div class="item df aic jcsb" v-for="( v, i ) in  dataList " :key="i">
               <div class="df fdc">
                 <p class="fw7 fz14 b2 mb10">团队奖励</p>
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
@@ -187,7 +164,7 @@ const changeType = (number: number) => {
   }
   active.value = number
 };
-
+const userInfo = ref<any>(JSON.parse(sessionStorage.getItem('userInfo')!))
 
 const directRef = ref<any>(null)
 const rewardRef = ref<any>(null)
@@ -286,34 +263,6 @@ onMounted(() => {
   background-color: #f7f7f7;
   overflow: auto;
 
-  // .banner {
-  //   display: flex;
-  //   width: 100%;
-  //   height: 168px;
-  //   padding: 0 25px;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   background-color: #005abd;
-
-  //   .log {
-  //     img {
-  //       width: 90px;
-  //       height: 50px;
-  //     }
-  //   }
-
-  //   .wallet_menu {
-  //     img {
-  //       width: 24px;
-  //       height: 24px;
-
-  //       &:first-child {
-  //         margin-right: 16px;
-  //       }
-  //     }
-  //   }
-  // }
-
   .control {
     padding: 15px;
     width: 325px;
@@ -322,6 +271,11 @@ onMounted(() => {
     border-radius: 10px 10px 10px 10px;
     transform: translateY(-45%);
     margin: 0 auto;
+
+    &.active {
+      background: url('../../assets/images/lv0.png') no-repeat center;
+      background-size: cover;
+    }
 
     p {
       font-size: 14px;

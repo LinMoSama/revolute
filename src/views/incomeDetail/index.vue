@@ -1,6 +1,7 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu"  :showSwiper="true" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
+      :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic fdc">
       <p class="c999 mb10">账户余额(USDT)</p>
       <p class="fw7 fz30">{{ (userInfo.money * 1).toFixed(2) }}</p>
@@ -20,11 +21,13 @@
           <div class="all cont" ref="allRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
+                <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
+                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7" v-if="v.memo == '购买理财'">{{ (v.money * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7" v-else>+{{ (v.money * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -36,11 +39,12 @@
           <div class="fund cont" ref="fundRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
+                <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
+                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">{{ (v.money * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -52,11 +56,12 @@
           <div class="income cont" ref="incomeRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
+                <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}转入</p> -->
+                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.money * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -68,11 +73,12 @@
           <div class="transfer cont" ref="recommendRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
+                <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
+                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.money * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -84,11 +90,12 @@
           <div class="transfer cont" ref="teamRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p>
-                <p class="gray fz14">{{ getHMS(v.createtime*1000) }}</p>
+                <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
+                <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
+                <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.mun * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ (v.money * 1).toFixed(2) }}USDT</p>
               </div>
             </div>
           </div>
@@ -146,11 +153,11 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
-import { getFinancialList, getTransferList, getUserTeam } from '../../service/api'
+import { getFinancialList, getTransferList, getUserTeam, getMoneyLog } from '../../service/api'
 import { getHMS, formatDecimal } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
@@ -164,7 +171,11 @@ const active = ref(0)
 const params = ref({
   var_page: 1,
   list_rows: 10,
-  award_type: 0
+  mome: ''
+})
+const param = ref({
+  var_page: 1,
+  list_rows: 10,
 })
 const typeList = ref([
   '',
@@ -174,9 +185,16 @@ const typeList = ref([
   '团队',
   '平级'
 ])
+const typeArr = reactive<any>([
+  '',
+  '购买理财',
+  '复利池转出',
+  '推荐奖励',
+  '团队奖励'
+])
 const formData = ref<any>([])
 const changeType = (number: number) => {
-  params.value.award_type = number
+  params.value.mome = typeArr[number]
   active.value = number
 }
 const allRef = ref<any>(null)
@@ -199,24 +217,29 @@ const loadMore = () => {
     pageAdd()
   }
 }
+
+
 const pageAdd = async () => {
   const nowPage = await ++params.value.var_page
-  getFinancialList({
+  getMoneyLog({
     var_page: nowPage,
     list_rows: params.value.list_rows,
-    award_type: params.value.award_type
+    mome: params.value.mome
   }).then((res: any) => {
     if (!res.data.data.data.length) {
       showFailToast('到底了')
     } else {
-      formData.value = [ ...formData.value,...res.data.data.data]
+      formData.value = [...formData.value, ...res.data.data.data]
     }
   })
 }
 
 
 const getData = () => {
-  getFinancialList(params.value).then((res: any) => {
+  // getFinancialList(params.value).then((res: any) => {
+  //   formData.value = res.data.data.data
+  // })
+  getMoneyLog(params.value).then((res: any) => {
     formData.value = res.data.data.data
   })
 }
@@ -231,7 +254,7 @@ const getTeamIncome = () => {
     }
   })
 }
-watch(() => params.value.award_type, () => {
+watch(() => params.value.mome, () => {
   getData()
 })
 

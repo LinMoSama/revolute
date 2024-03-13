@@ -2,7 +2,7 @@
     <div class="inner">
         <div class="top df aic jcsb p20 bsbb">
             <div class="df aic">
-                <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.go(-1)">
+                <img src="../../assets/images/lefticon.png" style="width:10px;" @click="goBack">
                 <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
             </div>
             <p class="bl fz14 fw7">{{ typeList[status - 1] }}详情</p>
@@ -14,7 +14,7 @@
                 <span>{{ typeList[status - 1] }}</span>
                 <span v-if="type !== 2">{{ detailText[type].type }}</span>
             </p>
-            <p class="mt20 fz14" style="color: #93989F;">{{ getHMS(detailInfo.createtime) }}</p>
+            <p class="mt20 fz14" style="color: #93989F;">{{ getHMS(detailInfo.createtime * 1000) }}</p>
             <p class="mt10 fz14" :style="{ color: detailText[type].color }"> {{ detailText[type].text }}</p>
         </div>
         <div class="detail p20 bsbb">
@@ -25,7 +25,7 @@
             </div>
             <p class="gray mb15">接受账户</p>
             <div class="df aic jcsb mb15 bb ">
-                <p class="b2">{{ detailInfo.to_addr }}</p>
+                <p class="b2">{{ hiddenUserAccount(detailInfo.to_addr) }}</p>
                 <p class="b1 fw7">+{{ fixedTwo(detailInfo.to_mun) }}USDT</p>
             </div>
             <p class="mt20 b1 fw7 mb20">详细付款</p>
@@ -54,6 +54,7 @@ const $router = useRouter()
 const $route = useRoute()
 const status = ref<any>($route.query.status)
 const type = ref<any>(0)
+const active = ref<any>(0)
 const id = ref<any>($route.query.id)
 const detailInfo = ref<any>({})
 const detailText = ref([
@@ -72,9 +73,18 @@ const getDetail = () => {
         detailInfo.value = res.data.data
     })
 }
+const goBack = () => {
+    $router.push({
+        path: 'withdrawdetail',
+        query: {
+            active: active.value
+        }
+    })
+}
 onMounted(() => {
     getDetail()
     type.value = $route.query.type
+    active.value = $route.query.active
 })
 </script>
 
