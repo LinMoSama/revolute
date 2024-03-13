@@ -1,5 +1,12 @@
-// const usdtContractAddress = '0x55d398326f99059ff775485246999027b3197955' // 正式
-const usdtContractAddress = '0x638ff0E03eA3cbBDDE58708827Bf237e80A4d600'// 测试
+const usdtContractAddressProduction =
+  '0x55d398326f99059ff775485246999027b3197955' // 正式
+const usdtContractAddressDevelopment =
+  '0x638ff0E03eA3cbBDDE58708827Bf237e80A4d600' // 测试
+const usdtContractAddress =
+  process.env.NODE_ENV === 'development'
+    ? usdtContractAddressDevelopment
+    : usdtContractAddressProduction
+
 export const usdtContractABI = [
   {
     inputs: [],

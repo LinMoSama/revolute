@@ -2,8 +2,11 @@ import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { showSuccessToast, showFailToast } from 'vant'
 import { errorCodeHandler } from '@/utils/errorCodeHandler'
-const server = axios.create({
-  baseURL: 'http://api.revolute.cc',
+let urlPro = 'http://api.revolute.cc'
+let urlDeve = 'http://192.168.2.177:7786'
+alert(process.env.NODE_ENV);
+const server = axios.create({ 
+  baseURL: process.env.NODE_ENV === 'development' ? urlDeve : urlPro,
   // baseURL: 'http://192.168.2.177:7786',
   timeout: 10000,
 })
