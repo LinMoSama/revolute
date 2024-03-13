@@ -1,6 +1,7 @@
 <template>
   <div class='wrap'>
-    <Banner :menu="menu"  :showSwiper="true" :showWallect="true" :defaults="true" :isShowReferenceHandler="isShowReferenceHandler"></Banner>
+    <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
+      :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
@@ -35,7 +36,10 @@
       <div class="btn" @click="confirmWithdraw">确定</div>
     </div>
     <Menu ref="menu"></Menu>
-    <van-loading v-if="showLoding" />
+    <!-- <van-loading v-if="showLoding" /> -->
+    <van-overlay :show="showLoding" @click="showLoding = false" class="df aic jcc">
+      <van-loading size="24px" vertical>加载中...</van-loading>
+    </van-overlay>
   </div>
 </template>
 
@@ -44,14 +48,14 @@ import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
-import { getWithdraw } from '@/service/api'
+import { getWithdraw, getUserInfo } from '@/service/api'
 import { useUserStore } from '../../stores/user'
 import clipboard from '../../utils/utils'
 import { fixedTwo } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import { computed } from 'vue';
 import useIndex from '@/hooks/useIndex'
-const {isShowReferenceHandler} = useIndex()
+const { isShowReferenceHandler } = useIndex()
 const userStore = useUserStore()
 // const userInfo = JSON.parse(userStore.userInfo)
 const userInfo = JSON.parse(sessionStorage.getItem('userInfo')!)
@@ -89,6 +93,14 @@ const instanceAmount = computed(() => {
   return (formData.value.mount - (formData.value.mount * (initInfo.transfer_myzc_fee / 100))).toFixed(2)
 })
 
+const getUser = () => {
+  showLoding.value = true
+  getUserInfo().then((res: any) => {
+    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
+  }).finally(() => {
+    showLoding.value = false
+  })
+}
 const confirmWithdraw = () => {
   if (!formData.value.mount) {
     showFailToast('请检查转账数量的输入')
@@ -105,10 +117,12 @@ const confirmWithdraw = () => {
     } else {
       showFailToast(res.data.msg)
     }
+    getUser()
     showLoding.value = false
   }).finally(() => {
     showLoding.value = false
   })
+  formData.value.mount = ''
 }
 </script>
 

@@ -36,7 +36,9 @@
       <div class="btn" @click="transferTo">确定</div>
     </div>
     <Menu ref="menu"></Menu>
-    <van-loading v-if="showLoding" />
+    <van-overlay :show="showLoding" @click="showLoding = false" class="df aic jcc">
+      <van-loading size="24px" vertical>加载中...</van-loading>
+    </van-overlay>
   </div>
 </template>
 
@@ -45,7 +47,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
-import { getTransferTo, getInit } from '../../service/api'
+import { getTransferTo, getInit, getUserInfo } from '../../service/api'
 import { showSuccessToast, showFailToast } from 'vant';
 import { useUserStore } from '../../stores/user'
 import clipboard from '../../utils/utils'
@@ -55,11 +57,7 @@ const userStore = useUserStore()
 const menu = ref()
 const showLoding = ref(false)
 const $router = useRouter()
-
-// const userInfo = JSON.parse(userStore.userInfo)
 const userInfo = JSON.parse(sessionStorage.getItem('userInfo')!)
-
-// const initInfo = JSON.parse(userStore.initInfo)
 const initInfo = JSON.parse(sessionStorage.getItem('initInfo') || '{}')
 
 const formData = ref<any>({
@@ -88,6 +86,15 @@ watch(() => formData.value.to_username, () => {
     flag.value = false
   }
 })
+
+const getUser = () => {
+  showLoding.value = true
+  getUserInfo().then((res: any) => {
+    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
+  }).finally(() => {
+    showLoding.value = false
+  })
+}
 const transferTo = () => {
   if (!formData.value.mount) {
     showFailToast('请检查转账数量的输入')
@@ -99,20 +106,17 @@ const transferTo = () => {
   }
   showLoding.value = true
   getTransferTo(formData.value).then((res: any) => {
-    if (res.data.data.code) {
+    if (res.data.code) {
       showSuccessToast('转账成功')
     } else {
       showFailToast(res.data.msg)
     }
+    getUser()
     showLoding.value = false
-    for (let i in formData) {
-      formData.value[i] = ''
-    }
+    formData.value.mount = ''
+    formData.value.to_username = ''
   }).finally(() => {
     showLoding.value = false
-    for (let i in formData) {
-      formData.value[i] = ''
-    }
   })
 }
 
