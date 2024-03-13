@@ -8,12 +8,12 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="https://twitter.com/Revolute_DAM">
           <img src="../assets/images/footer_icon1.png" alt="" />
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="https://t.me/Revolute_Channel">
           <img src="../assets/images/footer_icon2.png" alt="" />
         </a>
       </li>
