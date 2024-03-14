@@ -12,7 +12,7 @@
     <div class="content bsbb">
       <p class="fz18 co fw7 mb20">接收方</p>
       <div class="df aic jcsb bb">
-        <input type="text" placeholder="请输入接收方地址" v-model="formData.to_username">
+        <input type="text" placeholder="请输入接收方地址" v-model="formData.to_username" style="width: 100%;">
         <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;"
           @click="copyAdd(formData.to_username, $event)">
         <img v-else src="../../assets/images/frame0.png" style="width: 26px;">
@@ -50,7 +50,7 @@ import Banner from '@/components/Banner.vue'
 import { getTransferTo, getInit, getUserInfo } from '../../service/api'
 import { showSuccessToast, showFailToast } from 'vant';
 import { useUserStore } from '../../stores/user'
-import clipboard,{formatDecimal} from '../../utils/utils'
+import clipboard, { formatDecimal } from '../../utils/utils'
 import useIndex from '@/hooks/useIndex'
 const { isShowReferenceHandler } = useIndex()
 const userStore = useUserStore()
