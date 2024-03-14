@@ -36,6 +36,7 @@ const router = useRouter()
 const {
   meta: { title },
 } = useRoute()
+document.documentElement.scrollTop = 0
 // getAwardListHandler()
 // const {
 //   awardList,
