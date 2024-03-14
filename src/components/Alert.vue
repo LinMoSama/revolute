@@ -101,7 +101,7 @@ const props = withDefaults(
     hiddenInput?: boolean
     tipTextShow?: boolean
     zhuanchu?: boolean
-    userInfo?: any,
+    userInfo?: any
   }>(),
   {
     hiddenCancel: false,
@@ -168,7 +168,7 @@ function max() {
   }
 }
 defineExpose({
-  recommenderAddress
+  recommenderAddress,
 })
 </script>
 

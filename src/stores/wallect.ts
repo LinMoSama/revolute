@@ -16,8 +16,20 @@ export default defineStore('wallect', () => {
     try {
       if (!isInstall) return showFailToast('Metamask 未安装')
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-      sessionStorage.setItem('account', accounts[0])
+      console.log(accounts[0], 'accounts[0]')
+
       account.value = accounts[0]
+      // 签名消息
+      const message = `Welcome to revolute!\nThis signature request is to verify that you own the wallet that is trying to log in to revolute.\n\nWallet address:\n${account.value}\n\nThis request will not trigger blockchain transactions and cost any gas fees.`
+      const messageHex = Web3.utils.utf8ToHex(message)
+      const res = await ethereum.request({
+        method: 'personal_sign',
+        params: [messageHex, account.value],
+      })
+      console.log(res)
+      console.log(res.code)
+      sessionStorage.setItem('signRes', res)
+      sessionStorage.setItem('account', accounts[0])
       const {
         data: {
           data: { userinfo },
@@ -25,8 +37,6 @@ export default defineStore('wallect', () => {
       } = await login({
         account: accounts[0],
       })
-      console.log(accounts[0], 'accounts[0]')
-      console.log('account', accounts[0])
       userStore.userInfo = userinfo
       userStore.token = userinfo.token
       sessionStorage.setItem('userInfo', JSON.stringify(userinfo))

@@ -166,7 +166,17 @@ button {
 
   color: inherit;
 }
+/* 谷歌 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
 
+/* 火狐 */
+input[type='number'] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
 select {
   text-indent: 0.01px;
   text-overflow: '';
@@ -174,8 +184,8 @@ select {
   border: 0;
   border-radius: 0;
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
 }
 select::-ms-expand {
   display: none;
@@ -186,7 +196,6 @@ pre {
   font-family: monospace, monospace;
   font-size: 1em;
 }
-
 
 .bsbb {
   box-sizing: border-box;
@@ -255,7 +264,6 @@ pre {
 .fw4 {
   font-weight: 400;
 }
-
 
 .mt5 {
   margin-top: 5px;
@@ -528,12 +536,12 @@ pre {
 .red {
   color: red;
 }
-.gray{
-  color:#93989F
+.gray {
+  color: #93989f;
 }
-.b1{
-  color: #0359BD;
+.b1 {
+  color: #0359bd;
 }
-.b2{
-  color: #313C5B;
+.b2 {
+  color: #313c5b;
 }
