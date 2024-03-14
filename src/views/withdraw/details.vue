@@ -15,7 +15,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
+                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
@@ -41,7 +41,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
+                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
@@ -67,7 +67,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
+                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
@@ -93,7 +93,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ (v.mun * 1).toFixed(2) }}
+                                <p style="color: #0E1446;" class="fw7 fz14">USDT : {{ formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
                                 <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
@@ -123,7 +123,7 @@
 import { onMounted, ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { getTransferList } from '../../service/api'
-import { getHMS, hiddenUserAccount } from '../../utils/utils'
+import { getHMS, hiddenUserAccount,formatDecimal } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 const $router = useRouter()
 const $route = useRoute()

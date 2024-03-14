@@ -5,7 +5,7 @@
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
-        <p class="fw7">{{ (userInfo.money * 1).toFixed(2) }}</p>
+        <p class="fw7">{{ formatDecimal(userInfo.money * 1) }}</p>
       </div>
       <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="goDetailList">
     </div>
@@ -25,7 +25,7 @@
       <div class="df fdc gray li">
         <div class="df aic jcsb">
           <p>手续费</p>
-          <p>{{ fixedTwo(initInfo.transfer_myzc_fee) }}%</p>
+          <p>{{ formatDecimal(initInfo.transfer_myzc_fee) }}%</p>
         </div>
         <div class="df aic jcsb">
           <p>实际到账</p>
@@ -50,7 +50,7 @@ import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { getWithdraw, getUserInfo } from '@/service/api'
 import { useUserStore } from '../../stores/user'
-import clipboard from '../../utils/utils'
+import clipboard,{formatDecimal} from '../../utils/utils'
 import { fixedTwo } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import { computed } from 'vue';

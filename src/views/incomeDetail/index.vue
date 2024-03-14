@@ -4,11 +4,11 @@
       :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic fdc">
       <p class="c999 mb10">账户余额(USDT)</p>
-      <p class="fw7 fz30">{{ (userInfo.money * 1).toFixed(2) }}</p>
+      <p class="fw7 fz30">{{ formatDecimal(userInfo.money * 1) }}</p>
       <p class="fz14 gray mt20">
         <span>团队累积收益:</span>
         <span v-if="!noTeam">-- USDT</span>
-        <span v-else>{{ (teamInfo.team_sum * 1).toFixed(2) }}</span>
+        <span v-else>{{ formatDecimal(teamInfo.team_sum * 1) }}</span>
       </p>
       <div class="btns df aic jcse">
         <div class="with" @click="$router.push('/withdraw')">提现</div>
@@ -27,8 +27,8 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7" v-if="v.memo == '购买理财'">{{ (v.money * 1).toFixed(2) }}USDT</p>
-                <p class="fz16 b1 fw7" v-else>+{{ (v.money * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7" v-if="v.memo == '购买理财'">{{ formatDecimal(v.money * 1) }}USDT</p>
+                <p class="fz16 b1 fw7" v-else>+{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">{{ (v.money * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.money * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.money * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ (v.money * 1).toFixed(2) }}USDT</p>
+                <p class="fz16 b1 fw7">+{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>

@@ -28,7 +28,7 @@
                     <p style="color:#f7f7f7">|</p>
                     <div class="df fdc aic" style="width:50%">
                         <p class="gray fz12" style="padding-bottom:20px">团队业绩 (USDT)</p>
-                        <p class="b2 fz14 fw7">{{ (v.team_fic * 1).toFixed(2) }}</p>
+                        <p class="b2 fz14 fw7">{{ formatDecimal(v.team_fic * 1) }}</p>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
 import { onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { getUserRecommendList } from '../../service/api'
-import { hiddenUserAccount, getHMS } from '../../utils/utils'
+import { hiddenUserAccount, getHMS,formatDecimal } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 const $router = useRouter()
 const $route = useRoute()

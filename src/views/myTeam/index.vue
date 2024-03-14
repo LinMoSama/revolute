@@ -10,7 +10,7 @@
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
           <p class="gray">
             <span>团队收益率:</span>
-            <span v-if="hasTeam"> {{ (formData.team_sum * 1).toFixed(2) }} %</span>
+            <span v-if="hasTeam"> {{ formatDecimal(formData.team_sum * 1)}} %</span>
             <span v-else>-- %</span>
           </p>
         </div>
@@ -68,20 +68,20 @@
           <div class="yell df aic">
             <p>收益率 :</p>
             <!-- <p v-if="hasTeam"> {{ formData.team_award_team }}%</p> -->
-            <p v-if="hasTeam">{{ (formData.team_sum * 1).toFixed(2) }} %</p>
+            <p v-if="hasTeam">{{ formatDecimal(formData.team_sum * 1) }} %</p>
             <p class="fz12" v-else>0%</p>
           </div>
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
             <p class="mb20">直推业绩 (USDT)</p>
-            <p class="fw7 fz16" v-if="hasTeam">{{ (formData.recommend_sum * 1).toFixed(2) }}</p>
+            <p class="fw7 fz16" v-if="hasTeam">{{ formatDecimal(formData.recommend_sum * 1) }}</p>
             <p class="fz12" v-else>--</p>
           </div>
           <div class="df fdc">
             <p class="mb20">团队业绩 (USDT)</p>
             <p class="fw7 fz16" v-if="hasTeam">
-              {{ (formData.team_finc_sum * 1).toFixed(2) }}
+              {{ formatDecimal(formData.team_finc_sum * 1) }}
             </p>
             <p class="fz12" v-else>--</p>
           </div>
@@ -98,7 +98,7 @@
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
-                <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
+                <p class="b1 fz14">+{{ formatDecimal(v.mun * 1) }} USDT</p>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
-                <p class="b1 fz14">+{{ (v.mun * 1).toFixed(2) }} USDT</p>
+                <p class="b1 fz14">+{{ formatDecimal(v.mun * 1) }} USDT</p>
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@ import { useRouter } from "vue-router";
 import Menu from "@/components/Menu.vue";
 import Banner from "@/components/Banner.vue";
 import { getUserTeam, getFinancialList } from "../../service/api";
-import { hiddenUserAccount, getHMS } from "../../utils/utils";
+import { hiddenUserAccount, getHMS,formatDecimal } from "../../utils/utils";
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
 const { isShowReferenceHandler } = useIndex()

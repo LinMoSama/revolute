@@ -5,7 +5,7 @@
     <div class="control df aic jcsb">
       <div class="df fdc">
         <p class="c999 mb10">账户余额</p>
-        <p class="fw7">{{ (userInfo.money * 1).toFixed(2) }}</p>
+        <p class="fw7">{{ formatDecimal(userInfo.money * 1) }}</p>
       </div>
       <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="goDetailList">
     </div>
@@ -50,7 +50,7 @@ import Banner from '@/components/Banner.vue'
 import { getTransferTo, getInit, getUserInfo } from '../../service/api'
 import { showSuccessToast, showFailToast } from 'vant';
 import { useUserStore } from '../../stores/user'
-import clipboard from '../../utils/utils'
+import clipboard,{formatDecimal} from '../../utils/utils'
 import useIndex from '@/hooks/useIndex'
 const { isShowReferenceHandler } = useIndex()
 const userStore = useUserStore()
