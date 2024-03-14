@@ -10,7 +10,8 @@
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
           <p class="gray">
             <span>团队收益率:</span>
-            <span v-if="hasTeam"> {{ formatDecimal(formData.team_sum * 1)}} %</span>
+            <!-- <span v-if="hasTeam"> {{ formatDecimal(formData.team_sum * 1)}} %</span> -->
+            <span v-if="hasTeam"> {{ formatDecimal(formData.team_award_team * 1)}} %</span>
             <span v-else>-- %</span>
           </p>
         </div>
@@ -68,7 +69,7 @@
           <div class="yell df aic">
             <p>收益率 :</p>
             <!-- <p v-if="hasTeam"> {{ formData.team_award_team }}%</p> -->
-            <p v-if="hasTeam">{{ formatDecimal(formData.team_sum * 1) }} %</p>
+            <p v-if="hasTeam">{{ formatDecimal(formData.team_award_team * 1) }} %</p>
             <p class="fz12" v-else>0%</p>
           </div>
         </div>
