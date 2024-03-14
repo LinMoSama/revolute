@@ -41,7 +41,15 @@
               <span>{{ formtTime(item.createtime) }}</span>
             </div>
             <div class="right">
-              <p>{{ titleComputed }}</p>
+              <p>
+                {{
+                  item.type === 1
+                    ? '认购收益'
+                    : item.type === 2
+                    ? '复利收益'
+                    : '推荐收益'
+                }}
+              </p>
               <span>+{{ formatDecimal(item.mun) }}USDT</span>
             </div>
           </div>
@@ -210,17 +218,24 @@ function scrollLoading(e: any) {
     }
   }
 }
-const titleComputed = computed(() => {
-  let title = ''
-  awardList.value.forEach((ele: any) => {
-    if (ele.type === 1) {
-      title = '认购收益'
-    } else if (ele.type === 2) {
-      title = '复利收益'
-    }
-  })
-  return title
-})
+document.documentElement.scrollTop = 0
+// const titleComputed = () => {
+//   let titleCom = ref()
+//   awardList.value.forEach((ele: any) => {
+//     console.log(ele)
+//     if (ele.type === 1) {
+//       titleCom.value = '认购收益'
+//     }
+//     if (ele.type === 2) {
+//       titleCom.value = '复利收益'
+//     }
+//     if (ele.type === 3) {
+//       titleCom.value = '推荐奖励'
+//     }
+//   })
+//   console.log(titleCom)
+//   return titleCom.value
+// }
 //获取奖励明细
 async function getAwardListHandler(type: number = 2, flag: boolean = false) {
   const res = await getAwardList({
@@ -230,8 +245,9 @@ async function getAwardListHandler(type: number = 2, flag: boolean = false) {
   })
 
   if (type === 0) {
-    totalList.value = res.data.data.total
-    awardList.value = [...awardList.value, ...res.data.data.data]
+    let list = res.data.data.data.filter((item: any) => item.type !== 3)
+    totalList.value = list.length
+    awardList.value = [...awardList.value, ...list]
   }
   if (type === 1) {
     totalList.value = res.data.data.total
@@ -363,6 +379,8 @@ function TransferOutFailHandler() {
   background-color: #f7f7f7;
   overflow: hidden;
   .no_data {
+    margin-top: 20px;
+    font-size: 16px;
     text-align: center;
   }
   .tabs {

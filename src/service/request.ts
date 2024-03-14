@@ -19,6 +19,7 @@ server.interceptors.request.use(
     // const token = $userStore.token
     const token = sessionStorage.getItem('token')
     // const token = '8e7886ea-bdc9-4094-97b1-c3ccd61acc22'
+    // const token = 'f3ac5f5e-7125-499f-8f6e-89bcc10d7bb0'
     if (token) {
       config.headers!.token = token
     }

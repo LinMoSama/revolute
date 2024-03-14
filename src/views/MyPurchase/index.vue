@@ -9,7 +9,7 @@
       <div class="title">Compound Pool</div>
       <div class="tips">
         <div class="left">
-          <div class="tip">稳健增值，灵活安全，选择余额宝，财富守护无忧！</div>
+          <div class="tip">稳健增值，灵活安全，选择复利宝，财富守护无忧！</div>
           <div class="more" @click="goDetail">More</div>
         </div>
         <div class="right">
@@ -64,7 +64,7 @@ function scrollLoading(e: any) {
     })
   }
 }
-
+document.documentElement.scrollTop = 0
 getUserFinancialList({
   var_page: page.value,
   list_rows: 5,
