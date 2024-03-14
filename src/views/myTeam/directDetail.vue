@@ -12,7 +12,7 @@
             <div class="item df fdc" v-for="(v, i) in formData" :key="i" :class="v.level ? '' : 'active'">
                 <div class="df aic jcsb" style="border-bottom:1px dashed #f7f7f7;padding-bottom:20px">
                     <div class="df aic">
-                        <img :src="v.url" style="width:30px">
+                        <img :src="v.avatar" style="width:30px;border-radius: 50%;margin-right:5px">
                         <p class="fz12 b2 fw7">{{ hiddenUserAccount(v.username) }}</p>
                     </div>
                     <div class="df aic jcsb ani" v-if="v.level">
