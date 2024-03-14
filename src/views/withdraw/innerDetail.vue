@@ -22,7 +22,11 @@
       <p style="width: 40px"></p>
     </div>
     <div class="content df aic jcsb fdc">
-      <img :src="detailText[type].icon" style="width: 80px" />
+      <!-- <img :src="detailText[type].icon" style="width: 80px" /> -->
+      <img src="../../assets/images/succ.png" style="width: 80px" v-show="type==1"/>
+      <img src="../../assets/images/fail.png" style="width: 80px" v-show="type==2"/>
+      <img src="../../assets/images/default.png" style="width: 80px" v-show="type==3"/>
+
       <p class="mt20 fz14" style="color: #0e1446">
         <span>{{ typeList[status - 1] }}</span>
         <span v-if="type !== 2">{{ detailText[type].type }}</span>
