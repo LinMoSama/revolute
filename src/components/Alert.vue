@@ -219,6 +219,7 @@ defineExpose({
       text-align: center;
       font-weight: 400;
       font-size: 12px;
+      line-height: 20px;
       color: rgba(49, 60, 91, 0.6);
     }
 
@@ -289,8 +290,8 @@ defineExpose({
     .input2 {
       input {
         width: 100%;
-        font-size: 12px;
-        padding-left: 0px;
+        font-size: 10px;
+        padding-left: 15px;
         color: rgba(49, 60, 91, 0.3);
       }
     }
