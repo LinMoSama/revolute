@@ -121,7 +121,7 @@ const transferTo = () => {
 }
 
 const instanceAmount = computed(() => {
-  return (formData.value.mount - (formData.value.mount * (initInfo.transfer_fee / 100))).toFixed(2)
+  return formatDecimal(formData.value.mount - (formData.value.mount * (initInfo.transfer_fee / 100)))
 })
 onMounted(async () => {
 })

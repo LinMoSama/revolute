@@ -50,7 +50,7 @@ import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
 import { getWithdraw, getUserInfo } from '@/service/api'
 import { useUserStore } from '../../stores/user'
-import clipboard,{formatDecimal} from '../../utils/utils'
+import clipboard, { formatDecimal } from '../../utils/utils'
 import { fixedTwo } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import { computed } from 'vue';
@@ -90,7 +90,7 @@ watch(() => formData.value.to_username, () => {
   }
 })
 const instanceAmount = computed(() => {
-  return (formData.value.mount - (formData.value.mount * (initInfo.transfer_myzc_fee / 100))).toFixed(2)
+  return formatDecimal(formData.value.mount - (formData.value.mount * (initInfo.transfer_myzc_fee / 100)))
 })
 
 const getUser = () => {

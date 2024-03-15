@@ -28,7 +28,7 @@
               </div>
               <div class="df aic jcsb">
                 <p class="fz16 b1 fw7" v-if="v.memo == '购买理财'">{{ formatDecimal(v.money * 1) }}USDT</p>
-                <p class="fz16 b1 fw7" v-else>+{{ formatDecimal(v.money * 1) }}USDT</p>
+                <p class="fz16 b1 fw7" v-else>{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -40,7 +40,6 @@
           <div class="fund cont" ref="fundRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
-                <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
                 <p class="fw7 fz14 b2 mb10">{{ v.memo }}</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
@@ -62,7 +61,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ formatDecimal(v.money * 1) }}USDT</p>
+                <p class="fz16 b1 fw7">{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -79,7 +78,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ formatDecimal(v.money * 1) }}USDT</p>
+                <p class="fz16 b1 fw7">{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>
@@ -96,7 +95,7 @@
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7">+{{ formatDecimal(v.money * 1) }}USDT</p>
+                <p class="fz16 b1 fw7">{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
           </div>

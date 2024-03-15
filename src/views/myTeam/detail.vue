@@ -48,6 +48,8 @@
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
+                                <p v-if="v.is_youxiao" class="fz12" style="color:#5FD788">有效用户</p>
+                                <p v-else class="fz12" style="color: #93989F;">无效用户</p>
                             </div>
                         </div>
                     </div>
@@ -66,6 +68,8 @@
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
+                                <p v-if="v.is_youxiao" class="fz12" style="color:#5FD788">有效用户</p>
+                                <p v-else class="fz12" style="color: #93989F;">无效用户</p>
                             </div>
                         </div>
                     </div>
