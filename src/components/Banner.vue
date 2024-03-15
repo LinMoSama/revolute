@@ -51,6 +51,16 @@
       </div>
     </div>
   </div>
+  <van-overlay :show="wallectStore.loading">
+    <div class="wrapper">
+      <van-loading vertical color="#fff">
+        <template #icon>
+          <van-icon name="star-o" size="30" />
+        </template>
+        操作中...
+      </van-loading>
+    </div>
+  </van-overlay>
 </template>
 
 <script setup lang="ts">
@@ -78,6 +88,9 @@ function langChange() {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  margin-top: 50%;
+}
 .my-swipe {
   position: relative;
   width: 100%;
