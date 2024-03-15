@@ -5,6 +5,8 @@ import { showFailToast } from 'vant'
 import { login } from '@/service/api'
 import { useUserStore } from './user'
 export default defineStore('wallect', () => {
+  let loading = ref(false)
+
   const userStore = useUserStore()
   const isInstall =
     ref(sessionStorage.getItem('isInstall') === 'false' ? false : true) ||
@@ -15,7 +17,9 @@ export default defineStore('wallect', () => {
   async function ConnectTheWallet() {
     try {
       if (!isInstall) return showFailToast('Metamask 未安装')
+      loading.value = true
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+
       console.log(accounts[0], 'accounts[0]')
 
       account.value = accounts[0]
@@ -28,8 +32,7 @@ export default defineStore('wallect', () => {
       })
       console.log(res)
       console.log(res.code)
-      sessionStorage.setItem('signRes', res)
-      sessionStorage.setItem('account', accounts[0])
+
       const {
         data: {
           data: { userinfo },
@@ -37,12 +40,16 @@ export default defineStore('wallect', () => {
       } = await login({
         account: accounts[0],
       })
+      loading.value = false
       userStore.userInfo = userinfo
       userStore.token = userinfo.token
       sessionStorage.setItem('userInfo', JSON.stringify(userinfo))
       sessionStorage.setItem('token', userinfo.token)
+      sessionStorage.setItem('signRes', res)
+      sessionStorage.setItem('account', accounts[0])
       window.location.reload()
     } catch (error: any) {
+      loading.value = false
       console.log(error)
       if (error.code === 4001) {
         showFailToast('拒绝了访问权限')
@@ -100,5 +107,5 @@ export default defineStore('wallect', () => {
       console.error('Error connecting to MetaMask:', error)
     }
   }
-  return { ConnectTheWallet, account, isInstall, connectToMetaMask }
+  return { ConnectTheWallet, account, isInstall, connectToMetaMask, loading }
 })

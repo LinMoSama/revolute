@@ -12,10 +12,10 @@
     <div class="content bsbb">
       <p class="fz18 co fw7 mb20">接收方</p>
       <div class="df aic jcsb bb">
-        <input type="text" placeholder="请输入接收方地址" v-model="formData.to_username">
-        <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;"
+        <input type="text"  :value="formData.to_username" disabled>
+        <!-- <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;"
           @click="copyAdd(formData.to_username, $event)">
-        <img v-else src="../../assets/images/frame0.png" style="width: 26px;">
+        <img v-else src="../../assets/images/frame0.png" style="width: 26px;"> -->
       </div>
       <p class="fz18 co fw7 mt20">提现金额</p>
       <p class="fz14 mt10" style="color: #B7BAC2;">您需要提现多少USDT?</p>

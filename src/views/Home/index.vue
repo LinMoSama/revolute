@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import Footer from '@/components/Footer.vue'
 // import SlideShow from '@/components/SlideShow.vue'
@@ -165,6 +165,7 @@ const {
   cancel,
   max,
 } = useIndex()
+
 const menu = ref()
 const awardList = ref({})
 const getInfo = () => {
