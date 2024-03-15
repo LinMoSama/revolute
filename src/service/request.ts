@@ -2,13 +2,13 @@ import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { showSuccessToast, showFailToast } from 'vant'
 import { errorCodeHandler } from '@/utils/errorCodeHandler'
+import router from '@/router/index';
 let urlPro = 'https://api.revolute.cc'
 let urlDeve = 'http://192.168.2.177:7786'
-// alert(process.env.NODE_ENV);
-const server = axios.create({ 
+const server = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? urlDeve : urlPro,
   // baseURL: 'http://192.168.2.177:7786',
-  // baseURL: 'http://api.revolute.cc',
+  // baseURL: 'https://api.revolute.cc',
   timeout: 10000,
 })
 
@@ -50,8 +50,7 @@ server.interceptors.response.use(
     ) {
       showFailToast('登录失效，请重新登录')
       sessionStorage.clear()
-      window.location.href = '/home'
-      // window.location.reload()
+      router.push('/home')
     }
     let { status } = err.response
     // errorCodeHandler(status)
