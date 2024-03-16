@@ -12,7 +12,7 @@
           Back
         </p>
       </div>
-      <p class="bl fz14 fw7">{{ typeList[status - 1] }}详情</p>
+      <p class="bl fz14 fw7">{{ typeList[status - 1] }} details</p>
       <p style="width: 40px"></p>
     </div>
     <div v-if="flag">
@@ -37,33 +37,33 @@
         </p>
       </div>
       <div class="detail p20 bsbb">
-        <p class="gray mb15">发送账户</p>
+        <p class="gray mb15">Send account</p>
         <div class="df aic jcsb mb15 bb">
           <p class="b2">{{ hiddenUserAccount(detailInfo.from_addr) }}</p>
           <p class="b1 fw7">-{{ formatDecimal(detailInfo.mun) }}USDT</p>
         </div>
-        <p class="gray mb15">接受账户</p>
+        <p class="gray mb15">Accept account</p>
         <div class="df aic jcsb mb15 bb">
           <p class="b2">{{ hiddenUserAccount(detailInfo.to_addr) }}</p>
           <p class="b1 fw7">+{{ formatDecimal(detailInfo.to_mun) }}USDT</p>
         </div>
-        <p class="mt20 b1 fw7 mb20">详细付款</p>
+        <p class="mt20 b1 fw7 mb20">Detailed payment</p>
         <div class="df aic jcsb mb15">
-          <p class="gray">提现金额</p>
+          <p class="gray">Withdrawal amount</p>
           <p>{{ formatDecimal(detailInfo.mun) }}USDT</p>
         </div>
         <div class="df aic jcsb mb15">
-          <p class="gray">手续费</p>
+          <p class="gray">Commission</p>
           <p>{{ formatDecimal(detailInfo.fee) }}</p>
         </div>
         <div class="df aic jcsb mb15">
-          <p class="b2">实际到账</p>
+          <p class="b2">Actual receipt</p>
           <p class="b2 fw7">{{ formatDecimal(detailInfo.to_mun) }}USDT</p>
         </div>
       </div>
     </div>
     <div class="df aic jcc fz16" style="height: 60vh;">
-      搜索数据出错 请重试...
+      Search data error, please try again...
     </div>
   </div>
 </template>
@@ -84,24 +84,24 @@ const detailText = ref([
   {},
   {
     icon: '../../assets/images/succ.png',
-    text: '已完成',
-    type: '成功',
+    text: 'Completed',
+    type: 'success',
     color: '#4CCD78',
   },
   {
     icon: '../../assets/images/fail.png',
-    text: '失败',
-    type: '失败',
+    text: 'Fail',
+    type: 'Fail',
     color: '#FF0000',
   },
   {
     icon: '../../assets/images/default.png',
-    text: '待确认',
-    type: '确认中',
+    text: 'Confirming',
+    type: 'Confirming',
     color: '#313C5B',
   },
 ])
-const typeList = ref(['转账', '充值', '提现'])
+const typeList = ref(['Transfer ', 'Recharge ', 'Withdraw '])
 const flag = ref(false)
 const getDetail = () => {
   getIdToSearch({ transfer_id: id.value }).then((res: any) => {

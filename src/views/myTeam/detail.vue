@@ -5,17 +5,17 @@
                 <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.go(-1)">
                 <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
             </div>
-            <p class="bl fz14 fw7">团队成员</p>
-            <p style="width: 50px;font-size: 12px;" class="b1" @click="$router.push('/teamDirectDetail')">直推详细</p>
+            <p class="bl fz14 fw7">Team members</p>
+            <p style="width: 50px;font-size: 12px;" class="b1" @click="$router.push('/teamDirectDetail')">Detail</p>
         </div>
         <div class="p120 bsbb box">
             <div class="boxs df aic jcsb">
                 <div class="df fdc">
-                    <p style="margin-bottom: 20px;font-size: 14px;">直推人数 (人)</p>
+                    <p style="margin-bottom: 20px;font-size: 14px;">Number of direct referrals (person)</p>
                     <p class="fw7 fz16 mt20">{{ formData.recommend_count }}</p>
                 </div>
                 <div class="df fdc">
-                    <p style="margin-bottom: 20px;font-size: 14px;">间推人数 (人)</p>
+                    <p style="margin-bottom: 20px;font-size: 14px;">Number of referrals (person)</p>
                     <p class="fw7 fz16">{{ formData.team_coun }}</p>
                 </div>
             </div>
@@ -37,44 +37,44 @@
                         </div>
                     </div>
                 </van-tab> -->
-                <van-tab title="直推人员" name=0>
+                <van-tab title="Direct promotion" name=0>
                     <div class="direct cont" ref="directRef" v-if="recommendList.length" @scroll="loadMore">
                         <div class="item df fdc" v-for="(v, i) in recommendList" :key="i">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">
                                     <span>{{ hiddenUserAccount(v.username) }}</span>
                                 </p>
-                                <p class="fw7 fz14 b2">直推人员</p>
+                                <p class="fw7 fz14 b2">Direct promotion personnel</p>
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
-                                <p v-if="v.is_youxiao" class="fz12" style="color:#5FD788">有效用户</p>
-                                <p v-else class="fz12" style="color: #93989F;">无效用户</p>
+                                <p v-if="v.is_youxiao" class="fz12" style="color:#5FD788">valid user</p>
+                                <p v-else class="fz12" style="color: #93989F;">Invalid user</p>
                             </div>
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        暂无数据
+                        There is currently no data available
                     </div>
                 </van-tab>
-                <van-tab title="间推人员" name=1>
+                <van-tab title="Interpersonal promotion" name=1>
                     <div class="withdraw cont" ref="teamRef" v-if="teamList.length" @scroll="loadMore">
                         <div class="item df fdc" v-for="(v, i) in teamList" :key="i">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">
                                     <span>{{ hiddenUserAccount(v.username) }}</span>
                                 </p>
-                                <p class="fw7 fz14 b2">间推人员</p>
+                                <p class="fw7 fz14 b2">Interpersonal promotion personnel</p>
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
-                                <p v-if="v.is_youxiao" class="fz12" style="color:#5FD788">有效用户</p>
-                                <p v-else class="fz12" style="color: #93989F;">无效用户</p>
+                                <p v-if="v.is_youxiao" class="fz12" style="color:#5FD788">valid user</p>
+                                <p v-else class="fz12" style="color: #93989F;">Invalid user</p>
                             </div>
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        暂无数据
+                        There is currently no data available
                     </div>
                 </van-tab>
             </van-tabs>
@@ -125,7 +125,7 @@ const pageAdd = async () => {
         list_rows: params.value.list_rows,
     }).then((res: any) => {
         if (!res.data.data.data.length) {
-            showFailToast('到底了')
+            showFailToast('What the hell is going on')
         } else {
             recommendList.value = [...recommendList.value, ...res.data.data.data]
             teamList.value = [...teamList.value, ...res.data.data.data]

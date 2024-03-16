@@ -6,7 +6,7 @@
       <div class="df aic mt10">
         <img src="../../assets/images/withdrawicon.png" style="width: 60px;">
         <div class="df fdc ml20">
-          <p class="b2 mb10 fw7 fz16">我的邀请码</p>
+          <p class="b2 mb10 fw7 fz16">My invitation code</p>
           <p class="gray fz12">{{ formatName(formData.username)}}</p>
          
         </div>
@@ -19,12 +19,12 @@
     <div class="content bsbb">
       <div class="invi df aic jcsb">
         <div class="df fdc mr10">
-          <p class="fz12 gray mb10">邀请链接</p>
+          <p class="fz12 gray mb10">Invitation link</p>
           <p style="word-break:break-all" class="fz14">{{ inviteCode }}</p>
         </div>
         <img src="../../assets/images/copy.png" style="width: 40px;" @click="copyAdd(inviteCode, $event)">
       </div>
-      <div class="btn">去邀请</div>
+      <div class="btn">Invite</div>
     </div>
     <Menu ref="menu"></Menu>
   </div>
@@ -93,37 +93,6 @@ onMounted(() => {
   flex-direction: column;
   background-color: #F7F7F7;
   overflow: hidden;
-  // min-height: 100vh;
-
-  // .banner {
-  //   display: flex;
-  //   width: 100%;
-  //   height: 168px;
-  //   padding: 0 25px;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   background-color: #005ABD;
-
-  //   .log {
-  //     img {
-  //       width: 90px;
-  //       height: 50px;
-  //     }
-  //   }
-
-  //   .wallet_menu {
-  //     img {
-  //       width: 24px;
-  //       height: 24px;
-
-  //       &:first-child {
-  //         margin-right: 16px;
-  //       }
-  //     }
-  //   }
-
-
-  // }
 
   .control {
     padding: 15px;

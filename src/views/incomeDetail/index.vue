@@ -3,26 +3,26 @@
     <Banner :menu="menu" :showSwiper="true" :showWallect="true" :defaults="true"
       :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic fdc">
-      <p class="c999 mb10">账户余额(USDT)</p>
+      <p class="c999 mb10">Account balance(USDT)</p>
       <p class="fw7 fz30">{{ formatDecimal(userInfo.money * 1) }}</p>
       <p class="fz14 gray mt20">
-        <span>团队累积收益:</span>
+        <span>Accumulated benefits for the team:</span>
         <span v-if="!noTeam">-- USDT</span>
         <span v-else>{{ formatDecimal(teamInfo.team_sum * 1) }}</span>
       </p>
       <div class="btns df aic jcse">
-        <div class="with" @click="$router.push('/withdraw')">提现</div>
-        <div class="recharge" @click="controlHandler(0)">充值</div>
+        <div class="with" @click="$router.push('/withdraw')">Withdrawal</div>
+        <div class="recharge" @click="controlHandler(0)">Recharge</div>
       </div>
     </div>
     <div class="content bsbb">
       <van-tabs v-model:active="active" shrink @change="changeType">
-        <van-tab title="全部" name=0>
+        <van-tab title="All" name=0>
           <div class="all cont" ref="allRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
-                <p class="fw7 fz14 b2 mb10" v-if="v.memo == '复利池转出'">复利池转入</p>
+                <p class="fw7 fz14 b2 mb10" v-if="v.memo == '复利池转出'">Compound interest pool transfer out</p>
                 <p class="fw7 fz14 b2 mb10" v-else>{{ v.memo }}</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
@@ -33,10 +33,10 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
-        <van-tab title="认购" name=1>
+        <van-tab title="Subscribe for" name=1>
           <div class="fund cont" ref="fundRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
@@ -49,15 +49,15 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
-        <van-tab title="复利" name=2>
+        <van-tab title="compound interest" name=2>
           <div class="income cont" ref="incomeRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}转入</p> -->
-                <p class="fw7 fz14 b2 mb10">复利池转入</p>
+                <p class="fw7 fz14 b2 mb10">Compound interest pool transfer out</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
@@ -66,10 +66,10 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
-        <van-tab title="推荐" name=3>
+        <van-tab title="Recommend" name=3>
           <div class="transfer cont" ref="recommendRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
@@ -83,10 +83,10 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
-        <van-tab title="团队" name=4>
+        <van-tab title="Team" name=4>
           <div class="transfer cont" ref="teamRef" v-if="formData.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
@@ -100,7 +100,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
         <!-- <van-tab title="平级" name=5>
@@ -125,7 +125,7 @@
     <van-overlay :show="Chongzhishow">
       <div class="wrapper" @click.stop>
         <div class="block">
-          <p class="title">充值</p>
+          <p class="title">Recharge</p>
           <div class="input">
             <img src="../../assets/images/usdt_icon.png" alt="" />
             <input type="number" v-model.trim="inputMoney" placeholder="enter the amount" />
@@ -133,17 +133,17 @@
               <div class="danwei">USDT</div>
               <div class="max" @click="max">MAX</div>
             </div>
-            <span class="balance_not_enough" v-if="Number(inputMoney) > balance">余额不足</span>
-            <span class="keyong" v-if="balance <= 0">可用: 0.00USDT</span>
-            <span class="keyong" v-else>可用: {{ formatDecimal(balance) }}USDT</span>
+            <span class="balance_not_enough" v-if="Number(inputMoney) > balance">balance</span>
+            <span class="keyong" v-if="balance <= 0">available: 0.00USDT</span>
+            <span class="keyong" v-else>available: {{ formatDecimal(balance) }}USDT</span>
           </div>
           <div class="btns">
-            <div class="cancel" @click="cancel">取消</div>
+            <div class="cancel" @click="cancel">cancellation</div>
             <div class="confirm" @click="confim" :class="{
       disabled:
         Number(inputMoney) > balance || Number(inputMoney) <= 0,
     }">
-              确定
+              Determine
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ import { onMounted, reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
-import { getFinancialList, getTransferList, getUserTeam, getMoneyLog } from '../../service/api'
+import { getUserTeam, getMoneyLog } from '../../service/api'
 import { getHMS, formatDecimal } from '../../utils/utils'
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
@@ -173,20 +173,13 @@ const params = ref({
   list_rows: 10,
   mome: ''
 })
-const typeList = ref([
-  '',
-  '认购',
-  '复利',
-  '推荐',
-  '团队',
-  '平级'
-])
+
 const typeArr = reactive<any>([
   '',
-  '购买理财',
-  '复利池转出',
-  '推荐奖励',
-  '团队奖励'
+  'Buy financial management',
+  'Compound interest pool transfer out',
+  'Compound interest pool rewards',
+  'Team rewards'
 ])
 const formData = ref<any>([])
 const changeType = (number: number) => {
@@ -224,7 +217,7 @@ const pageAdd = async () => {
     mome: params.value.mome
   }).then((res: any) => {
     if (!res.data.data.data.length) {
-      showFailToast('到底了')
+      showFailToast('What the hell is going on')
     } else {
       formData.value = [...formData.value, ...res.data.data.data]
     }

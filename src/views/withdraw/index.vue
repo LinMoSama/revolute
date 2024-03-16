@@ -4,41 +4,41 @@
       :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
-        <p class="c999 mb10">账户余额</p>
+        <p class="c999 mb10">Account balance</p>
         <p class="fw7">{{ formatDecimal(userInfo.money * 1) }}</p>
       </div>
       <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="goDetailList">
     </div>
     <div class="content bsbb">
-      <p class="fz18 co fw7 mb20">接收方</p>
+      <p class="fz18 co fw7 mb20">Receiver</p>
       <div class="df aic jcsb bb">
-        <input type="text"  :value="formData.to_username" disabled>
+        <input type="text" :value="formData.to_username" disabled>
         <!-- <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;"
           @click="copyAdd(formData.to_username, $event)">
         <img v-else src="../../assets/images/frame0.png" style="width: 26px;"> -->
       </div>
-      <p class="fz18 co fw7 mt20">提现金额</p>
-      <p class="fz14 mt10" style="color: #B7BAC2;">您需要提现多少USDT?</p>
+      <p class="fz18 co fw7 mt20">Withdrawal amount</p>
+      <p class="fz14 mt10" style="color: #B7BAC2;">How much USDT do you need to withdraw?</p>
       <div class="big">
         <input type="number" placeholder="0.00" v-model="formData.mount">
       </div>
       <div class="df fdc gray li">
         <div class="df aic jcsb">
-          <p>手续费</p>
+          <p>commission</p>
           <p>{{ formatDecimal(initInfo.transfer_myzc_fee) }}%</p>
         </div>
         <div class="df aic jcsb">
-          <p>实际到账</p>
+          <p>Actual receipt</p>
           <p v-if="!formData.mount">--</p>
           <p v-else>{{ instanceAmount }}</p>
         </div>
       </div>
-      <div class="btn" @click="confirmWithdraw">确定</div>
+      <div class="btn" @click="confirmWithdraw">Determine</div>
     </div>
     <Menu ref="menu"></Menu>
     <!-- <van-loading v-if="showLoding" /> -->
     <van-overlay :show="showLoding" @click="showLoding = false" class="df aic jcc">
-      <van-loading size="24px" vertical>加载中...</van-loading>
+      <van-loading size="24px" vertical>Loading...</van-loading>
     </van-overlay>
   </div>
 </template>
@@ -103,17 +103,17 @@ const getUser = () => {
 }
 const confirmWithdraw = () => {
   if (!formData.value.mount) {
-    showFailToast('请检查转账数量的输入')
+    showFailToast('Please check the input of the transfer quantity')
     return
   }
   if (!formData.value.to_username) {
-    showFailToast('请检查转账地址的输入')
+    showFailToast('Please check the input of the transfer address')
     return
   }
   showLoding.value = true
   getWithdraw(formData.value).then(res => {
     if (res.data.code) {
-      showSuccessToast('提现成功')
+      showSuccessToast('Withdrawal successful')
     } else {
       showFailToast(res.data.msg)
     }
@@ -136,36 +136,6 @@ const confirmWithdraw = () => {
   flex-direction: column;
   background-color: #F7F7F7;
   overflow: auto;
-
-  // .banner {
-  //   display: flex;
-  //   width: 100%;
-  //   height: 168px;
-  //   padding: 0 25px;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   background-color: #005ABD;
-
-  //   .log {
-  //     img {
-  //       width: 90px;
-  //       height: 50px;
-  //     }
-  //   }
-
-  //   .wallet_menu {
-  //     img {
-  //       width: 24px;
-  //       height: 24px;
-
-  //       &:first-child {
-  //         margin-right: 16px;
-  //       }
-  //     }
-  //   }
-
-
-  // }
 
   .control {
     padding: 15px;

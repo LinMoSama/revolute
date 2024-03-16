@@ -4,40 +4,41 @@
       :isShowReferenceHandler="isShowReferenceHandler"></Banner>
     <div class="control df aic jcsb">
       <div class="df fdc">
-        <p class="c999 mb10">账户余额</p>
+        <p class="c999 mb10">Account balance</p>
         <p class="fw7">{{ formatDecimal(userInfo.money * 1) }}</p>
       </div>
       <img src="../../assets/images/withdrawicon.png" style="width: 40px;" @click="goDetailList">
     </div>
     <div class="content bsbb">
-      <p class="fz18 co fw7 mb20">接收方</p>
+      <p class="fz18 co fw7 mb20">Receiver</p>
       <div class="df aic jcsb bb">
-        <input type="text" placeholder="请输入接收方地址" v-model="formData.to_username" style="width: 100%;">
+        <input type="text" placeholder="Please enter the recipient's address" v-model="formData.to_username"
+          style="width: 100%;">
         <img v-if="flag" src="../../assets/images/frame.png" style="width: 26px;"
           @click="copyAdd(formData.to_username, $event)">
         <img v-else src="../../assets/images/frame0.png" style="width: 26px;">
       </div>
-      <p class="fz18 co fw7 mt20">转账金额</p>
-      <p class="fz14 mt10" style="color: #B7BAC2;">您需要转账多少USDT?</p>
+      <p class="fz18 co fw7 mt20">Transfer amount</p>
+      <p class="fz14 mt10" style="color: #B7BAC2;">How much USDT do you need to transfer?</p>
       <div class="big">
         <input type="number" placeholder="0.00" v-model="formData.mount">
       </div>
       <div class="df fdc gray li">
         <div class="df aic jcsb">
-          <p>手续费</p>
+          <p>Commission</p>
           <p>{{ initInfo.transfer_fee }}%</p>
         </div>
         <div class="df aic jcsb">
-          <p>实际到账</p>
+          <p>Actual receipt</p>
           <p v-if="!formData.mount">--</p>
           <p v-else>{{ instanceAmount }}</p>
         </div>
       </div>
-      <div class="btn" @click="transferTo">确定</div>
+      <div class="btn" @click="transferTo">Determine</div>
     </div>
     <Menu ref="menu"></Menu>
     <van-overlay :show="showLoding" @click="showLoding = false" class="df aic jcc">
-      <van-loading size="24px" vertical>加载中...</van-loading>
+      <van-loading size="24px" vertical>Loading...</van-loading>
     </van-overlay>
   </div>
 </template>
@@ -97,17 +98,17 @@ const getUser = () => {
 }
 const transferTo = () => {
   if (!formData.value.mount) {
-    showFailToast('请检查转账数量的输入')
+    showFailToast('Please check the input of the transfer quantity')
     return
   }
   if (!formData.value.to_username) {
-    showFailToast('请检查转账地址的输入')
+    showFailToast('Please check the input of the transfer address')
     return
   }
   showLoding.value = true
   getTransferTo(formData.value).then((res: any) => {
     if (res.data.code) {
-      showSuccessToast('转账成功')
+      showSuccessToast('Transfer successful')
     } else {
       showFailToast(res.data.msg)
     }
@@ -137,36 +138,6 @@ onMounted(async () => {
   flex-direction: column;
   background-color: #F7F7F7;
   overflow: auto;
-
-  // .banner {
-  //   display: flex;
-  //   width: 100%;
-  //   height: 168px;
-  //   padding: 0 25px;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   background-color: #005ABD;
-
-  //   .log {
-  //     img {
-  //       width: 90px;
-  //       height: 50px;
-  //     }
-  //   }
-
-  //   .wallet_menu {
-  //     img {
-  //       width: 24px;
-  //       height: 24px;
-
-  //       &:first-child {
-  //         margin-right: 16px;
-  //       }
-  //     }
-  //   }
-
-
-  // }
 
   .control {
     padding: 15px;

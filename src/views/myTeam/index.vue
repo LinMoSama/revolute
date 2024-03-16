@@ -9,9 +9,9 @@
         <div class="ml20">
           <p class="b2 mb10">{{ hiddenUserAccount(account) }}</p>
           <p class="gray">
-            <span>团队收益率:</span>
+            <span>Team return rate:</span>
             <!-- <span v-if="hasTeam"> {{ formatDecimal(formData.team_sum * 1)}} %</span> -->
-            <span v-if="hasTeam"> {{ formatDecimal(formData.team_award_team * 1)}} %</span>
+            <span v-if="hasTeam"> {{ formatDecimal(formData.team_award_team * 1) }} %</span>
             <span v-else>-- %</span>
           </p>
         </div>
@@ -23,9 +23,9 @@
     </div>
     <div class="detail df fdc bsbb">
       <div class="df aic jcsb">
-        <p class="fz12 gray">我的团队</p>
+        <p class="fz12 gray">My team</p>
         <div class="fz12 b1 df aic" @click="$router.push('/teamDetail')">
-          <p>查看成员</p>
+          <p>View Members</p>
           <img src="../../assets/images/righticon.png" style="width: 10px" />
         </div>
       </div>
@@ -34,26 +34,26 @@
           <div class="df aic">
             <img src="../../assets/images/team.png" style="width: 26px; margin-right: 5px" />
             <p class="fz12">
-              <span>直推有效还差</span>
-              <span v-if="formData.recommend_count">1人</span>
-              <span v-else>2人</span>
+              <span>Direct push is still need</span>
+              <span v-if="formData.recommend_count"> 1 people</span>
+              <span v-else>2 people</span>
             </p>
             <img src="../../assets/images/upper.png" style="width: 20px; margin-left: 10px" />
           </div>
           <div class="yell df aic">
-            <p>收益率 :</p>
+            <p style="white-space: nowrap;">Yield :</p>
             <p v-if="hasTeam"> {{ formData.team_award_recommend }}%</p>
             <p class="fz12" v-else>0%</p>
           </div>
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
-            <p class="mb20">直推有效人数 (人)</p>
+            <p class="mb20">Effective number of direct (person)</p>
             <p class="fw7 fz16" v-if="formData.recommend_count">{{ formData.recommend_count }}</p>
             <p class="fw7 fz16" v-else>--</p>
           </div>
           <div class="df fdc">
-            <p class="mb20">团队有效人数 (人)</p>
+            <p class="mb20">Effective number of team (person)</p>
             <p class="fw7 fz16" v-if="formData.team_coun">{{ formData.team_coun }}</p>
             <p class="fw7 fz16" v-else>--</p>
           </div>
@@ -67,7 +67,7 @@
             <p class="fz12" v-else>--</p>
           </div>
           <div class="yell df aic">
-            <p>收益率 :</p>
+            <p>Yield :</p>
             <!-- <p v-if="hasTeam"> {{ formData.team_award_team }}%</p> -->
             <p v-if="hasTeam">{{ formatDecimal(formData.team_award_team * 1) }} %</p>
             <p class="fz12" v-else>0%</p>
@@ -75,12 +75,12 @@
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
-            <p class="mb20">直推业绩 (USDT)</p>
+            <p class="mb20" style="white-space: nowrap;">Direct performance (USDT)</p>
             <p class="fw7 fz16" v-if="hasTeam">{{ formatDecimal(formData.recommend_sum * 1) }}</p>
             <p class="fz12" v-else>--</p>
           </div>
           <div class="df fdc">
-            <p class="mb20">团队业绩 (USDT)</p>
+            <p class="mb20">Team performance (USDT)</p>
             <p class="fw7 fz16" v-if="hasTeam">
               {{ formatDecimal(formData.team_finc_sum * 1) }}
             </p>
@@ -91,11 +91,11 @@
     </div>
     <div class="content bsbb mt20">
       <van-tabs v-model:active="active" shrink @change="changeType">
-        <van-tab title="推荐奖励" name=0>
+        <van-tab title="Recommendation rewards" name=0>
           <div class="direct cont" ref="directRef" v-if="dataList.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="( v, i ) in  dataList " :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">推荐奖励</p>
+                <p class="fw7 fz14 b2 mb10">Recommendation rewards</p>
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
@@ -104,14 +104,14 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
-        <van-tab title="团队奖励" name=1>
+        <van-tab title="Team rewards" name=1>
           <div class="withdraw cont" ref="rewardRef" v-if="dataList.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="( v, i ) in  dataList " :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">团队奖励</p>
+                <p class="fw7 fz14 b2 mb10">Team rewards</p>
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
@@ -120,7 +120,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
           </div>
         </van-tab>
       </van-tabs>
@@ -135,7 +135,7 @@ import { useRouter } from "vue-router";
 import Menu from "@/components/Menu.vue";
 import Banner from "@/components/Banner.vue";
 import { getUserTeam, getFinancialList } from "../../service/api";
-import { hiddenUserAccount, getHMS,formatDecimal } from "../../utils/utils";
+import { hiddenUserAccount, getHMS, formatDecimal } from "../../utils/utils";
 import { showSuccessToast, showFailToast } from 'vant';
 import useIndex from '@/hooks/useIndex'
 const { isShowReferenceHandler } = useIndex()
@@ -190,7 +190,7 @@ const pageAdd = async () => {
     award_type: params.value.award_type
   }).then((res: any) => {
     if (!res.data.data.data.length) {
-      showFailToast('到底了')
+      showFailToast('What the hell is going on')
     } else {
       dataList.value = [...dataList.value, ...res.data.data.data]
     }

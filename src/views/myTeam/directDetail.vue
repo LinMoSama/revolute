@@ -5,7 +5,7 @@
                 <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.go(-1)">
                 <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
             </div>
-            <p class="bl fz14 fw7">直推详细</p>
+            <p class="bl fz14 fw7">Direct detail</p>
             <p style="width: 50px;font-size: 12px;" class="b1"></p>
         </div>
         <div class="content mt20 p120 bsbb" ref="contentRef" v-if="formData.length" @scroll="loadMore">
@@ -22,19 +22,19 @@
                 </div>
                 <div class="df aic jcsb mt20" style="width:100%">
                     <div class="df fdc aic" style="width:50%">
-                        <p class="gray fz12" style="padding-bottom:20px">团队人数</p>
+                        <p class="gray fz12" style="padding-bottom:20px">Team size</p>
                         <p class="b2 fz14 fw7">{{ v.team_coun }}</p>
                     </div>
                     <p style="color:#f7f7f7">|</p>
                     <div class="df fdc aic" style="width:50%">
-                        <p class="gray fz12" style="padding-bottom:20px">团队业绩 (USDT)</p>
+                        <p class="gray fz12" style="padding-bottom:20px">Team performance (USDT)</p>
                         <p class="b2 fz14 fw7">{{ formatDecimal(v.team_fic * 1) }}</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            暂无数据
+            There is currently no data available
         </div>
     </div>
 </template>
@@ -68,7 +68,7 @@ const pageAdd = async () => {
         list_rows: params.value.list_rows,
     }).then((res: any) => {
         if (!res.data.data.data.length) {
-            showFailToast('到底了')
+            showFailToast('What the hell is going on')
         } else {
             formData.value = [...formData.value, ...res.data.data.data]
         }

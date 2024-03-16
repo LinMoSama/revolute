@@ -5,12 +5,12 @@
                 <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.push('/home')">
                 <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
             </div>
-            <p class="bl fz14 fw7">交易明细</p>
+            <p class="bl fz14 fw7">Transaction details</p>
             <p style="width: 40px;"></p>
         </div>
         <div class="content mt20">
             <van-tabs v-model:active="active" sticky shrink @change="changeType" offset-top="20px">
-                <van-tab title="全部" name=0>
+                <van-tab title="All" name=0>
                     <div class="all cont" ref="allRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
@@ -22,10 +22,10 @@
                                 </p>
                             </div>
                             <div class="df aic jcsb">
-                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方:
+                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">Receiver:
                                     {{ hiddenUserAccount(v.add_username) }}
                                 </p>
-                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
+                                <p v-else style="color: #93989F;font-size: 14px;">Receiver: {{
                     hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
@@ -33,10 +33,10 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        暂无数据
+                        There is currently no data available
                     </div>
                 </van-tab>
-                <van-tab title="转账" name=1>
+                <van-tab title="Transfer" name=1>
                     <div class="transfer cont" ref="transRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
@@ -48,10 +48,10 @@
                                 </p>
                             </div>
                             <div class="df aic jcsb">
-                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方:
+                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">Receiver:
                                     {{ hiddenUserAccount(v.add_username) }}
                                 </p>
-                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
+                                <p v-else style="color: #93989F;font-size: 14px;">Receiver: {{
                     hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
@@ -59,10 +59,10 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        暂无数据
+                        There is currently no data available
                     </div>
                 </van-tab>
-                <van-tab title="充值" name=2>
+                <van-tab title="Recharge" name=2>
                     <div class="recharge cont" ref="rechargeRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
@@ -74,10 +74,10 @@
                                 </p>
                             </div>
                             <div class="df aic jcsb">
-                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方: {{
+                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">Receiver: {{
                     hiddenUserAccount(v.add_username) }}
                                 </p>
-                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
+                                <p v-else style="color: #93989F;font-size: 14px;">Receiver: {{
                     v.add_username }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
@@ -85,10 +85,10 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        暂无数据
+                        There is currently no data available
                     </div>
                 </van-tab>
-                <van-tab title="提现" name=3>
+                <van-tab title="Withdraw" name=3>
                     <div class="withdraw cont" ref="withdrawRef" @scroll="loadMore" v-if="formData.length">
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
@@ -100,10 +100,10 @@
                                 </p>
                             </div>
                             <div class="df aic jcsb">
-                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">接收方: {{
+                                <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">Receiver: {{
                     hiddenUserAccount(v.add_username) }}
                                 </p>
-                                <p v-else style="color: #93989F;font-size: 14px;">接收方: {{
+                                <p v-else style="color: #93989F;font-size: 14px;">Receiver: {{
                                     v.add_username }}
                                 </p>
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS((v.createtime * 1000)) }}</p>
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        暂无数据
+                        There is currently no data available
                     </div>
                 </van-tab>
             </van-tabs>
@@ -150,19 +150,19 @@ const changeType = (number: number) => {
     active.value = number
 }
 const typeList = ref([
-    '转账',
-    '充值',
-    '提现'
+    'Transfer ',
+    'Recharge' ,
+    'Withdraw '
 ])
 const statusList = ref([
-    '成功',
-    '失败',
-    '确认中'
+    'success',
+    'Fail',
+    'Confirming'
 ])
 const stateType = ref([
-    { color: '#4CCD78', text: '已完成', type: 1 },
-    { color: '#FF0000', text: '失败', type: 2 },
-    { color: '#313C5B', text: '待确认', type: 3 },
+    { color: '#4CCD78', text: 'Completed', type: 1 },
+    { color: '#FF0000', text: 'Fail', type: 2 },
+    { color: '#313C5B', text: 'Confirming', type: 3 },
 ])
 const goInnerDetail = (status: any, type: any, id: number) => {
     $router.push({
@@ -197,7 +197,7 @@ const pageAdd = async () => {
         transfer_type: params.value.transfer_type
     }).then((res: any) => {
         if (!res.data.data.data.length) {
-            showFailToast('到底了')
+            showFailToast('What the hell is going on')
         } else {
             formData.value = [...formData.value, ...res.data.data.data]
         }
