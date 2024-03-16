@@ -44,7 +44,7 @@
                                 <p style="color: #0E1446;" class="fw7 fz14">
                                     <span>{{ hiddenUserAccount(v.username) }}</span>
                                 </p>
-                                <p class="fw7 fz14 b2">Direct promotion personnel</p>
+                                <p class="fw7 fz14 b2">Direct promotion</p>
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
@@ -64,7 +64,7 @@
                                 <p style="color: #0E1446;" class="fw7 fz14">
                                     <span>{{ hiddenUserAccount(v.username) }}</span>
                                 </p>
-                                <p class="fw7 fz14 b2">Interpersonal promotion personnel</p>
+                                <p class="fw7 fz14 b2">Interpersonal promotion</p>
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
