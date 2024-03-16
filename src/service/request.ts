@@ -1,12 +1,12 @@
 import axios from 'axios'
 import { showSuccessToast, showFailToast } from 'vant'
-import router from '@/router/index';
+import router from '@/router/index'
 let urlPro = 'https://api.revolute.cc'
 let urlDeve = 'http://192.168.2.177:7786'
 const server = axios.create({
-  // baseURL: process.env.NODE_ENV === 'development' ? urlDeve : urlPro,
+  baseURL: process.env.NODE_ENV === 'development' ? urlDeve : urlPro,
   // baseURL: 'http://192.168.2.177:7786',
-  baseURL: 'https://api.revolute.cc',
+  // baseURL: 'https://api.revolute.cc',
   timeout: 10000,
 })
 
@@ -40,10 +40,7 @@ server.interceptors.response.use(
   },
   err => {
     console.log(err)
-    if (
-      err.response.data.code === 401 &&
-      err.response.data.msg === 'Please operate after login'
-    ) {
+    if (err.response.data.code === 401) {
       showFailToast('Login invalid, login again')
       sessionStorage.clear()
       router.push('/home')
