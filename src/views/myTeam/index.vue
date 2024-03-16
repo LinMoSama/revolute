@@ -33,16 +33,18 @@
         <div class="df aic jcsb">
           <div class="df aic">
             <img src="../../assets/images/team.png" style="width: 26px; margin-right: 5px" />
-            <p class="fz12">
-              <span>Direct push is still need</span>
-              <span v-if="formData.recommend_count"> 1 people</span>
-              <span v-else>2 people</span>
-            </p>
+            <div class="fz12">
+              <p>Direct push is still need</p>
+              <p>
+                <span v-if="formData.recommend_count"> 1 people</span>
+                <span v-else>2 people</span>
+              </p>
+            </div>
             <img src="../../assets/images/upper.png" style="width: 20px; margin-left: 10px" />
           </div>
           <div class="yell df aic">
             <p style="white-space: nowrap;">Yield :</p>
-            <p v-if="hasTeam"> {{ formData.team_award_recommend }}%</p>
+            <p v-if="hasTeam">{{ formData.team_award_recommend }}%</p>
             <p class="fz12" v-else>0%</p>
           </div>
         </div>

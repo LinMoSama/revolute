@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { showSuccessToast, showFailToast } from 'vant'
 import router from '@/router/index'
+import { useUserStore } from '@/stores/user'
 let urlPro = 'https://api.revolute.cc'
 let urlDeve = 'http://192.168.2.177:7786'
 const server = axios.create({
