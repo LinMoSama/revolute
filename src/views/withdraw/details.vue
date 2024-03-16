@@ -15,10 +15,19 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                    USDT
+                                    : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14"  style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
+                                    <span>USDT :</span>
+                                    <span> {{
+                    formatDecimal(v.mun * 1) }}
+                                        {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
+                                </p>
+                                <p class="fw7 fz14" style="white-space: nowrap;"
+                                    :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -34,7 +43,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                       No data available.
+                        No data available.
                     </div>
                 </van-tab>
                 <van-tab title="Transfer" name=1>
@@ -42,10 +51,19 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                    USDT
+                                    : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14" style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
+                                    <span>USDT :</span>
+                                    <span> {{
+                    formatDecimal(v.mun * 1) }}
+                                        {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
+                                </p>
+                                <p class="fw7 fz14" style="white-space: nowrap;"
+                                    :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -61,7 +79,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                       No data available.
+                        No data available.
                     </div>
                 </van-tab>
                 <van-tab title="Recharge" name=2>
@@ -69,10 +87,19 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                    USDT
+                                    : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14"  style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
+                                    <span>USDT :</span>
+                                    <span> {{
+                    formatDecimal(v.mun * 1) }}
+                                        {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
+                                </p>
+                                <p class="fw7 fz14" style="white-space: nowrap;"
+                                    :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -88,7 +115,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                       No data available.
+                        No data available.
                     </div>
                 </van-tab>
                 <van-tab title="Withdraw" name=3>
@@ -96,10 +123,19 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                    USDT
+                                    : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14" style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
+                                    <span>USDT :</span>
+                                    <span> {{
+                    formatDecimal(v.mun * 1) }}
+                                        {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
+                                </p>
+                                <p class="fw7 fz14" style="white-space: nowrap;"
+                                    :style="{ color: stateType[v.status - 1].color }">{{
                                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -115,7 +151,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                       No data available.
+                        No data available.
                     </div>
                 </van-tab>
             </van-tabs>
