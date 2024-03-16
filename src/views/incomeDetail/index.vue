@@ -22,12 +22,12 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}收益</p> -->
-                <p class="fw7 fz14 b2 mb10" v-if="v.memo == '复利池转出'">Compound interest pool transfer out</p>
+                <p class="fw7 fz14 b2 mb10" v-if="v.memo == 'Compound interest pool transfer out'">Pool transfer out</p>
                 <p class="fw7 fz14 b2 mb10" v-else>{{ v.memo }}</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
-                <p class="fz16 b1 fw7" v-if="v.memo == '购买理财'">{{ formatDecimal(v.money * 1) }}USDT</p>
+                <p class="fz16 b1 fw7" v-if="v.memo == 'Buy financial management'">{{ formatDecimal(v.money * 1) }}USDT</p>
                 <p class="fz16 b1 fw7" v-else>{{ formatDecimal(v.money * 1) }}USDT</p>
               </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="item df aic jcsb" v-for="(v, i) in formData" :key="i">
               <div class="df fdc">
                 <!-- <p class="fw7 fz14 b2 mb10">{{ typeList[v.type] }}转入</p> -->
-                <p class="fw7 fz14 b2 mb10">Compound interest pool transfer out</p>
+                <p class="fw7 fz14 b2 mb10">Pool transfer out</p>
                 <p class="gray fz14">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df aic jcsb">
