@@ -15,15 +15,14 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
+                                <!-- <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
                                     USDT
                                     : {{
                     formatDecimal(v.mun * 1) }}
-                                    {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
-                                    <span>USDT :</span>
-                                    <span> {{
-                    formatDecimal(v.mun * 1) }}
+                                    {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p> -->
+                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14 df fdc">
+                                    <span>USDT : {{ formatDecimal(v.mun * 1) }}</span>
+                                    <span class="mt5">
                                         {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
                                 </p>
                                 <p class="fw7 fz14" style="white-space: nowrap;"
@@ -51,15 +50,14 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
+                                <!-- <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
                                     USDT
                                     : {{
                     formatDecimal(v.mun * 1) }}
-                                    {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
-                                    <span>USDT :</span>
-                                    <span> {{
-                    formatDecimal(v.mun * 1) }}
+                                    {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p> -->
+                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14 df fdc">
+                                    <span>USDT : {{ formatDecimal(v.mun * 1) }}</span>
+                                    <span class="mt5">
                                         {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
                                 </p>
                                 <p class="fw7 fz14" style="white-space: nowrap;"
@@ -87,15 +85,9 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
-                                    USDT
-                                    : {{
-                    formatDecimal(v.mun * 1) }}
-                                    {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
-                                    <span>USDT :</span>
-                                    <span> {{
-                    formatDecimal(v.mun * 1) }}
+                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14 df fdc">
+                                    <span>USDT : {{ formatDecimal(v.mun * 1) }}</span>
+                                    <span class="mt5">
                                         {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
                                 </p>
                                 <p class="fw7 fz14" style="white-space: nowrap;"
@@ -123,25 +115,19 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
-                                    USDT
-                                    : {{
-                    formatDecimal(v.mun * 1) }}
-                                    {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p style="color: #0E1446;white-space: nowrap;" v-else class="fw7 fz14 df fdc">
-                                    <span>USDT :</span>
-                                    <span> {{
-                    formatDecimal(v.mun * 1) }}
+                                <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14 df fdc">
+                                    <span>USDT : {{ formatDecimal(v.mun * 1) }}</span>
+                                    <span class="mt5">
                                         {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</span>
                                 </p>
                                 <p class="fw7 fz14" style="white-space: nowrap;"
                                     :style="{ color: stateType[v.status - 1].color }">{{
-                                    stateType[v.status - 1].text }}
+                    stateType[v.status - 1].text }}
                                 </p>
                             </div>
                             <div class="df aic jcsb">
                                 <p v-if="v.type !== 1" style="color: #93989F;font-size: 14px;">Receiver: {{
-                                    hiddenUserAccount(v.add_username) }}
+                    hiddenUserAccount(v.add_username) }}
                                 </p>
                                 <p v-else style="color: #93989F;font-size: 14px;">Receiver: {{
                                     v.add_username }}
