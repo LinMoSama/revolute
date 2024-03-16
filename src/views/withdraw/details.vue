@@ -15,7 +15,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
                                     USDT
                                     : {{
                     formatDecimal(v.mun * 1) }}
@@ -51,7 +51,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
                                     USDT
                                     : {{
                     formatDecimal(v.mun * 1) }}
@@ -87,7 +87,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
                                     USDT
                                     : {{
                     formatDecimal(v.mun * 1) }}
@@ -123,7 +123,7 @@
                         <div class="item df fdc" v-for="(v, i) in formData" :key="i"
                             @click="goInnerDetail(v.type, stateType[v.status - 1].type, v.id)">
                             <div class="df aic jcsb mb15">
-                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 2" class="fw7 fz14">
+                                <p style="color: #0E1446;white-space: nowrap;" v-if="v.status !== 3" class="fw7 fz14">
                                     USDT
                                     : {{
                     formatDecimal(v.mun * 1) }}
@@ -194,16 +194,19 @@ const typeList = ref([
     'Recharge ',
     'Withdraw '
 ])
+
 const statusList = ref([
     'success',
     'Fail',
     'Confirming'
 ])
+
 const stateType = ref([
     { color: '#4CCD78', text: 'Completed', type: 1 },
     { color: '#FF0000', text: 'Fail', type: 2 },
     { color: '#313C5B', text: 'Confirming', type: 3 },
 ])
+
 const goInnerDetail = (status: any, type: any, id: number) => {
     $router.push({
         path: 'withdrawinner',
