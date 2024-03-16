@@ -2,66 +2,68 @@
   <div class="inner">
     <div class="top df aic jcsb p20 bsbb">
       <div class="df aic">
-        <img
-          src="../../assets/images/lefticon.png"
-          style="width: 10px"
-          @click="goBack"
-        />
-        <p
-          style="
+        <img src="../../assets/images/lefticon.png" style="width: 10px" @click="goBack" />
+        <p style="
             color: #313c5b;
             font-size: 14px;
             margin-left: 20px;
             font-weight: 700;
-          "
-        >
+          ">
           Back
         </p>
       </div>
       <p class="bl fz14 fw7">{{ typeList[status - 1] }}详情</p>
       <p style="width: 40px"></p>
     </div>
-    <div class="content df aic jcsb fdc">
-      <!-- <img :src="detailText[type].icon" style="width: 80px" /> -->
-      <img src="../../assets/images/succ.png" style="width: 80px" v-show="type==1"/>
-      <img src="../../assets/images/fail.png" style="width: 80px" v-show="type==2"/>
-      <img src="../../assets/images/default.png" style="width: 80px" v-show="type==3"/>
+    <div v-if="flag">
+      <div class="content df aic jcsb fdc">
+        <!-- <img :src="detailText[type].icon" style="width: 80px" /> -->
+        <img src="../../assets/images/succ.png" style="width: 80px" v-show="type == 1" />
+        <img src="../../assets/images/fail.png" style="width: 80px" v-show="type == 2" />
+        <img src="../../assets/images/default.png" style="width: 80px" v-show="type == 3" />
 
-      <p class="mt20 fz14" style="color: #0e1446">
-        <span>{{ typeList[status - 1] }}</span>
-        <span v-if="type !== 2">{{ detailText[type].type }}</span>
-      </p>
-      <p class="mt20 fz14" style="color: #93989f">
-        {{ getHMS(detailInfo.createtime * 1000) }}
-      </p>
-      <p class="mt10 fz14" :style="{ color: detailText[type].color }">
-        {{ detailText[type].text }}
-      </p>
+        <p class="mt20 fz14" style="color: #0e1446">
+          <span>{{ typeList[status - 1] }}</span>
+          <span v-if="type !== 2">{{ detailText[type].type }}</span>
+        </p>
+        <p class="mt20 fz14" style="color: #93989f" v-if="detailInfo.createtime">
+          {{ getHMS(detailInfo.createtime * 1000) }}
+        </p>
+        <p class="mt20 fz14" style="color: #93989f" v-else>
+          ---
+        </p>
+        <p class="mt10 fz14" :style="{ color: detailText[type].color }">
+          {{ detailText[type].text }}
+        </p>
+      </div>
+      <div class="detail p20 bsbb">
+        <p class="gray mb15">发送账户</p>
+        <div class="df aic jcsb mb15 bb">
+          <p class="b2">{{ hiddenUserAccount(detailInfo.from_addr) }}</p>
+          <p class="b1 fw7">-{{ formatDecimal(detailInfo.mun) }}USDT</p>
+        </div>
+        <p class="gray mb15">接受账户</p>
+        <div class="df aic jcsb mb15 bb">
+          <p class="b2">{{ hiddenUserAccount(detailInfo.to_addr) }}</p>
+          <p class="b1 fw7">+{{ formatDecimal(detailInfo.to_mun) }}USDT</p>
+        </div>
+        <p class="mt20 b1 fw7 mb20">详细付款</p>
+        <div class="df aic jcsb mb15">
+          <p class="gray">提现金额</p>
+          <p>{{ formatDecimal(detailInfo.mun) }}USDT</p>
+        </div>
+        <div class="df aic jcsb mb15">
+          <p class="gray">手续费</p>
+          <p>{{ formatDecimal(detailInfo.fee) }}</p>
+        </div>
+        <div class="df aic jcsb mb15">
+          <p class="b2">实际到账</p>
+          <p class="b2 fw7">{{ formatDecimal(detailInfo.to_mun) }}USDT</p>
+        </div>
+      </div>
     </div>
-    <div class="detail p20 bsbb">
-      <p class="gray mb15">发送账户</p>
-      <div class="df aic jcsb mb15 bb">
-        <p class="b2">{{ hiddenUserAccount(detailInfo.from_addr) }}</p>
-        <p class="b1 fw7">-{{ formatDecimal(detailInfo.mun) }}USDT</p>
-      </div>
-      <p class="gray mb15">接受账户</p>
-      <div class="df aic jcsb mb15 bb">
-        <p class="b2">{{ hiddenUserAccount(detailInfo.to_addr) }}</p>
-        <p class="b1 fw7">+{{ formatDecimal(detailInfo.to_mun) }}USDT</p>
-      </div>
-      <p class="mt20 b1 fw7 mb20">详细付款</p>
-      <div class="df aic jcsb mb15">
-        <p class="gray">提现金额</p>
-        <p>{{ formatDecimal(detailInfo.mun) }}USDT</p>
-      </div>
-      <div class="df aic jcsb mb15">
-        <p class="gray">手续费</p>
-        <p>{{ formatDecimal(detailInfo.fee) }}</p>
-      </div>
-      <div class="df aic jcsb mb15">
-        <p class="b2">实际到账</p>
-        <p class="b2 fw7">{{ formatDecimal(detailInfo.to_mun) }}USDT</p>
-      </div>
+    <div class="df aic jcc fz16" style="height: 60vh;">
+      搜索数据出错 请重试...
     </div>
   </div>
 </template>
@@ -100,9 +102,15 @@ const detailText = ref([
   },
 ])
 const typeList = ref(['转账', '充值', '提现'])
+const flag = ref(false)
 const getDetail = () => {
   getIdToSearch({ transfer_id: id.value }).then((res: any) => {
-    detailInfo.value = res.data.data
+    if (res.data.code == 1) {
+      flag.value = true
+      detailInfo.value = res.data.data
+    } else {
+      flag.value = false
+    }
   })
 }
 const goBack = () => {
