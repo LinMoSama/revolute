@@ -7,68 +7,76 @@ export default function () {
   let show = ref(false)
   const homeIconList = [
     {
-      title: '首页',
+      title: 'Home',
+      id: 1,
     },
     {
-      title: '提现',
+      title: 'Withdrawal',
+      id: 2,
     },
     {
-      title: '转账',
+      title: 'Transfer',
+      id: 3,
     },
     {
-      title: '我的认购',
+      title: 'My subscription',
+      id: 4,
     },
     {
-      title: '我的钱包',
+      title: 'My wallet',
+      id: 5,
     },
     {
-      title: '邀请好友',
+      title: 'Invite friendsf',
+      id: 6,
     },
     {
-      title: '我的团队',
+      title: 'My team',
+      id: 7,
     },
     {
-      title: '交易明细',
+      title: 'Transaction details',
+      id: 8,
     },
   ]
-  function changRoute(value: string) {
+  function changRoute(value: number) {
     switch (value) {
-      case '首页':
+      case 1:
         router.push({
           path: '/home',
         })
         break
-      case '提现':
+      case 2:
         router.push({
           path: '/withdraw',
         })
         break
-      case '转账':
+      case 3:
         router.push({
           path: '/transfer',
         })
         break
-      case '我的认购':
+      case 4:
         router.push({
           path: '/myPurchase',
         })
         break
-      case '我的钱包':
+      case 5:
         router.push({
           path: '/incomeDetail',
         })
         break
-      case '邀请好友':
+      case 6:
         router.push({
           path: '/invite',
         })
         break
-      case '我的团队':
+      case 7:
         router.push({
           path: '/myTeam',
         })
         break
-      case '交易明细':
+      case 8:
         router.push({
           path: '/withdrawdetail?active=0',
         })

@@ -1,8 +1,6 @@
 import axios from 'axios'
-import { useUserStore } from '@/stores/user'
 import { showSuccessToast, showFailToast } from 'vant'
-import { errorCodeHandler } from '@/utils/errorCodeHandler'
-import router from '@/router/index';
+import router from '@/router/index'
 let urlPro = 'https://api.revolute.cc'
 let urlDeve = 'http://192.168.2.177:7786'
 const server = axios.create({
@@ -44,11 +42,8 @@ server.interceptors.response.use(
   },
   err => {
     console.log(err)
-    if (
-      err.response.data.code === 401 &&
-      err.response.data.msg === '请登录后操作'
-    ) {
-      showFailToast('登录失效，请重新登录')
+    if (err.response.data.code === 401) {
+      showFailToast('Login invalid, login again')
       sessionStorage.clear()
       router.push('/home')
     }
@@ -57,7 +52,7 @@ server.interceptors.response.use(
     if (err && err.response) {
       // errorCodeHandler(err.response.status)
     } else {
-      showFailToast('连接服务器失败!')
+      showFailToast('Failed to connect to the server!')
     }
     return Promise.reject(err)
   }

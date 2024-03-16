@@ -5,7 +5,7 @@
         <img src="../assets/images/income1.png" alt="" />
       </div>
       <div class="title">
-        <p class="revenue_title">昨日总收益</p>
+        <p class="revenue_title">Yesterday</p>
         <div class="money" v-if="token === ''">0.00 USDT</div>
         <div class="money" v-else>{{ yesterdayCom }} USDT</div>
       </div>
@@ -15,7 +15,7 @@
         <img src="../assets/images/income2.png" alt="" />
       </div>
       <div class="title">
-        <p class="revenue_title">总收益</p>
+        <p class="revenue_title">Total income</p>
         <div class="money" v-if="token === ''">0.00 USDT</div>
         <div class="money" v-else>{{ sumAwardCom }} USDT</div>
       </div>
@@ -90,7 +90,7 @@ function goTotalEarningsYesterday() {
         &::after {
           display: inline-block;
           position: absolute;
-          margin-left: 2px;
+          margin-left: 10px;
           width: 12px;
           height: 12px;
           content: '';

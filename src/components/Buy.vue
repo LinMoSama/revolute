@@ -2,8 +2,8 @@
   <div class="buy_wrap">
     <div class="top">
       <div class="top_left">
-        <div class="top_left_top">{{ day }}天</div>
-        <div class="top_left_bottom">助您轻松实现财务目标！</div>
+        <div class="top_left_top">{{ day }} days</div>
+        <div class="top_left_bottom">Help you easily achieve your financial goals!</div>
       </div>
       <div class="top_right">
         <img src="../assets/images/buy_icon1.png" alt="" v-if="type===1">
@@ -14,20 +14,20 @@
     <div class="bottom">
       <div class="bottom_left">
         <div class="left_top">
-          <div class="onsale">在售</div>
-          <div class="product" v-if="type === 1">产品一</div>
-          <div class="product" v-if="type === 2">产品二</div>
-          <div class="product" v-if="type === 3">产品三</div>
+          <div class="onsale">On sale</div>
+          <div class="product" v-if="type === 1">Product 1</div>
+          <div class="product" v-if="type === 2">Product 2</div>
+          <div class="product" v-if="type === 3">Product 3</div>
         </div>
         <div class="left_bottom">
-          <p class="left_bottom_text" v-if="type === 1">投资精明选择！</p>
-          <p class="left_bottom_text" v-if="type === 2">实现财富增长！</p>
-          <p class="left_bottom_text" v-if="type === 3">财富稳步积累！</p>
+          <p class="left_bottom_text" v-if="type === 1">Investment smart choice!</p>
+          <p class="left_bottom_text" v-if="type === 2">Realize wealth growth!</p>
+          <p class="left_bottom_text" v-if="type === 3">Wealth accumulates steadily!</p>
         </div>
       </div>
       <div class="bottom_right">
         <div class="bottom_right_top">{{ percentage }}%</div>
-        <div class="bottom_right_bottom">每日{{ percentage }}%回报</div>
+        <div class="bottom_right_bottom">Daily {{ percentage }}% return</div>
       </div>
       <button class="buy" @click="buy">Buy</button>
     </div>
@@ -111,8 +111,8 @@ function buy() {
 
         .onsale {
           margin-right: 10px;
-          width: 40px;
-          height: 20px;
+          // height: 20px;
+          padding: 5px;
           background: #0359BD;
           border-radius: 2px 2px 2px 2px;
           font-weight: 600;

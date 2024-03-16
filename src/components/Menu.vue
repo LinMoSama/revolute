@@ -9,7 +9,7 @@
         />
         <ul>
           <li
-            @click="changRoute(item.title)"
+            @click="changRoute(item.id)"
             v-for="(item, index) in homeIconList"
             :key="index"
           >
@@ -17,55 +17,49 @@
               src="../assets/images/home_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '首页'"
-            />
-            <img
-              src="../assets/images/chongzhi_icon.png"
-              alt=""
-              class="home_icon"
-              v-if="item.title === '充值'"
+              v-if="item.id === 1"
             />
             <img
               src="../assets/images/tixian_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '提现'"
+              v-if="item.id === 2"
             />
             <img
               src="../assets/images/zhuanzhang_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '转账'"
+              v-if="item.id === 3"
             />
             <img
               src="../assets/images/rengou_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '我的认购'"
+              v-if="item.id === 4"
             />
             <img
               src="../assets/images/mingxi_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '我的钱包'"
+              v-if="item.id === 5"
             />
             <img
               src="../assets/images/yaoqing_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '邀请好友'"
+              v-if="item.id === 6"
             />
             <img
               src="../assets/images/team_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '我的团队'"
+              v-if="item.id === 7"
             />
             <img
               src="../assets/images/jiaoyimingxi_icon.png"
               alt=""
               class="home_icon"
-              v-if="item.title === '交易明细'"
+              v-if="item.id === 8"
             />
             <p>{{ item.title }}</p>
             <img

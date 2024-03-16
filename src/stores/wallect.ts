@@ -52,7 +52,7 @@ export default defineStore('wallect', () => {
       loading.value = false
       console.log(error)
       if (error.code === 4001) {
-        showFailToast('拒绝了访问权限')
+        showFailToast(' User denied message signature')
       }
     }
   }

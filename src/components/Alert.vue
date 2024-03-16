@@ -16,9 +16,10 @@
         />
         <p class="title" :class="{ title_succ: transferSucc }">{{ title }}</p>
         <p class="tip_text" v-if="tipTextShow">
-          基金收益+复利的收益总和大于本金时， 不再享受复利收益
+          When the sum of fund income+compound interest income is greater than
+          the principal, you will no longer enjoy compound interest income
         </p>
-        <p v-if="transferSucc" class="succ_tip">请在我的钱包中查看</p>
+        <p v-if="transferSucc" class="succ_tip">Please check in my wallet</p>
         <template v-if="flag">
           <div class="input">
             <input
@@ -40,15 +41,15 @@
             <span
               class="balance_not_enough"
               v-if="!zhuanchu && inputMoney > userStore.userInfo.money"
-              >余额不足</span
+              >Insufficient balance</span
             >
             <span
               class="balance_not_enough"
               v-if="zhuanchu && inputMoney > userInfo.money_award"
             >
-              余额不足
+              Insufficient balance
             </span>
-            <span class="keyong">可用: {{ keYongMoney }}USDT</span>
+            <span class="keyong">available: {{ keYongMoney }}USDT</span>
           </div>
         </template>
 
@@ -56,7 +57,7 @@
           <div class="input input2" v-if="!hiddenInput">
             <input
               type="text"
-              placeholder="输入推荐钱包地址"
+              placeholder="Enter the recommended wallet address"
               v-model.trim="recommenderAddress"
             />
           </div>
@@ -69,12 +70,12 @@
             mt34: transferFail,
           }"
         >
-          <div class="cancel" @click="cancel" v-if="!hiddenCancel">取消</div>
+          <div class="cancel" @click="cancel" v-if="!hiddenCancel">cancel</div>
           <div
             class="confirm"
             @click="confim(flag ? inputMoney : recommenderAddress)"
           >
-            确定
+            confirm
           </div>
         </div>
       </div>
@@ -133,10 +134,10 @@ function cancel() {
 }
 function confim(val: any) {
   if (
-    props.title === '温馨提示' ||
-    props.title === '转出成功' ||
-    props.title === '转出失败' ||
-    props.title === '推荐人'
+    props.title === 'Warm tips' ||
+    props.title === 'Transfer out successful' ||
+    props.title === 'Transfer out failed' ||
+    props.title === 'Referrer'
   ) {
     recommenderAddress.value = ''
     return emit('confirmAlert', val)
@@ -154,7 +155,7 @@ function confim(val: any) {
     return showFailToast('Min 100.00')
   }
   if (props.zhuanchu && Number(inputMoney.value) <= 0) {
-    return showFailToast('不能为0')
+    return showFailToast('Cannot be 0')
   }
   inputMoney.value = ''
   recommenderAddress.value = ''
@@ -214,7 +215,7 @@ defineExpose({
     }
 
     .tip_text {
-      width: 218px;
+      padding: 0 10px;
       margin: 0 auto -14px;
       text-align: center;
       font-weight: 400;

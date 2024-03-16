@@ -14,13 +14,13 @@ export default [
     path: '/totalEarningsYesterday',
     name: 'TotalEarningsYesterday',
     component: () => import('@/views/totalEarningsYesterday/index.vue'),
-    meta: { title: '昨日总收益' },
+    meta: { title: "Yesterday's total income" },
   },
   // 我的认购
   {
     path: '/myPurchase',
     name: 'MyPurchase',
-    meta: { title: '我的认购' },
+    meta: { title: 'My subscription' },
     component: () => import('@/views/MyPurchase/index.vue'),
   },
   // 我的认购详情
@@ -34,7 +34,7 @@ export default [
   {
     path: '/withdraw',
     name: 'Withdraw',
-    meta: { title: '提现' },
+    meta: { title: 'Withdrawal' },
     component: () => import('@/views/withdraw/index.vue'),
   },
   // 提现记录
@@ -53,28 +53,28 @@ export default [
   {
     path: '/transfer',
     name: 'Transfer',
-    meta: { title: '转账' },
+    meta: { title: 'Transfer' },
     component: () => import('@/views/transfer/index.vue'),
   },
   // 收益明细
   {
     path: '/incomeDetail',
     name: 'incomeDetail',
-    meta: { title: '我的钱包' },
+    meta: { title: 'My wallet' },
     component: () => import('@/views/incomeDetail/index.vue'),
   },
   // 邀请好友
   {
     path: '/invite',
     name: 'invite',
-    meta: { title: '邀请好友' },
+    meta: { title: 'Invite friends' },
     component: () => import('@/views/invite/index.vue'),
   },
   // 我的团队
   {
     path: '/myTeam',
     name: 'myTeam',
-    meta: { title: '我的团队' },
+    meta: { title: 'My team' },
     component: () => import('@/views/myTeam/index.vue'),
   },
   // 团队人员
