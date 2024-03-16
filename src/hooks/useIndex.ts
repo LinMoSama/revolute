@@ -38,7 +38,7 @@ export default function () {
   async function addMountHandler(mount: string, financial_id: number) {
     try {
       const res = await addMount({
-        mount: 50000,
+        mount,
         financial_id,
       })
       console.log(res.data.code)
