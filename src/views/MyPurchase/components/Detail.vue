@@ -298,7 +298,7 @@ async function getMoneyLogHandler() {
   const res = await getMoneyLog({
     var_page: page.value,
     list_rows: 20,
-    mome: '复利池转出',
+    mome: 'Compound interest pool transfer out',
   })
   totalList.value = res.data.data.total
   moneyLogList.value = res.data.data.data
