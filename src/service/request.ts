@@ -14,8 +14,6 @@ const server = axios.create({
 // 请求拦截器
 server.interceptors.request.use(
   config => {
-    const $userStore = useUserStore()
-    // const token = $userStore.token
     const token = sessionStorage.getItem('token')
     // const token = '8e7886ea-bdc9-4094-97b1-c3ccd61acc22'
     // const token = 'f3ac5f5e-7125-499f-8f6e-89bcc10d7bb0'
