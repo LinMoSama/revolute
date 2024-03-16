@@ -38,13 +38,13 @@ export default function () {
   async function addMountHandler(mount: string, financial_id: number) {
     try {
       const res = await addMount({
-        mount,
+        mount: 50000,
         financial_id,
       })
       console.log(res.data.code)
       console.log(res.data.msg)
-      if (res.data.code === 0 && res.data.msg === '余额不能足') {
-        showFailToast('余额不足')
+      if (res.data.code === 0 && res.data.msg === 'The balance is not enough') {
+        showFailToast('Insufficient balance')
         return
       }
       console.log(res, '42 res')
@@ -54,19 +54,17 @@ export default function () {
   }
   // 判断是否填写推荐人
   function isShowReferenceHandler() {
-    if (wallectStore.isInstall === false && !sessionStorage.getItem('account')) {
-      showFailToast('请安装并连接钱包')
+    if (
+      wallectStore.isInstall === false &&
+      !sessionStorage.getItem('account')
+    ) {
+      showFailToast('Installing and connecting the wallet')
       return false
     }
     if (!userStore.token) {
-      showFailToast('请先连接钱包')
+      showFailToast('Please connect the wallet first')
       return false
     }
-    // alert(
-    //   JSON.parse(sessionStorage.getItem('userInfo')!).recommend +
-    //     '====' +
-    //     '测试代码'
-    // )
     if (
       JSON.parse(sessionStorage.getItem('userInfo')!).recommend === 0 ||
       JSON.parse(sessionStorage.getItem('userInfo')!).recommend === null
@@ -126,9 +124,9 @@ export default function () {
 
       isShowReference.value = false
       if (res.data.code === 1) {
-        showSuccessToast('绑定成功')
+        showSuccessToast('Binding succeeded')
       } else {
-        showFailToast('绑定失败')
+        showFailToast('Binding failed')
       }
       console.log(res.data, 'ReferenceAlertConfirm')
       // 获取用户信息
@@ -143,7 +141,7 @@ export default function () {
     try {
       addMountHandler(value, itemID.value)
       getUserInfoHandler()
-      showSuccessToast('购买成功')
+      showSuccessToast('Purchase succeeded')
       closeAlert()
     } catch (error) {
       console.log(error)
@@ -278,17 +276,16 @@ export default function () {
         status: obj.status,
       })
       loading.value = false
-      showSuccessToast('操作成功')
+      showSuccessToast('Operation succeeded')
     } catch (error: any) {
+      console.log(error)
       loading.value = false
-      console.log(error)
-      if (error.code === 4001) {
-        showFailToast('已拒绝')
+      console.log(error.code)
+      if (error.code === 100) {
+        showFailToast('User denied transaction signature')
       } else {
-        console.log(error)
-        showFailToast('操作失败')
+        showFailToast('operation failed')
       }
-      console.log(error)
     }
   }
 

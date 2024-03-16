@@ -2,14 +2,14 @@
   <div class="pur_wrap">
     <Banner  :showSwiper="true"
       :menu="menu"
-      title="我的认购"
+      title="My subscription"
       :isShowReferenceHandler="isShowReferenceHandler"
     ></Banner>
     <div class="part">
       <div class="title">Compound Pool</div>
       <div class="tips">
         <div class="left">
-          <div class="tip">稳健增值，灵活安全，选择复利宝，财富守护无忧！</div>
+          <div class="tip">Stable value-added, flexible and safe, choose Fulibao, and protect wealth without worry！</div>
           <div class="more" @click="goDetail">More</div>
         </div>
         <div class="right">

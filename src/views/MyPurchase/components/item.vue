@@ -17,29 +17,29 @@
         v-else-if="item.financial_id === 3"
       />
       <div class="product">
-        <p>{{ productType }}/{{ item.subscription }}天</p>
-        <span :class="{ redemption: item.status===0 }">{{
+        <p>{{ productType }}/{{ item.subscription }} days</p>
+        <span :class="{ redemption: item.status === 0 }">{{
           isInFinancialManagement
         }}</span>
       </div>
       <div class="days_remaining" :class="{ days_0: leaveDaysCom <= 0 }">
-        剩余天数: {{ leaveDaysCom }}天
+        days left:{{ leaveDaysCom }}
       </div>
     </div>
-    <div class="item">
-      <div class="left">收益率</div>
+    <div class="item item-item">
+      <div class="left">Yield</div>
       <div class="right">{{ item.income }}%</div>
     </div>
-    <div class="item">
-      <div class="left">预估收益</div>
+    <div class="item item-item">
+      <div class="left">Estimated income</div>
       <div class="right">{{ yuJiSHouyi }} USDT</div>
     </div>
-    <div class="item">
-      <div class="left">投入本金</div>
+    <div class="item item-item">
+      <div class="left">Investment principal</div>
       <div class="right">{{ mun }} USDT</div>
     </div>
-    <div class="item">
-      <div class="left">购买时间</div>
+    <div class="item item-item">
+      <div class="left">Purchase time</div>
       <div class="right">{{ timeCom }}</div>
     </div>
   </div>
@@ -51,10 +51,10 @@ import { formatDecimal } from '@/utils/utils'
 const props = defineProps(['item'])
 let productType = computed(() => {
   return props.item.financial_id === 1
-    ? '产品一'
+    ? 'Product 1'
     : props.item.financial_id === 2
-    ? '产品二'
-    : '产品三'
+    ? 'Product 2'
+    : 'Product 3'
 })
 let mun = computed(() => {
   return formatDecimal(Number(props.item.mun))
@@ -114,7 +114,7 @@ function formtTime(timestamp: number) {
   return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
 }
 let isInFinancialManagement = computed(() => {
-  return props.item.status === 0 ? '已赎回' : '理财中'
+  return props.item.status === 0 ? 'Redeemed' : 'Financing'
 })
 </script>
 
@@ -127,10 +127,12 @@ let isInFinancialManagement = computed(() => {
   width: 325px;
   background: #ffffff;
   border-radius: 10px 10px 10px 10px;
-
+  .item-item {
+    justify-content: space-between;
+  }
   .item {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     margin-bottom: 16px;
     font-weight: 400;
     font-size: 12px;

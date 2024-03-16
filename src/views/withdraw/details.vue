@@ -5,7 +5,7 @@
                 <img src="../../assets/images/lefticon.png" style="width:10px;" @click="$router.push('/home')">
                 <p style="color: #313C5B;font-size: 14px;margin-left: 20px;font-weight: 700;">Back</p>
             </div>
-            <p class="bl fz14 fw7">交易明细</p>
+            <p class="bl fz14 fw7">Transaction details</p>
             <p style="width: 40px;"></p>
         </div>
         <div class="content mt20">

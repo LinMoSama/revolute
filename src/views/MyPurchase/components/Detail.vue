@@ -3,32 +3,34 @@
     <Back :title="title" @click-left="onClickLeft"></Back>
     <div class="top_bg">
       <div class="all_balance">
-        <div class="title">总余额</div>
+        <div class="title">Total balance</div>
         <div class="money">{{ formatDecimal(userInfo.money_award) }}</div>
       </div>
 
       <div class="income">
         <div class="yes_income">
-          <div class="title">昨日收益</div>
+          <div class="title">Yesterday's earnings</div>
           <div class="money">{{ formatDecimal(yesterday) }}</div>
         </div>
         <div class="hr"></div>
         <div class="accumulations">
-          <div class="title">累积收益</div>
+          <div class="title">Cumulative income</div>
           <div class="money">{{ formatDecimal(sum_award) }}</div>
         </div>
       </div>
       <div class="Tips" @click="tipHandler">
         <img src="../../../assets/images/!.png" alt="" />
-        <p>温馨提示</p>
+        <p>Warm tips</p>
       </div>
 
-      <div class="btn" @click="TransferOut">转出</div>
+      <div class="btn" @click="TransferOut">Transfer out</div>
     </div>
     <div class="tabs" @scroll="scrollLoading">
       <van-tabs v-model:active="active" shrink>
-        <van-tab title="全部">
-          <div v-if="awardList.length === 0" class="no_data">暂无数据</div>
+        <van-tab title="All">
+          <div v-if="awardList.length === 0" class="no_data">
+            No data temporarily
+          </div>
 
           <div
             class="item"
@@ -44,10 +46,10 @@
               <p>
                 {{
                   item.type === 1
-                    ? '认购收益'
+                    ? 'Subscription income'
                     : item.type === 2
-                    ? '复利收益'
-                    : '推荐收益'
+                    ? 'Compound interest income'
+                    : 'Recommendation income'
                 }}
               </p>
               <span>+{{ formatDecimal(item.mun) }}USDT</span>
@@ -55,8 +57,10 @@
           </div>
         </van-tab>
 
-        <van-tab title="认购收益">
-          <div v-if="awardList2.length === 0" class="no_data">暂无数据</div>
+        <van-tab title="Subscription income">
+          <div v-if="awardList2.length === 0" class="no_data">
+            No data temporarily
+          </div>
 
           <div
             class="item"
@@ -69,14 +73,16 @@
               <span>{{ formtTime(item.createtime) }}</span>
             </div>
             <div class="right">
-              <p>认购收益</p>
+              <p>Subscription income</p>
               <span>+{{ formatDecimal(item.mun) }}USDT</span>
             </div>
           </div>
         </van-tab>
 
-        <van-tab title="转出记录">
-          <div v-if="moneyLogList.length === 0" class="no_data">暂无数据</div>
+        <van-tab title="Transfer out record">
+          <div v-if="moneyLogList.length === 0" class="no_data">
+            No data temporarily
+          </div>
           <div
             class="item"
             v-for="(item, index) in moneyLogList"
@@ -88,14 +94,16 @@
               <span>{{ formtTime(item.createtime) }}</span>
             </div>
             <div class="right">
-              <p>转出记录</p>
+              <p>Transfer out record</p>
               <span class="zhuanchu">-{{ formatDecimal(item.money) }}USDT</span>
             </div>
           </div>
         </van-tab>
 
-        <van-tab title="复利收益">
-          <div v-if="awardList3.length === 0" class="no_data">暂无数据</div>
+        <van-tab title="Compound interest income">
+          <div v-if="awardList3.length === 0" class="no_data">
+            No data temporarily
+          </div>
 
           <div
             class="item"
@@ -108,7 +116,7 @@
               <span>{{ formtTime(item.createtime) }}</span>
             </div>
             <div class="right">
-              <p>复利收益</p>
+              <p>Compound interest income</p>
               <span>+{{ formatDecimal(item.mun) }}USDT</span>
             </div>
           </div>
@@ -118,7 +126,7 @@
   </div>
 
   <Alert
-    title="转出"
+    title="Transfer out"
     :alert-show="alertShow"
     :flag="true"
     :zhuanchu="true"
@@ -128,7 +136,7 @@
   >
   </Alert>
   <Alert
-    title="温馨提示"
+    title="Warm tips"
     :alert-show="tipAlertShow"
     :hiddenInput="true"
     :hiddenCancel="true"
@@ -138,7 +146,7 @@
   </Alert>
 
   <Alert
-    title="转出成功"
+    title="Transfer out successful"
     :alert-show="transferOutSucc"
     @confirm-alert="TransferOutSuccHandler"
     :hiddenCancel="true"
@@ -147,7 +155,7 @@
   >
   </Alert>
   <Alert
-    title="转出失败"
+    title="Transfer out failed"
     :alert-show="transferOutFail"
     :transferFail="true"
     @confirm-alert="TransferOutFailHandler"
@@ -402,6 +410,9 @@ function TransferOutFailHandler() {
       color: #0e1446;
 
       .left {
+        p {
+          margin-bottom: 15px !important;
+        }
         span {
           margin-top: 4px;
           font-weight: 400;
@@ -411,6 +422,7 @@ function TransferOutFailHandler() {
       }
 
       .right {
+        text-align: right;
         p {
           text-align: right;
         }
@@ -429,7 +441,7 @@ function TransferOutFailHandler() {
 
       .left p,
       .right p {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -447,15 +459,13 @@ function TransferOutFailHandler() {
 
     .btn {
       margin-top: 26px;
-      width: 88px;
-      height: 36px;
+      padding: 10px;
       background: #ffffff;
       border-radius: 6px 6px 6px 6px;
       font-weight: 400;
       font-size: 16px;
       color: #313c5b;
       text-align: center;
-      line-height: 36px;
     }
 
     .all_balance {
@@ -485,7 +495,7 @@ function TransferOutFailHandler() {
       color: #ffffff;
 
       .hr {
-        margin: 8px 70px 0;
+        // margin: 8px 70px 0;
         width: 1px;
         height: 26px;
         background: rgba(255, 255, 255, 0.6);
@@ -494,6 +504,10 @@ function TransferOutFailHandler() {
 
       .yes_income,
       .accumulations {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
         .title {
           margin-bottom: 6px;
         }

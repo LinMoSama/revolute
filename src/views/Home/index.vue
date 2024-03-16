@@ -9,15 +9,15 @@
     <div class="control">
       <div class="item" @click="controlHandler(0)">
         <img src="../../assets/images/recharge.png" alt="" />
-        <p>充值</p>
+        <p>Recharge</p>
       </div>
       <div class="item" @click="controlHandler(1)">
         <img src="../../assets/images/withdraw.png" alt="" />
-        <p>提现</p>
+        <p>Withdrawal</p>
       </div>
       <div class="item" @click="controlHandler(2)">
         <img src="../../assets/images/transfer.png" alt="" />
-        <p>转账</p>
+        <p>Transfer</p>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
 
     <!-- 认购金额 -->
     <Alert
-      title="认购金额"
+      title="Subscription amount"
       :alertShow="alertShow"
       @updateShow="updateShow"
       @closeAlert="closeAlert"
@@ -57,7 +57,7 @@
 
     <!-- 推荐人 -->
     <Alert
-      title="推荐人"
+      title="Referrer"
       :alertShow="isShowReference"
       @updateShow="updateShow"
       @closeAlert="closeReferenceAlert"
@@ -70,7 +70,7 @@
     <van-overlay :show="Chongzhishow">
       <div class="wrapper" @click.stop>
         <div class="block">
-          <p class="title">充值</p>
+          <p class="title">Recharge</p>
           <div class="input">
             <img src="../../assets/images/usdt_icon.png" alt="" />
             <input
@@ -83,15 +83,15 @@
               <div class="max" @click="max">MAX</div>
             </div>
             <span class="balance_not_enough" v-if="Number(inputMoney) > balance"
-              >余额不足</span
+              >Insufficient balance</span
             >
-            <span class="keyong" v-if="balance <= 0">可用: 0.00USDT</span>
+            <span class="keyong" v-if="balance <= 0">available: 0.00USDT</span>
             <span class="keyong" v-else
-              >可用: {{ formatDecimal(balance) }}USDT</span
+              >available: {{ formatDecimal(balance) }}USDT</span
             >
           </div>
           <div class="btns">
-            <div class="cancel" @click="cancel">取消</div>
+            <div class="cancel" @click="cancel">cancel</div>
             <div
               class="confirm"
               @click="confim"
@@ -100,7 +100,7 @@
                   Number(inputMoney) > balance || Number(inputMoney) <= 0,
               }"
             >
-              确定
+              confirm
             </div>
           </div>
         </div>
@@ -114,12 +114,12 @@
           <template #icon>
             <van-icon name="star-o" size="30" />
           </template>
-          操作中...
+          In operation...
         </van-loading>
       </div>
     </van-overlay>
 
-    <h2 class="slogan">探索未来的数字金融世界</h2>
+    <h2 class="slogan">Explore the future of digital finance</h2>
 
     <Footer></Footer>
   </div>
@@ -178,7 +178,7 @@ const getInfo = () => {
 }
 onMounted(() => {
   if (route.query.salt && !sessionStorage.getItem('token')) {
-    return showToast('请先登录')
+    return showToast('Please login first')
   }
   let userInfo = JSON.parse(sessionStorage.getItem('userInfo')!)
   if (JSON.parse(sessionStorage.getItem('userInfo')!)) {
@@ -227,12 +227,16 @@ watch(
     transform: translateY(-40%);
 
     .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       img {
         width: 28px;
         height: 28px;
       }
 
       p {
+        margin-top: 5px;
         font-size: 12px;
         color: #313c5b;
       }

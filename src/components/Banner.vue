@@ -57,7 +57,7 @@
         <template #icon>
           <van-icon name="star-o" size="30" />
         </template>
-        操作中...
+        In operation...
       </van-loading>
     </div>
   </van-overlay>
@@ -82,9 +82,7 @@ function updateMenu() {
     props.menu.showMenu()
   }
 }
-function langChange() {
-  console.log('langChange')
-}
+function langChange() {}
 </script>
 
 <style lang="scss" scoped>
