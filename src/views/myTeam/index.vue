@@ -50,12 +50,12 @@
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
-            <p class="mb20">Effective number of direct (person)</p>
+            <p class="mb20">Effective  of direct (person)</p>
             <p class="fw7 fz16" v-if="formData.recommend_count">{{ formData.recommend_count }}</p>
             <p class="fw7 fz16" v-else>--</p>
           </div>
           <div class="df fdc">
-            <p class="mb20">Effective number of team (person)</p>
+            <p class="mb20">Effective of team (person)</p>
             <p class="fw7 fz16" v-if="formData.team_coun">{{ formData.team_coun }}</p>
             <p class="fw7 fz16" v-else>--</p>
           </div>
@@ -69,9 +69,9 @@
             <p class="fz12" v-else>--</p>
           </div>
           <div class="yell df aic">
-            <p>Yield :</p>
+            <p style="white-space: nowrap;">Yield :</p>
             <!-- <p v-if="hasTeam"> {{ formData.team_award_team }}%</p> -->
-            <p v-if="hasTeam">{{ formatDecimal(formData.team_award_team * 1) }} %</p>
+            <p style="white-space: nowrap;" v-if="hasTeam">{{ formatDecimal(formData.team_award_team * 1) }} %</p>
             <p class="fz12" v-else>0%</p>
           </div>
         </div>
