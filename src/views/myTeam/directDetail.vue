@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
         </div>
     </div>
 </template>

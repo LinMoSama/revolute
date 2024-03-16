@@ -33,12 +33,12 @@
         <div class="df aic jcsb">
           <div class="df aic">
             <img src="../../assets/images/team.png" style="width: 26px; margin-right: 5px" />
-            <div class="fz12">
-              <p>Direct push is still need</p>
-              <p>
-                <span v-if="formData.recommend_count"> 1 people</span>
-                <span v-else>2 people</span>
-              </p>
+            <div class="fz12 df aic">
+              <p>Direct push is still need </p>
+              <span v-if="formData.recommend_count">&nbsp;1 </span>
+              <span v-else>&nbsp;2</span>
+              <!-- <p>
+              </p> -->
             </div>
             <img src="../../assets/images/upper.png" style="width: 20px; margin-left: 10px" />
           </div>
@@ -50,12 +50,12 @@
         </div>
         <div class="df aic jcsb box">
           <div class="df fdc">
-            <p class="mb20">Effective  of direct (person)</p>
+            <p class="mb20">Effective  of direct</p>
             <p class="fw7 fz16" v-if="formData.recommend_count">{{ formData.recommend_count }}</p>
             <p class="fw7 fz16" v-else>--</p>
           </div>
           <div class="df fdc">
-            <p class="mb20">Effective of team (person)</p>
+            <p class="mb20">Effective of team</p>
             <p class="fw7 fz16" v-if="formData.team_coun">{{ formData.team_coun }}</p>
             <p class="fw7 fz16" v-else>--</p>
           </div>
@@ -93,11 +93,11 @@
     </div>
     <div class="content bsbb mt20">
       <van-tabs v-model:active="active" shrink @change="changeType">
-        <van-tab title="Recommendation rewards" name=0>
+        <van-tab title="Referral rewards" name=0>
           <div class="direct cont" ref="directRef" v-if="dataList.length" @scroll="loadMore">
             <div class="item df aic jcsb" v-for="( v, i ) in  dataList " :key="i">
               <div class="df fdc">
-                <p class="fw7 fz14 b2 mb10">Recommendation rewards</p>
+                <p class="fw7 fz14 b2 mb10">Referral rewards</p>
                 <p class="fw7 fz14 b2 mb10">{{ getHMS(v.createtime * 1000) }}</p>
               </div>
               <div class="df fdc">
@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
         <van-tab title="Team rewards" name=1>
@@ -122,7 +122,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
       </van-tabs>

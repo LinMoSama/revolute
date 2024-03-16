@@ -6,7 +6,7 @@
       <p class="c999 mb10">Account balance(USDT)</p>
       <p class="fw7 fz30">{{ formatDecimal(userInfo.money * 1) }}</p>
       <p class="fz14 gray mt20">
-        <span>Accumulated benefits for the team:</span>
+        <span>Cumulative team earnings:</span>
         <span v-if="!noTeam">-- USDT</span>
         <span v-else>{{ formatDecimal(teamInfo.team_sum * 1) }}</span>
       </p>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
         <van-tab title="Subscribe for" name=1>
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
         <van-tab title="compound interest" name=2>
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
         <van-tab title="Recommend" name=3>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
         <van-tab title="Team" name=4>
@@ -100,7 +100,7 @@
             </div>
           </div>
           <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-            There is currently no data available
+           No data available.
           </div>
         </van-tab>
         <!-- <van-tab title="平级" name=5>
@@ -176,9 +176,9 @@ const params = ref({
 
 const typeArr = reactive<any>([
   '',
-  'Buy financial management',
-  'Compound interest pool transfer out',
-  'Compound interest pool rewards',
+  'Financial investment',
+  'Compounding pool withdrawal',
+  'Referral rewards',
   'Team rewards'
 ])
 const formData = ref<any>([])

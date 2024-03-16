@@ -11,11 +11,11 @@
         <div class="p120 bsbb box">
             <div class="boxs df aic jcsb">
                 <div class="df fdc">
-                    <p style="margin-bottom: 20px;font-size: 14px;">Number of direct referrals (person)</p>
+                    <p style="margin-bottom: 20px;font-size: 14px;">Direct referrals count</p>
                     <p class="fw7 fz16 mt20">{{ formData.recommend_count }}</p>
                 </div>
                 <div class="df fdc">
-                    <p style="margin-bottom: 20px;font-size: 14px;">Number of referrals (person)</p>
+                    <p style="margin-bottom: 20px;font-size: 14px;">Indirect referrals count</p>
                     <p class="fw7 fz16">{{ formData.team_coun }}</p>
                 </div>
             </div>
@@ -54,17 +54,17 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        There is currently no data available
+                       No data available.
                     </div>
                 </van-tab>
-                <van-tab title="Interpersonal promotion" name=1>
+                <van-tab title="Indirect referral" name=1>
                     <div class="withdraw cont" ref="teamRef" v-if="teamList.length" @scroll="loadMore">
                         <div class="item df fdc" v-for="(v, i) in teamList" :key="i">
                             <div class="df aic jcsb mb15">
                                 <p style="color: #0E1446;" class="fw7 fz14">
                                     <span>{{ hiddenUserAccount(v.username) }}</span>
                                 </p>
-                                <p class="fw7 fz14 b2">Interpersonal promotion</p>
+                                <p class="fw7 fz14 b2">Indirect referral</p>
                             </div>
                             <div class="df aic jcsb">
                                 <p style="color: #93989F;font-size: 14px;">{{ getHMS(v.createtime * 1000) }}</p>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        There is currently no data available
+                       No data available.
                     </div>
                 </van-tab>
             </van-tabs>

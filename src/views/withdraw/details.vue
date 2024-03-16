@@ -18,7 +18,7 @@
                                 <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p class="fw7 fz14"  style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        There is currently no data available
+                       No data available.
                     </div>
                 </van-tab>
                 <van-tab title="Transfer" name=1>
@@ -45,7 +45,7 @@
                                 <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p class="fw7 fz14" style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        There is currently no data available
+                       No data available.
                     </div>
                 </van-tab>
                 <van-tab title="Recharge" name=2>
@@ -72,7 +72,7 @@
                                 <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p class="fw7 fz14"  style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        There is currently no data available
+                       No data available.
                     </div>
                 </van-tab>
                 <van-tab title="Withdraw" name=3>
@@ -99,7 +99,7 @@
                                 <p style="color: #0E1446;white-space: nowrap;" class="fw7 fz14">USDT : {{
                     formatDecimal(v.mun * 1) }}
                                     {{ typeList[v.type - 1] }}{{ statusList[v.status - 1] }}</p>
-                                <p class="fw7 fz14" :style="{ color: stateType[v.status - 1].color }">{{
+                                <p class="fw7 fz14" style="white-space: nowrap;" :style="{ color: stateType[v.status - 1].color }">{{
                                     stateType[v.status - 1].text }}
                                 </p>
                             </div>
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="nodata df aic jcc mt40 fz20 b2" v-else>
-                        There is currently no data available
+                       No data available.
                     </div>
                 </van-tab>
             </van-tabs>
@@ -276,7 +276,7 @@ p {
         .item {
             background: #fff;
             border-radius: 20px;
-            padding: 20px;
+            padding: 20px 15px;
             box-sizing: border-box;
             margin-bottom: 20px;
         }
