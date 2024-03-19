@@ -55,7 +55,7 @@ export default function () {
   // 判断是否填写推荐人
   function isShowReferenceHandler() {
     if (
-      wallectStore.isInstall === false &&
+      sessionStorage.getItem('isInstall') === 'false' &&
       !sessionStorage.getItem('account')
     ) {
       showFailToast('Installing and connecting the wallet')

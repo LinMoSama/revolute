@@ -16,7 +16,7 @@ export default defineStore('wallect', () => {
 
   async function ConnectTheWallet() {
     try {
-      if (!isInstall) return showFailToast('Metamask 未安装')
+      if (!isInstall) return showFailToast('wallect not installed')
       loading.value = true
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
 
@@ -50,7 +50,6 @@ export default defineStore('wallect', () => {
       window.location.reload()
     } catch (error: any) {
       loading.value = false
-      console.log(error)
       if (error.code === 4001) {
         showFailToast(' User denied message signature')
       }

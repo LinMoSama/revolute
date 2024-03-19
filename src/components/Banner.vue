@@ -33,17 +33,14 @@
       <p class="title">{{ title }}</p>
       <div class="wallet_menu">
         <template v-if="!defaults">
-          <img
-            src="../assets/images/wallet.png"
-            alt=""
-            @click="wallectStore.ConnectTheWallet"
-            v-show="!account"
-          />
+          <img src="../assets/images/wallet.png" alt="" v-show="!Account" />
 
           <template v-if="showWallect">
-            <div class="wallect" v-show="account">
+            <div class="wallect" v-show="Account">
               <img src="../assets/images/wallect_icon.png" alt="" />
-              <div class="account">{{ formatName(account as string) }}</div>
+              <div class="account">
+                {{ formatName(Account as string) }}
+              </div>
             </div>
           </template>
         </template>
@@ -65,8 +62,15 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import { onMounted, ref } from 'vue'
 import useBanner from '@/hooks/useBanner'
-const { wallectStore, account, formatName, token } = useBanner()
+import useWallect from '@/stores/wallect'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
+const wallectStore = useWallect()
+let Account = sessionStorage.getItem('account')
+
+const { formatName, token } = useBanner()
 const props = defineProps([
   'menu',
   'showWallect',
@@ -74,6 +78,7 @@ const props = defineProps([
   'isShowReferenceHandler',
   'showSwiper',
 ])
+
 let {
   meta: { title },
 } = useRoute()
@@ -82,6 +87,16 @@ function updateMenu() {
     props.menu.showMenu()
   }
 }
+onMounted(() => {
+  let token = sessionStorage.getItem('token')
+  let account = sessionStorage.getItem('account')
+  let signRes = sessionStorage.getItem('signRes')
+  if (token && account && signRes) {
+    return
+  } else {
+    wallectStore.ConnectTheWallet()
+  }
+})
 function langChange() {}
 </script>
 

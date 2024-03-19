@@ -39,6 +39,7 @@ export function getWebData(to: any, from: any, next: any) {
           window.location.reload()
         } else {
           let account = sessionStorage.getItem('account')
+
           console.log(account)
           if (account && account !== accounts[0]) {
             sessionStorage.clear()
