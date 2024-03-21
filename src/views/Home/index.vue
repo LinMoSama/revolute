@@ -137,6 +137,7 @@ import Buy from '@/components/Buy.vue'
 import Alert from '@/components/Alert.vue'
 import Menu from '@/components/Menu.vue'
 import Banner from '@/components/Banner.vue'
+import useWallect from '@/stores/wallect'
 import { getUserInfo, getInit } from '../../service/api'
 import { useUserStore } from '@/stores/user'
 import { formatDecimal } from '@/utils/utils'
@@ -144,10 +145,10 @@ import { showToast } from 'vant'
 const userStore = useUserStore()
 const route = useRoute()
 const reference = ref()
+const wallectStore = useWallect()
 const {
   loading,
   inputMoney,
-  controlList,
   alertShow,
   isShowReference,
   investList,
@@ -165,7 +166,6 @@ const {
   cancel,
   max,
 } = useIndex()
-
 const menu = ref()
 const awardList = ref({})
 const getInfo = () => {
@@ -206,6 +206,17 @@ watch(
   },
   { immediate: true }
 )
+onMounted(() => {
+  let token = sessionStorage.getItem('token')
+  let account = sessionStorage.getItem('account')
+  let signRes = sessionStorage.getItem('signRes')
+  if (token && account && signRes) {
+    return
+  } else {
+    wallectStore.ConnectTheWallet()
+  }
+})
+
 </script>
 
 <style scoped lang="scss">

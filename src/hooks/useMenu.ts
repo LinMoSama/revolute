@@ -27,7 +27,7 @@ export default function () {
       id: 5,
     },
     {
-      title: 'Invite friendsf',
+      title: 'Invite friends',
       id: 6,
     },
     {

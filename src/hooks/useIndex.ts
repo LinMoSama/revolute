@@ -4,7 +4,7 @@ import { getInvestList, getUserInfo, addMount, getInit } from '@/service/api'
 import { useUserStore } from '@/stores/user'
 import { getReferrer, rechargeSuccess } from '@/service/api'
 import useWallect from '@/stores/wallect'
-import { showFailToast, showSuccessToast } from 'vant'
+import { showFailToast, showLoadingToast, showSuccessToast } from 'vant'
 import useWbe3Store from '@/stores/web3'
 import { floatObj } from '@/utils/utils'
 export default function () {
@@ -20,6 +20,7 @@ export default function () {
   let balance = ref(0)
   let inputMoney = ref('')
   let loading = ref(false)
+  const isInstall = localStorage.getItem('isInstall') === 'true'
   onMounted(() => {
     getInvestListHandler()
   })
@@ -54,13 +55,17 @@ export default function () {
   }
   // 判断是否填写推荐人
   function isShowReferenceHandler() {
-    if (
-      sessionStorage.getItem('isInstall') === 'false' &&
-      !sessionStorage.getItem('account')
-    ) {
-      showFailToast('Installing and connecting the wallet')
+    if (!isInstall) {
+      showFailToast('Install Wallet')
       return false
     }
+    // if (
+    //   sessionStorage.getItem('isInstall') === 'false' &&
+    //   !sessionStorage.getItem('account')
+    // ) {
+    //   showFailToast('Installing and connecting the wallet')
+    //   return false
+    // }
     if (!userStore.token) {
       showFailToast('Please connect the wallet first')
       return false
@@ -173,17 +178,36 @@ export default function () {
   async function recharge() {
     if (isShowReferenceHandler()) {
       try {
+        showLoadingToast({
+          message: 'loading',
+          duration: 0,
+          forbidClick: true,
+        })
         Chongzhishow.value = true
         //查询余额
+        console.log(web3Store.usdtContract.methods)
+        let account = sessionStorage.getItem('account')
+        console.log(account)
         const res = await web3Store.usdtContract.methods
-          .balanceOf(wallectStore.account)
+          .balanceOf(account)
           .call()
         let b = Number(res) / 10 ** 18
         balance.value = b
+        showLoadingToast({
+          message: '',
+          duration: 0.1,
+          forbidClick: true,
+        })
         console.log(b)
         console.log(res, 'res')
         getUserInfoHandler()
       } catch (error) {
+        showLoadingToast({
+          message: '',
+          duration: 0.1,
+          forbidClick: true,
+        })
+        showFailToast('get balance failed, try again later')
         console.log(error)
       }
     }

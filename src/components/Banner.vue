@@ -31,19 +31,19 @@
         <img src="../assets/images/logo.png" alt="" />
       </div>
       <p class="title">{{ title }}</p>
-      <div class="wallet_menu">
-        <template v-if="!defaults">
-          <img src="../assets/images/wallet.png" alt="" v-show="!Account" />
-
-          <template v-if="showWallect">
-            <div class="wallect" v-show="Account">
-              <img src="../assets/images/wallect_icon.png" alt="" />
-              <div class="account">
-                {{ formatName(Account as string) }}
-              </div>
-            </div>
-          </template>
-        </template>
+      <div class="wallet_menu" v-if="!defaults">
+        <img
+          v-show="!account"
+          src="../assets/images/wallet.png"
+          alt=""
+          @click="wallectStore.ConnectTheWallet"
+        />
+        <div class="wallect" v-show="account">
+          <img src="../assets/images/wallect_icon.png" alt="" />
+          <div class="account">
+            {{ formatName(account as string) }}
+          </div>
+        </div>
         <img src="../assets/images/lang_icon.png" alt="" @click="langChange" />
       </div>
     </div>
@@ -62,14 +62,11 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, nextTick, onBeforeUpdate } from 'vue'
 import useBanner from '@/hooks/useBanner'
 import useWallect from '@/stores/wallect'
-import { useUserStore } from '@/stores/user'
-const userStore = useUserStore()
 const wallectStore = useWallect()
-let Account = sessionStorage.getItem('account')
-
+let account = ref('')
 const { formatName, token } = useBanner()
 const props = defineProps([
   'menu',
@@ -87,15 +84,11 @@ function updateMenu() {
     props.menu.showMenu()
   }
 }
+onBeforeUpdate(() => {
+  account.value = sessionStorage.getItem('account')!
+})
 onMounted(() => {
-  let token = sessionStorage.getItem('token')
-  let account = sessionStorage.getItem('account')
-  let signRes = sessionStorage.getItem('signRes')
-  if (token && account && signRes) {
-    return
-  } else {
-    wallectStore.ConnectTheWallet()
-  }
+  account.value = sessionStorage.getItem('account')!
 })
 function langChange() {}
 </script>

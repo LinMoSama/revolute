@@ -2,7 +2,7 @@
   <div class="wrap">
     <Back :title="title" @click-left="onClickLeft"></Back>
     <div class="title">
-      <p>昨日总收益</p>
+      <p>Yesterday's total income</p>
       <div class="money">{{ formatDecimal(awardList.yesterday) }}</div>
       <div class="icon"></div>
     </div>
