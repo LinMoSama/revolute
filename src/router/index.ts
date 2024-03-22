@@ -3,7 +3,7 @@ import {
   createWebHistory,
   createWebHashHistory,
 } from 'vue-router'
-import { getWebData } from '@/web3'
+import { getWebData, getContract } from '@/web3'
 import routes from './routes'
 
 const router = createRouter({
@@ -16,6 +16,8 @@ router.beforeEach((to, from, next) => {
   getWebData(next)
 })
 
-router.afterEach((to, from) => {})
+router.afterEach((to, from) => {
+  getContract()
+})
 
 export default router

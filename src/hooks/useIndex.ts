@@ -21,6 +21,7 @@ export default function () {
   let inputMoney = ref('')
   let loading = ref(false)
   const isInstall = localStorage.getItem('isInstall') === 'true'
+  console.log(isInstall, 'isInstall')
   onMounted(() => {
     getInvestListHandler()
   })
@@ -185,7 +186,6 @@ export default function () {
         })
         Chongzhishow.value = true
         //查询余额
-        console.log(web3Store.usdtContract.methods)
         let account = sessionStorage.getItem('account')
         console.log(account)
         const res = await web3Store.usdtContract.methods
@@ -198,7 +198,7 @@ export default function () {
           duration: 0.1,
           forbidClick: true,
         })
-        console.log(b)
+        console.log(b, ' balance / 10 ** 18')
         console.log(res, 'res')
         getUserInfoHandler()
       } catch (error) {
@@ -259,10 +259,13 @@ export default function () {
       let price =
         floatObj.multiply(iptMoney, 10000)?.toString() + '00000000000000'
       console.log(price, 'price')
+
+      console.log(data.coverdata.addr, 'data.coverdata.addr')
       const approveGas = await web3Store.usdtContract.methods
         .approve(data.coverdata.addr, price)
         .estimateGas()
-
+      console.log(String(Number(approveGas)), 'approveGas')
+      console.log(wallectStore.account as string)
       const approveRes = await web3Store.usdtContract.methods
         .approve(data.coverdata.addr, price)
         .send({
@@ -271,7 +274,7 @@ export default function () {
           gasPrice: String(gasPrice),
         })
       console.log(approveRes, '授权')
-      console.log(String(Number(approveGas)), 'approveGas')
+
       //调用转账合约
       const transferGas = await web3Store.usdtContract.methods
         .transfer(data.coverdata.addr, price)
@@ -302,7 +305,7 @@ export default function () {
       loading.value = false
       showSuccessToast('Operation succeeded')
     } catch (error: any) {
-      console.log(error)
+      console.log(error, 'error')
       loading.value = false
       console.log(error.code)
       if (error.code === 100) {

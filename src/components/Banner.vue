@@ -31,14 +31,14 @@
         <img src="../assets/images/logo.png" alt="" />
       </div>
       <p class="title">{{ title }}</p>
-      <div class="wallet_menu" v-if="!defaults">
+      <div class="wallet_menu" >
         <img
           v-show="!account"
           src="../assets/images/wallet.png"
           alt=""
           @click="wallectStore.ConnectTheWallet"
         />
-        <div class="wallect" v-show="account">
+        <div class="wallect" v-if="!defaults && account">
           <img src="../assets/images/wallect_icon.png" alt="" />
           <div class="account">
             {{ formatName(account as string) }}

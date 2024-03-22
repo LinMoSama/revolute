@@ -45,6 +45,7 @@ export default defineStore('wallect', () => {
       sessionStorage.setItem('token', userinfo.token)
       sessionStorage.setItem('signRes', res)
       sessionStorage.setItem('account', accounts[0])
+      console.log('1234556789');
     } catch (error: any) {
       loading.value = false
       if (error.code === 4001) {
